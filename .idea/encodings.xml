@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/0-krankenhausverwaltung-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/0-krankenhausverwaltung-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/1-krankenhausverwaltung-adapter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/1-krankenhausverwaltung-adapter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/2-krankenhausverwaltung-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/2-krankenhausverwaltung-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/3-krankenhausverwaltung-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/3-krankenhausverwaltung-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/4-krankenhausverwaltung-abstractioncode/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/4-krankenhausverwaltung-abstractioncode/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/x-krankenhausverwaltung/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/x-krankenhausverwaltung/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
