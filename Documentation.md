@@ -13,8 +13,8 @@ unterschiedlichen Bedeutungsbereichen zu Problemen bei der Kommunikation und feh
 Wichtig ist ebenfalls die bereits bestehenden Begriffe der Fachsprache zu nutzen und keine neuen zu erfinden. Dies trägt ebenfalls zu einer unter den Stakeholdern
 verständlichen Kommunikation und Sprache bei.<br>
 All diese Kriterien wurden beim Verwenden der nachfolgenden Bezeichnungen beachtet. So wurden beispielsweise bereits bekannte Begriffe der Domäne wie "Patient" und
-"Arzt" verwendet und keine eigenen erstellt. Ebenfalls sind uneindeutige Begriffe der Domäne weiter erläutert. So ist zum Beispiel bei der "Zimmeradresse" erläutert, dass 
-sich diese auf die Adressierung eines Zimmers innerhalb des Krankenhauses bezieht und nicht auch die Adresse des Krankenhauses an sich beinhaltet.
+"Arzt" verwendet und keine eigenen erstellt. Ebenfalls sind uneindeutige Begriffe der Domäne weiter erläutert. So ist zum Beispiel bei der "Untersuchungsart" erläutert, dass 
+sich diese auf die Untersuchung eines Patienten von einem Arzt bezieht. Sie stellt keine Untersuchungen des Krankenhauses durch Behörden oder Gesundheitsaufsichten dar.
 
 #### 1.1.1 Fachliche Begriffe und ihre Bedeutung
 Die Analyse der Ubiquitous Language basiert auf den zentralen Entitäten und Werten in der Problemstellung 
@@ -31,16 +31,64 @@ eines Krankenhausmanagementsystems. Dabei werden in Klammern die im Quellcode ve
 - **Datum (Date)**: Ein Wertobjekt, das einen bestimmten Tag eines Jahres festhält.
 - **Name (Name)**: Der offizielle Name einer Person bestehend aus ihrem Vornamen und Nachnamen.
 - **Uhrzeit (Time)**: 
+- **Untersuchungsart (ExaminationType)**: Die Untersuchungsart beschreibt die unterschiedlichen Typen von Untersuchungen, welche in einem Krankenhaus von einem Arzt an einem Patient durchgeführt werden.
 
 #### 1.1.2 Domänenregeln und Verantwortlichkeiten
-1. **Ein Patient kann sich in einem bestimmten Zeitraum nur in einem Zimmer befinden.**
-2. **Ein Arzt kann mehrere Untersuchungen durchführen, aber jede Untersuchung ist genau einem Arzt zugewiesen.**
-3. **Ein Zimmer hat eine maximale Kapazität basierend auf seiner Größe.**
-4. **Eine Untersuchung hat immer einen klar definierten Start- und Endzeitpunkt.**
-5. **Die Entlassung eines Patienten darf nicht vor seinem Aufnahmedatum liegen.**
+1. Ein Patient kann sich in einem bestimmten Zeitraum nur in einem Zimmer befinden. 
+2. Ein Arzt kann mehrere Untersuchungen durchführen, aber jede Untersuchung ist genau einem Arzt zugewiesen. Ohne einen Arzt kann keine Untersuchung durchgeführt werden.
+3. Ein Zimmer hat eine maximale Kapazität basierend auf seiner Größe. Diese Größe gibt die maximale Anzahl an Patienten an, welche gleichzeitig in einem Zimmer untergebracht werden können.
+4. Eine Untersuchung hat immer einen klar definierten Start- und Endzeitpunkt.
+5. Die Entlassung eines Patienten darf nicht vor seinem Aufnahmedatum liegen.
+6. Ein Patient kann mehrere Untersuchungen haben, welche jedoch nicht gleichzeitig stattfinden können.
+7. Ärzte müssen einen Namen haben, da nicht ausgewiesene Personen keine Untersuchungen an Patienten durchführen dürfen. Patienten wiederum müssen nicht zwingend einen Namen haben/ ihn angeben, da allen Personen eine Gesundheitsversorgung geboten wird.
 
 
 ## 2 Clean Architecture
 ## 3 Programming Principles
+Single respons bei Belegung patient und zimmer
 ## 4 Refactoring
 ## 6 Entwurfsmuster
+### 6.1 Builder Pattern
+#### Begründung für den Einsatz des Builder-Patterns
+Das Builder-Pattern wird eingesetzt, um die Instanziierung von Objekten mit vielen optionalen Attributen zu erleichtern und Konstruktoren mit gleichen Signaturen 
+zu ermöglichen. Insbesondere für eine komplexe Domänenklasse, die viele Felder besitzt und sich mit der Zeit erweitern kann, bietet dieses Muster 
+eine effektive Möglichkeit zur Objekterzeugung. Aufgrund seiner Vorteile wurde das Muster in unterschiedlichen Klassen des Projektes verwendet. Im Folgenden
+sollen die Vor- und Nachteile dieses Patterns am Beispiel der Patient Entität erläutert werden.
+
+#### Warum das Muster an dieser Stelle eingesetzt wurde
+Die Klasse Patient besitzt mehrere Attribute, von denen einige optional sind. Ein konventioneller Konstruktor mit vielen Parametern wäre unübersichtlich und 
+fehleranfällig. Das Builder-Pattern erlaubt es, nur die benötigten Parameter zu setzen und so eine lesbare, flexible und intuitive Objektinitialisierung zu 
+ermöglichen.
+
+#### Verbesserung des Codes durch das Builder-Pattern
+Lesbarkeit & Wartbarkeit: Durch die Verwendung von Methoden mit sprechenden Namen (withName(), withAddress(), etc.) wird der Code lesbarer und intuitiver.
+Flexibilität: Das Muster erlaubt es, optionale Parameter zu setzen, ohne überladene Konstruktoren zu benötigen.
+Unveränderlichkeit: Das fertige Patient-Objekt kann als immutable behandelt werden, da alle Attribute final gesetzt werden.
+Vermeidung von inkonsistenten Zuständen: Die notwendigen Validierungen können zentral im build()-Methodenaufruf erfolgen.
+
+#### Vor- und Nachteile des Builder-Patterns
+
+Vorteile:
+- Verbesserte Lesbarkeit und Verständlichkeit des Codes
+- Flexibilität bei der Objekterstellung
+- Vermeidung von zu vielen Konstruktoren mit unterschiedlichen Parameterkombinationen
+- Förderung von Immutability (wenn gewünscht)
+
+Nachteile:
+- Zusätzlicher Implementierungsaufwand durch eine separate Builder-Klasse
+- Erhöhter Speicherbedarf, da ein zusätzliches Objekt (PatientBuilder) benötigt wird
+- Vor- und Nachteile ohne das Builder-Pattern
+
+#### Vorteile ohne Builder-Pattern:
+- Weniger Code durch direkte Nutzung von Konstruktoren
+- Geringerer Speicherverbrauch, da keine zusätzliche Builder-Klasse notwendig ist
+
+#### Nachteile ohne Builder-Pattern:
+- Lange, schwer verständliche Konstruktoraufrufe
+- Höhere Fehleranfälligkeit durch falsche Parameterreihenfolge
+- Geringere Erweiterbarkeit des Codes
+
+#### Fazit
+Das Builder-Pattern verbessert die Struktur und Lesbarkeit des Codes erheblich, insbesondere bei komplexen Objekten mit vielen optionalen Attributen. 
+Während der Mehraufwand an Code und Speicherverbrauch als Nachteil betrachtet werden kann, überwiegen die Vorteile, da das Muster die Wartbarkeit und 
+Erweiterbarkeit des Codes deutlich verbessert.

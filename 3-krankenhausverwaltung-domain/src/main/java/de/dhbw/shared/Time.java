@@ -1,4 +1,4 @@
-package de.dhbw.valueobjects;
+package de.dhbw.shared;
 
 import java.util.Objects;
 

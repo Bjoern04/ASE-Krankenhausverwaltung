@@ -1,4 +1,4 @@
-package de.dhbw.valueobjects;
+package de.dhbw.shared;
 
 import java.util.Objects;
 
@@ -89,7 +89,7 @@ public final class Contact {
      * Validates email format using a simple check.
      *
      * @param email The email to validate
-     * @return true if the email format is valid, otherwise false
+     * @return True if the email format is valid, otherwise false
      */
     private boolean isValidEmail(String email) {
         return email.contains("@") && email.contains(".");
