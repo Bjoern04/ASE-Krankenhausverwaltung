@@ -41,6 +41,46 @@ eines Krankenhausmanagementsystems. Dabei werden in Klammern die im Quellcode ve
 
 
 ## 2 Clean Architecture
+### 2.1 Grundlagen Clean Architecture
+Die Architektur der Krankenhausverwaltungsanwendung basiert auf den 
+Prinzipien der Clean Architecture. Dieses Architekturmuster fördert eine
+klare Trennung von Verantwortlichkeiten, eine hohe Testbarkeit und eine 
+geringe Kopplung zwischen den Schichten. Dadurch wird eine flexible, wartbare
+und erweiterbare Softwarelösung gewährleistet.
+
+### 2.2 Schichten der Anwendung
+Die Anwendung besteht aus den typischen fünf Hauptschichten der Clean Architecture:
+1. Abstraktions-Schicht
+2. Domain-Schicht
+3. Application-Schicht
+4. Adapter-Schicht
+5. Plugin-Schicht
+
+### 2.2.1 Abstraktions-Schicht
+### 2.2.2 Domain-Schicht
+Die Domain-Schicht enthält die zentrale Geschäftslogiken und definiert die
+grundlegenden Geschäftsobjekte (Entities) sowie deren Verhalten. Sie 
+Dabei sollen diese nicht von äußeren Elementen wie Datenbanken oder APIs 
+abhängig sein. 
+
+#### Bestandteile
+- **Entities**: Die Entities Patient, Arzt, Zimmer, Untersuchung und Belegung 
+repräsentieren die zentralen Domänenobjekte, welche zur Abbildung und Modellierung
+der Geschäftslogik benötigt werden. Diese Objekte können sich im Ablauf des 
+Programms verändern und haben einen Lebenszyklus.
+- **Value Objects**: Auch die Value Objects sind in der Domain-Schicht enthalten.
+Sie sind unveränderliche Werte wie Name, Adresse, etc., welche zur Beschreibung
+der Entities verwendet werden. 
+- **Repositories**: Die Repositories definieren Interfaces für die Aggregate 
+Roots, welche in äußeren Schichten implementiert werden können, um auf Daten
+z.B. aus einer Datenbank zuzugreifen.
+- **Domain Services**: Der letzte Bestandteil sind die Domain Services,
+welche Geschäftslogik beinhalten an welcher mehrere unterschiedliche
+Entities beteiligt sind.
+
+<br>
+
+
 ## 3 Programming Principles
 ## 4 Refactoring
 ## 6 Entwurfsmuster
