@@ -1,0 +1,75 @@
+package de.dhbw;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import de.dhbw.assignment.entity.Assignment;
+import de.dhbw.doctor.entity.Doctor;
+import de.dhbw.examination.entity.Examination;
+import de.dhbw.mixin.entities.assignment.AssignmentBuilderMixin;
+import de.dhbw.mixin.entities.assignment.AssignmentMixin;
+import de.dhbw.mixin.entities.doctor.DoctorBuilderMixin;
+import de.dhbw.mixin.entities.doctor.DoctorMixin;
+import de.dhbw.mixin.entities.examination.ExaminationMixin;
+import de.dhbw.mixin.entities.patient.PatientBuilderMixin;
+import de.dhbw.mixin.entities.patient.PatientMixin;
+import de.dhbw.mixin.entities.room.RoomMixin;
+import de.dhbw.mixin.value_objects.AddressMixin;
+import de.dhbw.mixin.value_objects.ContactMixin;
+import de.dhbw.mixin.value_objects.NameMixin;
+import de.dhbw.mixin.value_objects.RoomAddressMixin;
+import de.dhbw.patient.entity.Patient;
+import de.dhbw.room.entity.Room;
+import de.dhbw.shared.Address;
+import de.dhbw.shared.Contact;
+import de.dhbw.shared.Name;
+import de.dhbw.shared.RoomAddress;
+
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+public class JsonSerializer {
+    private final ObjectMapper objectMapper;
+
+    public JsonSerializer() {
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.registerModule(new JavaTimeModule()); // Unterstützt LocalDate
+        addMixins();
+        this.objectMapper.findAndRegisterModules();
+    }
+
+    private void addMixins() {
+        this.objectMapper.addMixIn(Patient.class, PatientMixin.class);
+        this.objectMapper.addMixIn(Patient.PatientBuilder.class, PatientBuilderMixin.class);
+        this.objectMapper.addMixIn(Room.class, RoomMixin.class);
+        this.objectMapper.addMixIn(Room.RoomBuilder.class, RoomMixin.class);
+        this.objectMapper.addMixIn(Doctor.class, DoctorMixin.class);
+        this.objectMapper.addMixIn(Doctor.DoctorBuilder.class, DoctorBuilderMixin.class);
+        this.objectMapper.addMixIn(Assignment.class, AssignmentMixin.class);
+        this.objectMapper.addMixIn(Assignment.AssignmentBuilder.class, AssignmentBuilderMixin.class);
+        this.objectMapper.addMixIn(Examination.class, ExaminationMixin.class);
+
+        // Value Objects
+        this.objectMapper.addMixIn(Name.class, NameMixin.class);
+        this.objectMapper.addMixIn(Address.class, AddressMixin.class);
+        this.objectMapper.addMixIn(Contact.class, ContactMixin.class);
+        this.objectMapper.addMixIn(RoomAddress.class, RoomAddressMixin.class);
+    }
+
+    public void serialize(Object obj, String filePath) {
+        try {
+            objectMapper.writeValue(new File(filePath), obj);
+        } catch (IOException e) {
+            throw new RuntimeException("Fehler beim Speichern der JSON-Datei: " + filePath, e);
+        }
+    }
+
+    public <T> List<T> deserialize(String filePath, Class<T> clazz) {
+        try {
+            return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
+        } catch (IOException e) {
+            throw new RuntimeException("Fehler beim Laden der JSON-Datei: " + filePath, e);
+        }
+    }
+}

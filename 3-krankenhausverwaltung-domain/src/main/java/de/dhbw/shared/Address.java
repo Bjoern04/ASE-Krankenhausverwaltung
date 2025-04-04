@@ -7,9 +7,9 @@ import java.util.Objects;
  */
 public final class Address {
     private final String street;
-    private final String city;
     private final int houseNumber;
     private final int zipCode;
+    private final String city;
 
     /**
      * Constructor for the Address Value Object.
@@ -20,7 +20,7 @@ public final class Address {
      * @param zipCode The postal/zip code
      * @throws IllegalArgumentException if any parameter is invalid
      */
-    public Address(final String street, final String city, final int houseNumber, final int zipCode) {
+    public Address(final String street, final int houseNumber, final int zipCode, final String city) {
         if (street == null || street.trim().isEmpty()) {
             throw new IllegalArgumentException("Street must not be null or empty");
         }

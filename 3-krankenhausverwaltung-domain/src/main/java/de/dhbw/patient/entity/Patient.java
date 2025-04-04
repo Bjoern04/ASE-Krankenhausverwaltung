@@ -1,9 +1,8 @@
 package de.dhbw.patient.entity;
 
-import de.dhbw.examination.entity.Examination;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import de.dhbw.shared.Address;
 import de.dhbw.shared.Contact;
-import de.dhbw.shared.Date;
 import de.dhbw.shared.Name;
 
 import java.time.LocalDate;
@@ -28,10 +27,13 @@ public class Patient {
     private LocalDate dateOfBirth;
 
     // List of medical examinations
-    private List<Examination> examinations;
+    private List<UUID> examinationIds;
 
     // Patient contact information
     private Contact contact;
+
+    // Assignment information (if applicable)
+    private UUID assignmentId;
 
     // Private constructor to enforce builder usage
     private Patient(PatientBuilder builder) {
@@ -44,15 +46,16 @@ public class Patient {
         this.name = builder.name;
         this.address = builder.address;
         this.dateOfBirth = builder.dateOfBirth;
-        this.examinations = builder.examinations != null
-                ? new ArrayList<>(builder.examinations)
+        this.examinationIds = builder.examinationIds != null
+                ? new ArrayList<>(builder.examinationIds)
                 : new ArrayList<>();
         this.contact = builder.contact;
+        this.assignmentId = builder.assignmentId;
     }
 
-    public Patient removeExamination(Examination examination) {
-        if (this.examinations != null) {
-            this.examinations.remove(examination);
+    public Patient removeExamination(UUID examinationId) {
+        if (this.examinationIds != null) {
+            this.examinationIds.remove(examinationId);
         }
         return this;
     }
@@ -74,12 +77,16 @@ public class Patient {
         return dateOfBirth;
     }
 
-    public List<Examination> getExaminations() {
-        return new ArrayList<>(examinations);
+    public List<UUID> getExaminations() {
+        return examinationIds;
     }
 
     public Contact getContact() {
         return contact;
+    }
+
+    public UUID getAssignment() {
+        return assignmentId;
     }
 
     // Update methods
@@ -95,16 +102,31 @@ public class Patient {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void addExamination (Examination examination) {
-        this.examinations.add(examination);
+    public void addExamination (UUID examinationId) {
+        if (examinationId == null) {
+            throw new NullPointerException("Die Untersuchung darf nicht null sein.");
+        }
+        if (!this.examinationIds.contains(examinationId)) {
+            this.examinationIds.add(examinationId);
+        }
     }
 
-    public void addExaminations (List<Examination> examinations) {
-        this.examinations.addAll(examinations);
+    public void addExaminations (List<UUID> examinationIds) {
+        for (UUID examinationId : examinationIds) {
+            if (!this.examinationIds.contains(examinationId)) {
+                this.examinationIds.add(examinationId);
+            }
+        }
     }
 
     public void updateContact(Contact updatedContact) {
         this.contact = updatedContact;
+    }
+
+    public void updateAssignment(UUID updatedAssignmentId) {
+        if (updatedAssignmentId != null && !updatedAssignmentId.equals(this.assignmentId)) {
+            this.assignmentId = updatedAssignmentId;
+        }
     }
 
     /**
@@ -115,9 +137,11 @@ public class Patient {
         private Name name;
         private Address address;
         private LocalDate dateOfBirth;
-        private List<Examination> examinations;
+        private List<UUID> examinationIds;
         private Contact contact;
+        private UUID assignmentId;
 
+        @JsonCreator
         public PatientBuilder(UUID id) {
             this.id = id;
         }
@@ -137,13 +161,18 @@ public class Patient {
             return this;
         }
 
-        public PatientBuilder withExamination(List<Examination> examinations) {
-            this.examinations = new ArrayList<>(examinations);
+        public PatientBuilder withExamination(List<UUID> examinationIds) {
+            this.examinationIds = examinationIds;
             return this;
         }
 
         public PatientBuilder withContact(Contact contact) {
             this.contact = contact;
+            return this;
+        }
+
+        public PatientBuilder withAssignment(UUID assignmentId) {
+            this.assignmentId = assignmentId;
             return this;
         }
 

@@ -1,5 +1,7 @@
 package de.dhbw.shared;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 /**

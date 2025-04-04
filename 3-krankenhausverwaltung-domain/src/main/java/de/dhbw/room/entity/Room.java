@@ -18,7 +18,7 @@ public class Room {
 
     private int roomSize;
 
-    private List<Assignment> assignments;
+    private List<UUID> assignmentIds;
 
     private Room (RoomBuilder builder) {
         if (builder.id == null) {
@@ -36,10 +36,9 @@ public class Room {
         }
         this.roomSize = builder.roomSize;
 
-        this.assignments = builder.assignments != null
-                ? new ArrayList<>(builder.assignments)
+        this.assignmentIds = builder.assignmentIds != null
+                ? new ArrayList<>(builder.assignmentIds)
                 : new ArrayList<>();
-
     }
 
     // Getters
@@ -55,8 +54,8 @@ public class Room {
         return roomSize;
     }
 
-    public List<Assignment> getAssignments() {
-        return assignments;
+    public List<UUID> getAssignments() {
+        return assignmentIds;
     }
 
     public void updateRoomAddress(RoomAddress roomAddress) {
@@ -73,15 +72,21 @@ public class Room {
         this.roomSize = roomSize;
     }
 
-    public void addAssignment (Assignment assignment) {
-        if (assignment == null){
+    public void addAssignment (UUID assignmentId) {
+        if (assignmentId == null) {
             throw new NullPointerException("Die Belegung darf nicht null sein.");
         }
-        this.assignments.add(assignment);
+        if (!this.assignmentIds.contains(assignmentId)) {
+            this.assignmentIds.add(assignmentId);
+        }
     }
 
-    public void updateAssignments(List<Assignment> assignments) {
-        this.assignments.addAll(assignments);
+    public void updateAssignments(List<UUID> assignments) {
+        for (UUID assignmentId : assignments) {
+            if (!this.assignmentIds.contains(assignmentId)) {
+                this.assignmentIds.add(assignmentId);
+            }
+        }
     }
 
     public static class RoomBuilder {
@@ -91,7 +96,7 @@ public class Room {
 
         private int roomSize;
 
-        private List<Assignment> assignments;
+        private List<UUID> assignmentIds;
 
         public RoomBuilder (UUID id, RoomAddress roomAddress, int roomSize) {
             this.id = id;
@@ -99,8 +104,9 @@ public class Room {
             this.roomSize = roomSize;
         }
 
-        public void withAssignments(List<Assignment> assignments) {
-            this.assignments = assignments;
+        public RoomBuilder withAssignments(List<UUID> assignmentIds) {
+            this.assignmentIds = assignmentIds;
+            return this;
         }
 
         /**

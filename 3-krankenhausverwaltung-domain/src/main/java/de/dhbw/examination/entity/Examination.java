@@ -12,10 +12,10 @@ public class Examination {
     private String examinationType;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Patient patient;
-    private Doctor doctor;
+    private UUID patientId;
+    private UUID doctorId;
 
-    public Examination(UUID id, String examinationType, LocalDateTime startTime, LocalDateTime endTime, Patient patient, Doctor doctor) {
+    public Examination(UUID id, String examinationType, LocalDateTime startTime, LocalDateTime endTime, UUID patientId, UUID doctorId) {
         if (id == null) {
             throw new NullPointerException("Untersuchungs-ID darf nicht null sein.");
         }
@@ -36,15 +36,15 @@ public class Examination {
         }
         this.endTime = endTime;
 
-        if (patient == null) {
+        if (patientId == null) {
             throw new NullPointerException("Patient der an Untersuchung teilnimmt darf nicht null sein.");
         }
-        this.patient = patient;
+        this.patientId = patientId;
 
-        if (doctor == null) {
+        if (doctorId == null) {
             throw new NullPointerException("Arzt der Untersuchung durchführt darf nicht null sein.");
         }
-        this.doctor = doctor;
+        this.doctorId = doctorId;
     }
 
     // Getters
@@ -64,12 +64,12 @@ public class Examination {
         return endTime;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public UUID getPatient() {
+        return patientId;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public UUID getDoctor() {
+        return doctorId;
     }
 
 
@@ -81,30 +81,30 @@ public class Examination {
     }
 
     public void updateStartTime(LocalDateTime startTime) {
-        if (examinationType == null) {
+        if (startTime == null) {
             throw new NullPointerException("Startzeit der Untersuchung darf nicht null sein.");
         }
         this.startTime = startTime;
     }
 
     public void updateEndTime(LocalDateTime endTime) {
-        if (examinationType == null) {
+        if (endTime == null) {
             throw new NullPointerException("Endzeitpunkt der Untersuchung darf nicht null sein.");
         }
         this.endTime = endTime;
     }
 
-    public void updatePatient(Patient patient) {
-        if (examinationType == null) {
+    public void updatePatient(UUID patient) {
+        if (patient == null) {
             throw new NullPointerException("Patient der an Untersuchung teilnimmt darf nicht null sein.");
         }
-        this.patient = patient;
+        this.patientId = patient;
     }
 
-    public void updateDoctor(Doctor doctor) {
-        if (examinationType == null) {
+    public void updateDoctor(UUID doctor) {
+        if (doctor == null) {
             throw new NullPointerException("Arzt der Untersuchung durchführt darf nicht null sein.");
         }
-        this.doctor = doctor;
+        this.doctorId = doctor;
     }
 }

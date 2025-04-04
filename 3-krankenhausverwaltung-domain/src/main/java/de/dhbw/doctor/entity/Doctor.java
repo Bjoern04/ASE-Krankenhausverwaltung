@@ -23,7 +23,7 @@ public class Doctor {
 
     private LocalDate dateOfBirth;
 
-    private List<Examination> examinations;
+    private List<UUID> examinationIds;
 
     private Contact contact;
 
@@ -54,8 +54,8 @@ public class Doctor {
         this.contact = builder.contact;
 
         // Optional fields
-        this.examinations = builder.examinations != null
-                ? new ArrayList<>(builder.examinations)
+        this.examinationIds = builder.examinationIds != null
+                ? new ArrayList<>(builder.examinationIds)
                 : new ArrayList<>();
     }
 
@@ -76,8 +76,8 @@ public class Doctor {
         return dateOfBirth;
     }
 
-    public List<Examination> getExaminations() {
-        return examinations;
+    public List<UUID> getExaminations() {
+        return examinationIds;
     }
 
     public Contact getContact() {
@@ -107,10 +107,12 @@ public class Doctor {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void updateExaminations(List<Examination> examinations) {
-        this.examinations = examinations != null
-                ? new ArrayList<>(examinations)
-                : new ArrayList<>();
+    public void updateExaminations(List<UUID> examinations) {
+        for (UUID examinationId : examinationIds) {
+            if (!this.examinationIds.contains(examinationId)) {
+                this.examinationIds.add(examinationId);
+            }
+        }
     }
 
     public void updateContact(Contact contact) {
@@ -120,15 +122,15 @@ public class Doctor {
         this.contact = contact;
     }
 
-    public void addExamination(Examination examination) {
-        this.examinations.add(examination);
-    }
-
-    public void addExaminations(List<Examination> examinations) {
-        if (examinations != null) {
-            this.examinations.addAll(examinations);
+    public void addExamination(UUID examination) {
+        if (examination == null) {
+            throw new NullPointerException("Die Untersuchung darf nicht null sein.");
+        }
+        if (!this.examinationIds.contains(examination)) {
+            this.examinationIds.add(examination);
         }
     }
+
 
     /**
      * Builder class for Doctor following the Builder design pattern.
@@ -142,7 +144,7 @@ public class Doctor {
 
         private LocalDate dateOfBirth;
 
-        private List<Examination> examinations;
+        private List<UUID> examinationIds;
 
         private Contact contact;
 
@@ -154,8 +156,9 @@ public class Doctor {
             this.contact = contact;
         }
 
-        public void withExaminations(List<Examination> examinations) {
-            this.examinations = examinations;
+        public DoctorBuilder withExaminations(List<UUID> examinations) {
+            this.examinationIds = examinations;
+            return this;
         }
 
         /**

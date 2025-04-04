@@ -1,7 +1,9 @@
 package de.dhbw.assignment.entity;
 
+import com.fasterxml.jackson.databind.deser.std.UUIDDeserializer;
 import de.dhbw.doctor.entity.Doctor;
 import de.dhbw.patient.entity.Patient;
+import de.dhbw.room.entity.Room;
 import de.dhbw.shared.RoomAddress;
 
 import java.time.LocalDate;
@@ -13,9 +15,9 @@ import java.util.UUID;
 public class Assignment {
     private final UUID id;
 
-    private Room room;
+    private UUID roomId;
 
-    private Patient patient;
+    private UUID patientId;
 
     private LocalDate dateOfAdmission;
 
@@ -27,15 +29,15 @@ public class Assignment {
         }
         this.id = builder.id;
 
-        if (builder.room == null) {
+        if (builder.roomId == null) {
             throw new NullPointerException("Raum der Belegung darf nicht null sein.");
         }
-        this.room = builder.room;
+        this.roomId = builder.roomId;
 
-        if (builder.patient == null) {
+        if (builder.patientId == null) {
             throw new NullPointerException("Patient der Belegung darf nicht null sein.");
         }
-        this.patient = builder.patient;
+        this.patientId = builder.patientId;
 
         if (builder.dateOfAdmission == null) {
             throw new NullPointerException("Einlieferungsdatum darf nicht null sein.");
@@ -49,12 +51,12 @@ public class Assignment {
         return id;
     }
 
-    public Room getRoom() {
-        return room;
+    public UUID getRoom() {
+        return roomId;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public UUID getPatient() {
+        return patientId;
     }
 
     public LocalDate getDateOfAdmission() {
@@ -65,18 +67,18 @@ public class Assignment {
         return dateOfDischarge;
     }
 
-    public void updateRoom(Room room) {
+    public void updateRoom(UUID room) {
         if (room == null) {
             throw new NullPointerException("Raum der Belegung darf nicht null sein.");
         }
-        this.room = room;
+        this.roomId = room;
     }
 
-    public void updatePatient(Patient patient) {
+    public void updatePatient(UUID patient) {
         if (patient == null) {
             throw new NullPointerException("Patient der Belegung darf nicht null sein.");
         }
-        this.patient = patient;
+        this.patientId = patient;
     }
 
     public void updateDateOfAdmission(LocalDate dateOfAdmission) {
@@ -96,23 +98,24 @@ public class Assignment {
     public static class AssignmentBuilder {
         private final UUID id;
 
-        private Room room;
+        private UUID roomId;
 
-        private Patient patient;
+        private UUID patientId;
 
         private LocalDate dateOfAdmission;
 
         private LocalDate dateOfDischarge;
 
-        public AssignmentBuilder (UUID id, Room room, Patient patient, LocalDate dateOfAdmission) {
+        public AssignmentBuilder (UUID id, UUID room, UUID patient, LocalDate dateOfAdmission) {
             this.id = id;
-            this.room = room;
-            this.patient = patient;
+            this.roomId = room;
+            this.patientId = patient;
             this.dateOfAdmission = dateOfAdmission;
         }
 
-        public void withDateOfDischarge (LocalDate dateOfDischarge) {
+        public AssignmentBuilder withDateOfDischarge (LocalDate dateOfDischarge) {
             this.dateOfDischarge = dateOfDischarge;
+            return this;
         }
 
         /**
