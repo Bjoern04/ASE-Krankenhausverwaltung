@@ -41,7 +41,8 @@ public class RoomStorage implements RoomRepository {
 
     @Override
     public boolean saveRoom(Room room) {
-        return false;
+        serializer.serialize(room, file.getAbsolutePath());
+        return true;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class RoomStorage implements RoomRepository {
 
 
     @Override
-    public void deleteAssigment(Assignment assignment) {
+    public void deleteAssigment(Room room, UUID assignmentId) {
 
     }
 

@@ -3,6 +3,7 @@ package de.dhbw.patient.repository;
 import de.dhbw.patient.entity.Patient;
 import de.dhbw.shared.Name;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface PatientRepository {
@@ -15,5 +16,6 @@ public interface PatientRepository {
     boolean deletePatient(Patient patient);
 
     void updatePatient (Patient patient);
-    void loadPatients() throws Exception;
+
+    List<Patient> loadPatients() throws Exception;
 }

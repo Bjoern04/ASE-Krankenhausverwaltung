@@ -17,5 +17,5 @@ public interface RoomRepository {
 
     void updateRoom (Room room);
 
-    void deleteAssigment(Assignment assignment);
+    void deleteAssigment(Room room, UUID assignmentId);
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 public class PatientStorage implements PatientRepository {
     private final File file;
     private final JsonSerializer serializer;
-    private List<Patient> patients;
+    //private List<Patient> patients;
 
     public PatientStorage(String filePath) throws IOException {
         this.file = new File(filePath);
@@ -24,7 +24,7 @@ public class PatientStorage implements PatientRepository {
     @Override
     public Patient findPatientById(UUID id) {
         try {
-            loadPatients();
+            List<Patient> patients = loadPatients();
             return patients.stream().filter(patient -> patient.getId().equals(id)).findFirst().orElse(null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class PatientStorage implements PatientRepository {
 
     @Override
     public boolean savePatient(Patient patient) {
-        serializer.serialize(patients, file.getAbsolutePath());
+        //serializer.serialize(patients, file.getAbsolutePath());
         return true;
     }
 
@@ -53,15 +53,11 @@ public class PatientStorage implements PatientRepository {
 
     }
 
-    public void loadPatients() throws IOException {
+    public List<Patient> loadPatients() throws IOException {
         if (file.exists()) {
-            patients = serializer.deserialize(file.getAbsolutePath(), Patient.class);
+            return serializer.deserialize(file.getAbsolutePath(), Patient.class);
         } else {
-            patients = new ArrayList<>();
+            return new ArrayList<>();
         }
-    }
-
-    private void savePatients() throws IOException {
-        serializer.serialize(patients, file.getAbsolutePath());
     }
 }

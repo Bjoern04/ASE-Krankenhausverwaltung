@@ -1,6 +1,7 @@
 package de.dhbw;
 
 import de.dhbw.assignment.entity.Assignment;
+import de.dhbw.assignment.repository.AssignmentRepository;
 import de.dhbw.patient.entity.Patient;
 import de.dhbw.patient.repository.PatientRepository;
 import de.dhbw.room.entity.Room;
@@ -8,70 +9,70 @@ import de.dhbw.room.repository.RoomRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class AssignRoomToPatientUseCase {
     private final PatientRepository patientRepository;
     private final RoomRepository roomRepository;
+    private final AssignmentRepository assignmentRepository;
 
-    public AssignRoomToPatientUseCase(PatientRepository patientRepository, RoomRepository roomRepository) {
+    public AssignRoomToPatientUseCase(PatientRepository patientRepository, RoomRepository roomRepository, AssignmentRepository assignmentRepository) {
         this.patientRepository = patientRepository;
         this.roomRepository = roomRepository;
+        this.assignmentRepository = assignmentRepository;
     }
 
-    public void execute(UUID patient, UUID room, LocalDate dateOfAdmission, LocalDate dateOfDischarge) throws Exception {
-
-        patientRepository.loadPatients();
-        /*
+    public void execute(UUID patientId, UUID roomId, LocalDate dateOfAdmission, LocalDate dateOfDischarge) throws Exception {
         // Check if the patient exists
-        Patient patientToUpdate = patientRepository.findPatientById(patient.getId());
+        Patient patientToUpdate = patientRepository.findPatientById(patientId);
         if (patientToUpdate == null) {
             throw new IllegalArgumentException("Der von Ihnen übergebene Patient existiert nicht. Ein Patient muss zuerst im Krankenhaus registriert werden bevor er einem Zimmer zugewiesen werden kann.");
         }
 
         // Check if the room exists
-        Room roomToUpdate = roomRepository.findRoomById(room.getId());
+        Room roomToUpdate = roomRepository.findRoomById(roomId);
         if (roomToUpdate == null) {
             throw new IllegalArgumentException("Der Raum dem der Patient hinzugefügt werden sollte existiert nicht. Bitte weisen Sie den Patienten einem existierenden Zimmer zu.");
         }
 
         // Check if the room has a bed available
-        List<Assignment> assignmentsOfTheRoom = roomToUpdate.getAssignments();
-        int availableBeds = roomToUpdate.getRoomSize() - assignmentsOfTheRoom.size();
+        List<UUID> assignmentIdsOfTheRoom = roomToUpdate.getAssignments();
+        int availableBeds = roomToUpdate.getRoomSize() - assignmentIdsOfTheRoom.size();
         if (availableBeds <= 0) {
             throw new IllegalArgumentException("Der Raum ist voll. Bitte weisen Sie den Patienten einem anderen Raum zu.");
         }
 
         // Check if the patient is already assigned to a room
-        boolean patientAssignedToRoom = false;
-        Assignment oldAssignment = patient.getAssignment();
-        for (Assignment assignment : assignmentsOfTheRoom) {
-            if (assignment.equals(oldAssignment)) {
-                patientAssignedToRoom = true;
-                break;
-            }
+        UUID oldAssignmentId = patientToUpdate.getAssignment();
+
+        if (oldAssignmentId == null) {
+            // Patient was not assigned to any room before
+            Assignment assignment = new Assignment.AssignmentBuilder(UUID.randomUUID(), roomId, patientId, dateOfAdmission).withDateOfDischarge(dateOfDischarge).build();
+            assignmentRepository.saveAssigment(assignment);
+            updateCorrespondingObjects(patientToUpdate, roomToUpdate, assignment);
         }
-
-        if (!patientAssignedToRoom) {
-            Assignment assignment = new Assignment.AssignmentBuilder(UUID.randomUUID(), room, patient, dateOfAdmission).withDateOfDischarge(dateOfDischarge).build();
-
-            // Delete old assignment if it exists
-            if (oldAssignment != null) {
-                Room oldRoom = roomRepository.findRoomById(oldAssignment.getRoom().getId());
-
-                if (oldRoom != null) {
-                    roomRepository.deleteAssigment(oldAssignment);
-                    roomRepository.updateRoom(oldRoom);
-                }
+        else {
+            // Patient was assigned to a room before
+            Assignment oldAssignment = assignmentRepository.findAssignmentById(oldAssignmentId);
+            if (oldAssignment == null) {
+                throw new NoSuchElementException("Ein Assignment mit der im Patienten hinterlegten ID, konnte nicht gefunden werden. Bitte überprüfen Sie die JSON Datei.");
             }
-
-            // Update the patient and room with the new assignment
-            patient.updateAssignment(assignment);
-            roomToUpdate.addAssignment(assignment);
-            patientRepository.updatePatient(patient);
-            roomRepository.updateRoom(roomToUpdate);
+            Room oldRoom = roomRepository.findRoomById(oldAssignmentId);
+            if (oldRoom == null) {
+                throw new NoSuchElementException("Ein Raum mit der im Assignment hinterlegten ID, konnte nicht gefunden werden. Bitte überprüfen Sie die JSON Datei.");
+            }
+            roomRepository.deleteAssigment(oldRoom, oldAssignmentId);
+            Assignment assignment = new Assignment.AssignmentBuilder(oldAssignmentId, roomId, patientId, dateOfAdmission).withDateOfDischarge(dateOfDischarge).build();
+            assignmentRepository.updateAssigment(assignment);
+            updateCorrespondingObjects(patientToUpdate, roomToUpdate, assignment);
         }
-*/
+    }
 
+    private void updateCorrespondingObjects(Patient patientToUpdate, Room roomToUpdate, Assignment assignment) {
+        patientToUpdate.updateAssignment(assignment.getId());
+        roomToUpdate.addAssignment(assignment.getId());
+        patientRepository.updatePatient(patientToUpdate);
+        roomRepository.updateRoom(roomToUpdate);
     }
 }
