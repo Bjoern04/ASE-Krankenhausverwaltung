@@ -16,6 +16,4 @@ public interface PatientRepository {
     boolean deletePatient(Patient patient);
 
     void updatePatient (Patient patient);
-
-    List<Patient> loadPatients() throws Exception;
 }
