@@ -13,14 +13,14 @@ import java.util.UUID;
 public class CreateRoomCommand implements Command {
     private String argument;
 
-    public CreateRoomCommand(String arguments) {
+    public CreateRoomCommand(String argument) {
         this.argument = argument;
     }
     @Override
-    public String execute() throws InvalidParameter, IOException {
+    public String execute() throws RuntimeException {
         CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"));
 
-        List<Object> arguments = parseArguments(argument);
+        List<Object> arguments = InputParser.parseArguments(argument);
         if (arguments.size() != 5) {
             throw new TooFewParameters("Too few parameters. Expected 5, but got " + arguments.size());
         }
@@ -29,7 +29,7 @@ public class CreateRoomCommand implements Command {
             int floor = Integer.parseInt(arguments.get(1).toString());
             int roomNumber = Integer.parseInt(arguments.get(2).toString());
             int roomSize = Integer.parseInt(arguments.get(3).toString());
-            List<UUID> assignmentIds = parseUuidList(arguments.get(4).toString());
+            List<UUID> assignmentIds = InputParser.parseUuidList(arguments.get(4));
 
             UUID roomUUID = createRoom.execute(building, floor, roomNumber, roomSize, assignmentIds);
             return "The room was created successfully. The ID of the created room is: " + roomUUID.toString();
@@ -37,52 +37,5 @@ public class CreateRoomCommand implements Command {
         } catch (NumberFormatException e) {
             throw new InvalidParameter("Invalid parameter for creating the room: " + e.getMessage());
         }
-    }
-
-    public static List<UUID> parseUuidList(Object element) throws IllegalArgumentException {
-        if (!(element instanceof String[])) {
-            throw new IllegalArgumentException("Das Element ist kein String-Array und kann nicht als Liste von UUIDs geparst werden.");
-        }
-
-        String[] uuidStrings = (String[]) element;
-        List<UUID> uuidList = new ArrayList<>();
-
-        for (String uuidStr : uuidStrings) {
-            try {
-                UUID uuid = UUID.fromString(uuidStr.trim());
-                uuidList.add(uuid);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Ungültiges UUID-Format im Array: '" + uuidStr.trim() + "'", e);
-            }
-        }
-
-        return uuidList;
-    }
-
-    private List<Object> parseArguments(String argument) {
-        List<Object> result = new ArrayList<>();
-        String[] topLevelParameters = argument.split(",(?![^\\[]*\\])"); // Split by comma, ignoring commas inside brackets
-
-
-        for (String param : topLevelParameters) {
-            param = param.trim();
-            if (param.startsWith("[") && param.endsWith("]")) {
-                // Found an inner array
-                String innerArrayContent = param.substring(1, param.length() - 1).trim();
-                if (!innerArrayContent.isEmpty()) {
-                    String[] innerArray = innerArrayContent.split(",");
-                    for (int i = 0; i < innerArray.length; i++) {
-                        innerArray[i] = innerArray[i].trim();
-                    }
-                    result.add(innerArray);
-                } else {
-                    result.add(new String[0]); // Empty inner array
-                }
-            } else {
-                // Simple parameter
-                result.add(param);
-            }
-        }
-        return result;
     }
 }

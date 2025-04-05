@@ -17,7 +17,7 @@ public class RoomStorage implements RoomRepository {
     private final JsonSerializer serializer;
     private List<Room> rooms;
 
-    public RoomStorage(String filePath) throws IOException {
+    public RoomStorage(String filePath) {
         this.file = new File(filePath);
         this.serializer = new JsonSerializer();
     }

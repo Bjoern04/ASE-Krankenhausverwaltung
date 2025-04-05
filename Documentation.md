@@ -85,7 +85,8 @@ Entities beteiligt sind.
 
 
 ## 3 Programming Principles
-Single respons bei Belegung patient und zimmer
+Single respons bei Belegung patient und zimmer und bei herausnehmen der parser methoden aus create room command (auch refactoring)
+
 ## 4 Refactoring
 ## 6 Entwurfsmuster
 ### 6.1 Builder Pattern

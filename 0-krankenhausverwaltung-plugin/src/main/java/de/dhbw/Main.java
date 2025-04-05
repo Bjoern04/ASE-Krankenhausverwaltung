@@ -10,7 +10,6 @@ import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
         RoomAddress roomAddress = new RoomAddress(1, 1, 1);
         RoomAddress roomAddress2 = new RoomAddress(1, 1, 2);
         RoomAddress roomAddress3 = new RoomAddress(1, 1, 3);

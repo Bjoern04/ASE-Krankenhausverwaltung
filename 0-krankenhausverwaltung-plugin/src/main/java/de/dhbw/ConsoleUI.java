@@ -43,7 +43,7 @@ public class ConsoleUI {
         }
     }
 
-    private Command parseCommand(String input) throws InvalidKeyword {
+    private Command parseCommand(String input) throws RuntimeException {
         String[] tokens = input.split(":");
         if (tokens.length != 2) {
             throw new InvalidKeyword("Ungültiger Befehl. Bitte geben Sie einen gültigen Befehl ein.");
