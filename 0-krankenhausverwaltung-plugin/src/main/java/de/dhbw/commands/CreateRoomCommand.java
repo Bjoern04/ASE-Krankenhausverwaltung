@@ -4,12 +4,12 @@ import de.dhbw.AssignmentStorage;
 import de.dhbw.CreateRoom;
 import de.dhbw.RoomStorage;
 import de.dhbw.commands.exceptions.InvalidParameter;
-import de.dhbw.commands.exceptions.TooFewParameters;
+import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import java.util.List;
 import java.util.UUID;
 
 public class CreateRoomCommand implements Command {
-    private String argument;
+    private final String argument;
 
     public CreateRoomCommand(String argument) {
         this.argument = argument;
@@ -20,7 +20,7 @@ public class CreateRoomCommand implements Command {
 
         List<Object> arguments = InputParser.parseArguments(argument);
         if (arguments.size() != 5) {
-            throw new TooFewParameters("Too few parameters. Expected 5, but got " + arguments.size());
+            throw new WrongAmoutOfParameters("Falsche Anzahl an Parameter. Es wurden fünf erwartet, eingegeben wurden aber:" + arguments.size());
         }
         try {
             int building = Integer.parseInt(arguments.get(0).toString());

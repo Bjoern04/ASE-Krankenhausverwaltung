@@ -16,7 +16,7 @@ public class PatientStorage implements PatientRepository {
     private final JsonSerializer serializer;
     //private List<Patient> patients;
 
-    public PatientStorage(String filePath) throws IOException {
+    public PatientStorage(String filePath) {
         this.file = new File(filePath);
         this.serializer = new JsonSerializer();
     }

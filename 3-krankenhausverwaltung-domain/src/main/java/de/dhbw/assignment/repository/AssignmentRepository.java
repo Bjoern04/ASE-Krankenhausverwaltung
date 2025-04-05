@@ -13,13 +13,13 @@ import java.util.UUID;
 public interface AssignmentRepository {
     Room findRoomForPatient(Patient patient);
 
-    List<Patient> findPatientsForRoom (Room room);
+    List<UUID> findPatientsForRoom (Room room);
 
     Assignment findAssignmentById(UUID id);
 
     Assignment findAssignmentByPatient(Patient patient);
 
-    List<Assignment> findAssignmentsForRoom(Room room);
+    List<UUID> findAssignmentsForRoom(Room room);
 
     boolean saveAssigment(Assignment assignment);
 

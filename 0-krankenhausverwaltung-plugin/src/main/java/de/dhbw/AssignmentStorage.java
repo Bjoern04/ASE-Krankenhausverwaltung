@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class AssignmentStorage implements AssignmentRepository {
     private final File file;
     private final JsonSerializer serializer;
-    private List<Assignment> assignmentIds;
+    //private List<Assignment> assignmentIds;
 
     public AssignmentStorage(String filePath) {
         this.file = new File(filePath);
@@ -27,14 +28,20 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public List<Patient> findPatientsForRoom(Room room) {
-        return List.of();
+    public List<UUID> findPatientsForRoom(Room room) {
+        try {
+            List<Assignment> assignmentIds = loadAssignments();
+            return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).map(Assignment::getPatient).collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public Assignment findAssignmentById(UUID id) {
         try {
-            loadAssignments();
+            List<Assignment> assignmentIds =loadAssignments();
             return assignmentIds.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,7 +55,7 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public List<Assignment> findAssignmentsForRoom(Room room) {
+    public List<UUID> findAssignmentsForRoom(Room room) {
         return List.of();
     }
 
@@ -67,16 +74,16 @@ public class AssignmentStorage implements AssignmentRepository {
 
     }
 
-    private void loadAssignments() throws IOException {
+    private List<Assignment> loadAssignments() throws IOException {
         if (file.exists()) {
             if (file.length() == 0) {
-                assignmentIds = new ArrayList<>();
+                return new ArrayList<>();
             }
             else {
-                assignmentIds = serializer.deserialize(file.getAbsolutePath(), Assignment.class);
+                return serializer.deserialize(file.getAbsolutePath(), Assignment.class);
             }
         } else {
-            assignmentIds = new ArrayList<>();
+            return new ArrayList<>();
         }
     }
 }

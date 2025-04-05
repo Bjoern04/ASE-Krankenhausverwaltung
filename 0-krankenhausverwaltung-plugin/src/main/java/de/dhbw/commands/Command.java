@@ -6,5 +6,5 @@ import de.dhbw.commands.exceptions.InvalidParameter;
 import java.io.IOException;
 
 public interface Command {
-    String execute() throws InvalidParameter, InvalidKeyword, IOException;
+    String execute() throws RuntimeException;
 }
