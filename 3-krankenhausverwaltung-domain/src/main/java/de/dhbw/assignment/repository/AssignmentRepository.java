@@ -26,6 +26,4 @@ public interface AssignmentRepository {
     boolean deleteAssigment(Assignment assignment);
 
     void updateAssigment (Assignment assignment);
-
-    List<Assignment> loadAssigments() throws Exception;
 }

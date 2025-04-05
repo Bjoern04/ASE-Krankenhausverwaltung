@@ -12,6 +12,7 @@ import de.dhbw.mixin.entities.doctor.DoctorMixin;
 import de.dhbw.mixin.entities.examination.ExaminationMixin;
 import de.dhbw.mixin.entities.patient.PatientBuilderMixin;
 import de.dhbw.mixin.entities.patient.PatientMixin;
+import de.dhbw.mixin.entities.room.RoomBuilderMixin;
 import de.dhbw.mixin.entities.room.RoomMixin;
 import de.dhbw.mixin.value_objects.AddressMixin;
 import de.dhbw.mixin.value_objects.ContactMixin;
@@ -27,6 +28,7 @@ import de.dhbw.shared.RoomAddress;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class JsonSerializer {
@@ -43,7 +45,7 @@ public class JsonSerializer {
         this.objectMapper.addMixIn(Patient.class, PatientMixin.class);
         this.objectMapper.addMixIn(Patient.PatientBuilder.class, PatientBuilderMixin.class);
         this.objectMapper.addMixIn(Room.class, RoomMixin.class);
-        this.objectMapper.addMixIn(Room.RoomBuilder.class, RoomMixin.class);
+        this.objectMapper.addMixIn(Room.RoomBuilder.class, RoomBuilderMixin.class);
         this.objectMapper.addMixIn(Doctor.class, DoctorMixin.class);
         this.objectMapper.addMixIn(Doctor.DoctorBuilder.class, DoctorBuilderMixin.class);
         this.objectMapper.addMixIn(Assignment.class, AssignmentMixin.class);
@@ -57,11 +59,23 @@ public class JsonSerializer {
         this.objectMapper.addMixIn(RoomAddress.class, RoomAddressMixin.class);
     }
 
-    public void serialize(Object obj, String filePath) {
+    public <T> void serialize(List<T> objects, String filePath) {
         try {
-            objectMapper.writeValue(new File(filePath), obj);
+            // Versuche die existierende JSON-Datei zu laden
+            List<T> existingObjects = deserialize(filePath, (Class<T>) objects.get(0).getClass());
+
+            // Füge neue Objekte hinzu
+            existingObjects.addAll(objects);
+
+            // Schreibe die aktualisierte Liste zurück in die Datei
+            objectMapper.writeValue(new File(filePath), existingObjects);
         } catch (IOException e) {
-            throw new RuntimeException("Fehler beim Speichern der JSON-Datei: " + filePath, e);
+            // Wenn die Datei leer ist oder nicht existiert, schreibe einfach die neuen Objekte
+            try {
+                objectMapper.writeValue(new File(filePath), objects);
+            } catch (IOException ioException) {
+                throw new RuntimeException("Fehler beim Speichern der JSON-Datei: " + filePath, ioException);
+            }
         }
     }
 

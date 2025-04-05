@@ -55,7 +55,12 @@ public class PatientStorage implements PatientRepository {
 
     private List<Patient> loadPatients() throws IOException {
         if (file.exists()) {
-            return serializer.deserialize(file.getAbsolutePath(), Patient.class);
+            if (file.length() == 0) {
+                return new ArrayList<>();
+            }
+            else {
+                return serializer.deserialize(file.getAbsolutePath(), Patient.class);
+            }
         } else {
             return new ArrayList<>();
         }

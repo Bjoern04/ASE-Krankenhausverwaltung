@@ -5,10 +5,22 @@ import de.dhbw.assignment.repository.AssignmentRepository;
 import de.dhbw.patient.entity.Patient;
 import de.dhbw.room.entity.Room;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class AssignmentStorage implements AssignmentRepository {
+    private final File file;
+    private final JsonSerializer serializer;
+    private List<Assignment> assignmentIds;
+
+    public AssignmentStorage(String filePath) {
+        this.file = new File(filePath);
+        this.serializer = new JsonSerializer();
+    }
+
     @Override
     public Room findRoomForPatient(Patient patient) {
         return null;
@@ -21,7 +33,13 @@ public class AssignmentStorage implements AssignmentRepository {
 
     @Override
     public Assignment findAssignmentById(UUID id) {
-        return null;
+        try {
+            loadAssignments();
+            return assignmentIds.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -49,8 +67,16 @@ public class AssignmentStorage implements AssignmentRepository {
 
     }
 
-    @Override
-    public List<Assignment> loadAssigments() throws Exception {
-        return List.of();
+    private void loadAssignments() throws IOException {
+        if (file.exists()) {
+            if (file.length() == 0) {
+                assignmentIds = new ArrayList<>();
+            }
+            else {
+                assignmentIds = serializer.deserialize(file.getAbsolutePath(), Assignment.class);
+            }
+        } else {
+            assignmentIds = new ArrayList<>();
+        }
     }
 }

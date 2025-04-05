@@ -37,7 +37,7 @@ public class AssignRoomToPatientUseCase {
         }
 
         // Check if the room has a bed available
-        List<UUID> assignmentIdsOfTheRoom = roomToUpdate.getAssignments();
+        List<UUID> assignmentIdsOfTheRoom = roomToUpdate.getAssignmentIds();
         int availableBeds = roomToUpdate.getRoomSize() - assignmentIdsOfTheRoom.size();
         if (availableBeds <= 0) {
             throw new IllegalArgumentException("Der Raum ist voll. Bitte weisen Sie den Patienten einem anderen Raum zu.");

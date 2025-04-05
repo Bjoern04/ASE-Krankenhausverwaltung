@@ -9,13 +9,14 @@ import de.dhbw.shared.RoomAddress;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 public class RoomStorage implements RoomRepository {
     private final File file;
     private final JsonSerializer serializer;
-    private List<Room> rooms;
+    //private List<Room> rooms;
 
     public RoomStorage(String filePath) {
         this.file = new File(filePath);
@@ -26,7 +27,7 @@ public class RoomStorage implements RoomRepository {
     @Override
     public Room findRoomById(UUID id) {
         try {
-            loadRooms();
+            List<Room> rooms = loadRooms();
             return rooms.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,12 +37,21 @@ public class RoomStorage implements RoomRepository {
 
     @Override
     public Room findRoomByRoomAddress(RoomAddress roomAddress) {
-        return null;
+        try {
+            List<Room> rooms = loadRooms();
+            return rooms.stream()
+                    .filter(room -> room.getRoomAddress().equals(roomAddress))
+                    .findFirst()
+                    .orElse(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public boolean saveRoom(Room room) {
-        serializer.serialize(room, file.getAbsolutePath());
+        serializer.serialize(Collections.singletonList(room), file.getAbsolutePath());
         return true;
     }
 
@@ -53,11 +63,11 @@ public class RoomStorage implements RoomRepository {
     @Override
     public void updateRoom(Room room) {
         try {
-            loadRooms();
+            List<Room> rooms= loadRooms();
             int index = rooms.indexOf(findRoomById(room.getId()));
             if (index >= 0) {
                 rooms.set(index, room);
-                saveRooms();
+                saveRooms(rooms);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,15 +80,20 @@ public class RoomStorage implements RoomRepository {
 
     }
 
-    private void loadRooms() throws IOException {
+    private List<Room> loadRooms() throws IOException {
         if (file.exists()) {
-            rooms = serializer.deserialize(file.getAbsolutePath(), Room.class);
+            if (file.length() == 0) {
+                return new ArrayList<>();
+            }
+            else {
+                return serializer.deserialize(file.getAbsolutePath(), Room.class);
+            }
         } else {
-            rooms = new ArrayList<>();
+            return new ArrayList<>();
         }
     }
 
-    private void saveRooms() throws IOException {
+    private void saveRooms(List<Room> rooms) throws IOException {
         serializer.serialize(rooms, file.getAbsolutePath());
     }
 }

@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class ConsoleUI {
     private final Scanner scanner;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_ORANGE = "\u001B[38;5;208m";
 
     public ConsoleUI() {
         this.scanner = new Scanner(System.in);
@@ -35,8 +37,8 @@ public class ConsoleUI {
                     String output = command.execute();
                     System.out.println(output);
                 }
-            } catch (InvalidKeyword e) {
-                System.out.println("Fehler: " + e.getMessage());
+            } catch (RuntimeException exception) {
+                System.out.println(ANSI_ORANGE +  exception.getClass().getSimpleName() +": " +  exception.getMessage() + ANSI_RESET);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

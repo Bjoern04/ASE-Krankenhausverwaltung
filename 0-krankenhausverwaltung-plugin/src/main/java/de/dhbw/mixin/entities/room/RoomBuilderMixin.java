@@ -14,6 +14,6 @@ public abstract class RoomBuilderMixin {
 
     }
 
-    @JsonProperty("assignments")
+    @JsonProperty("assignmentIds")
     public abstract Room.RoomBuilder withAssignments(List<UUID> assignmentIds);
 }

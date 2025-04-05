@@ -1,7 +1,5 @@
 package de.dhbw.room.entity;
 
-import de.dhbw.assignment.entity.Assignment;
-import de.dhbw.patient.entity.Patient;
 import de.dhbw.shared.RoomAddress;
 
 import java.util.ArrayList;
@@ -54,7 +52,7 @@ public class Room {
         return roomSize;
     }
 
-    public List<UUID> getAssignments() {
+    public List<UUID> getAssignmentIds() {
         return assignmentIds;
     }
 
@@ -81,8 +79,8 @@ public class Room {
         }
     }
 
-    public void updateAssignments(List<UUID> assignments) {
-        for (UUID assignmentId : assignments) {
+    public void updateAssignments(List<UUID> assignmentIds) {
+        for (UUID assignmentId : assignmentIds) {
             if (!this.assignmentIds.contains(assignmentId)) {
                 this.assignmentIds.add(assignmentId);
             }

@@ -1,12 +1,10 @@
 package de.dhbw.commands;
 
+import de.dhbw.AssignmentStorage;
 import de.dhbw.CreateRoom;
 import de.dhbw.RoomStorage;
 import de.dhbw.commands.exceptions.InvalidParameter;
 import de.dhbw.commands.exceptions.TooFewParameters;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +16,7 @@ public class CreateRoomCommand implements Command {
     }
     @Override
     public String execute() throws RuntimeException {
-        CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"));
+        CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"), new AssignmentStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\assignments.json"));
 
         List<Object> arguments = InputParser.parseArguments(argument);
         if (arguments.size() != 5) {
