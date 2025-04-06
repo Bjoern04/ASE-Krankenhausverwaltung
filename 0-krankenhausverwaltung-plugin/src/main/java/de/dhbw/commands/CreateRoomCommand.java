@@ -22,10 +22,11 @@ public class CreateRoomCommand implements Command {
         if (arguments.size() != 5) {
             throw new WrongAmoutOfParameters("Falsche Anzahl an Parameter. Es wurden fünf erwartet, eingegeben wurden aber:" + arguments.size());
         }
+        String building = arguments.get(0).toString();
+        String floor = arguments.get(1).toString();
+        String roomNumber = arguments.get(2).toString();
+
         try {
-            int building = Integer.parseInt(arguments.get(0).toString());
-            int floor = Integer.parseInt(arguments.get(1).toString());
-            int roomNumber = Integer.parseInt(arguments.get(2).toString());
             int roomSize = Integer.parseInt(arguments.get(3).toString());
             List<UUID> assignmentIds = InputParser.parseUuidList(arguments.get(4));
 

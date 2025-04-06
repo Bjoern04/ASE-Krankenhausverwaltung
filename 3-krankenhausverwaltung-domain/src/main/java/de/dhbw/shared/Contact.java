@@ -20,7 +20,7 @@ public final class Contact {
      */
     public Contact(final String phoneNumber, final String email) {
         if (phoneNumber == null || !LocationNumberValidator.isValidLocationNumber(phoneNumber)) {
-            throw new IllegalArgumentException("House number must be a positive number.");
+            throw new IllegalArgumentException("Phone number must be a positive number.");
         }
 
         if (email == null || email.trim().isEmpty()) {

@@ -28,7 +28,7 @@ public class CreateDoctor{
             List<UUID> allExaminationIds = examinationRepository.loadAllExaminations().stream().map(Examination::getId).toList();
             for (UUID examinationId : examinationIdsOfDoctor) {
                 if (!allExaminationIds.contains(examinationId)) {
-                    throw new IllegalArgumentException("Eine Untersuchung mit der ID " + examinationId + " existiert nicht.");
+                    throw new IllegalArgumentException("An examination with the ID " + examinationId + " does not exist.");
                 }
             }
         }
@@ -39,5 +39,4 @@ public class CreateDoctor{
         doctorRepository.saveDoctor(doctor);
         return doctor.getId();
     }
-
 }

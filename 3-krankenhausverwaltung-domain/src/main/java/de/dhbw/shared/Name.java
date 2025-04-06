@@ -49,15 +49,6 @@ public final class Name {
     }
 
     /**
-     * Returns the full name (firstName lastName).
-     *
-     * @return The full name
-     */
-    public String getFirstNameLastName() {
-        return firstName + " " + lastName;
-    }
-
-    /**
      * Checks if two Name objects are equal based on their values.
      *
      * @param o The object to compare with

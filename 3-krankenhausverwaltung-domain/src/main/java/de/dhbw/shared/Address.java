@@ -120,13 +120,4 @@ public final class Address {
                 ", zipCode=" + zipCode +
                 '}';
     }
-
-    /**
-     * Returns a formatted address string.
-     *
-     * @return Formatted address string
-     */
-    public String getFormattedAddress() {
-        return street + " " + houseNumber + ", " + zipCode + " " + city;
-    }
 }

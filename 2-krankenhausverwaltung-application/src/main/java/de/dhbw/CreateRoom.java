@@ -18,7 +18,7 @@ public class CreateRoom {
         this.assignmentRepository = assignmentRepository;
     }
 
-    public UUID execute(int building, int floor, int rooNumber, int roomSize, List<UUID> assignmentIds) {
+    public UUID execute(String building, String floor, String rooNumber, int roomSize, List<UUID> assignmentIds) {
         // Check if the assignments exist.
         for (UUID assignmentId : assignmentIds) {
             Assignment assignment = assignmentRepository.findAssignmentById(assignmentId);

@@ -1,22 +1,8 @@
 package de.dhbw;
 
-import de.dhbw.patient.entity.Patient;
-import de.dhbw.room.entity.Room;
-import de.dhbw.shared.RoomAddress;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        /*
-        AssignRoomToPatientUseCase assignRoomToPatientUseCase = new AssignRoomToPatientUseCase(new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"), new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"), new AssignmentStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\assignments.json"));
-        assignRoomToPatientUseCase.execute(UUID.fromString("19d1271b-22d3-4d9a-b1f5-a8d997e3393e"), UUID.fromString("19d1271b-22d3-4d9a-b1f5-a8d997e3393e"), LocalDate.of(2025, 4, 2), LocalDate.of(2025, 4, 3));
-        */
-        /*CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"));
-        createRoom.execute(1, 1, 1, 1, null);*/
-
         ConsoleUI consoleUI = new ConsoleUI();
         consoleUI.start();
     }
