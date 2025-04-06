@@ -1,6 +1,6 @@
-package de.dhbw;
+package de.dhbw.storage;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import de.dhbw.JsonSerializer;
 import de.dhbw.assignment.entity.Assignment;
 import de.dhbw.assignment.repository.AssignmentRepository;
 import de.dhbw.patient.entity.Patient;

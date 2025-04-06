@@ -21,4 +21,6 @@ public interface ExaminationRepository {
     List<Examination> findExaminationForPatient (Patient patient);
 
     List<Examination> findExaminationForDoctor (Doctor doctor);
+
+    List<Examination> loadAllExaminations ();
 }

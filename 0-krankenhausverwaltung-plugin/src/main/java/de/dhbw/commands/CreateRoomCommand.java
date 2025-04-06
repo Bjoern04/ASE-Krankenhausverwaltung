@@ -1,8 +1,8 @@
 package de.dhbw.commands;
 
-import de.dhbw.AssignmentStorage;
+import de.dhbw.storage.AssignmentStorage;
 import de.dhbw.CreateRoom;
-import de.dhbw.RoomStorage;
+import de.dhbw.storage.RoomStorage;
 import de.dhbw.commands.exceptions.InvalidParameter;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import java.util.List;

@@ -44,7 +44,7 @@ public class AssignRoomToPatientUseCase {
         }
 
         // Check if the patient is already assigned to a room
-        UUID oldAssignmentId = patientToUpdate.getAssignment();
+        UUID oldAssignmentId = patientToUpdate.getAssignmentId();
 
         if (oldAssignmentId == null) {
             // Patient was not assigned to any room before

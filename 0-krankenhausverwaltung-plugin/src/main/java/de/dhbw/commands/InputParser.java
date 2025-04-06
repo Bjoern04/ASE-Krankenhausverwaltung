@@ -21,6 +21,12 @@ public class InputParser {
             case "createroom":
                 return new CreateRoomCommand(tokens[1]);
 
+            case "createpatient":
+                return new CreatePatientCommand(tokens[1]);
+
+            case "createdoctor":
+                return new CreateDoctorCommand(tokens[1]);
+
             case "getpatientsofroom":
                 return new RoomAssigmentCommand(tokens[1]);
         }

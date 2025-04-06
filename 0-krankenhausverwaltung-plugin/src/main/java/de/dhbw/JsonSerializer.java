@@ -83,6 +83,7 @@ public class JsonSerializer {
         try {
             return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (IOException e) {
+            System.out.println("message" + e.getMessage());
             throw new RuntimeException("Fehler beim Laden der JSON-Datei: " + filePath, e);
         }
     }

@@ -6,7 +6,7 @@ import java.util.Objects;
  * Value Object for Contact according to DDD principles.
  */
 public final class Contact {
-    private final int phoneNumber;
+    private final String phoneNumber;
     private final String email;
 
     /**
@@ -16,7 +16,7 @@ public final class Contact {
      * @param email The email address
      * @throws IllegalArgumentException if email is null, empty, or invalid
      */
-    public Contact(final int phoneNumber, final String email) {
+    public Contact(final String phoneNumber, final String email) {
         if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email must not be null or empty");
         }
@@ -33,7 +33,7 @@ public final class Contact {
      *
      * @return The phone number
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 

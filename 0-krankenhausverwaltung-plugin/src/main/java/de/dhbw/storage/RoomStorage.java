@@ -1,7 +1,6 @@
-package de.dhbw;
+package de.dhbw.storage;
 
-import de.dhbw.assignment.entity.Assignment;
-import de.dhbw.patient.entity.Patient;
+import de.dhbw.JsonSerializer;
 import de.dhbw.room.entity.Room;
 import de.dhbw.room.repository.RoomRepository;
 import de.dhbw.shared.RoomAddress;

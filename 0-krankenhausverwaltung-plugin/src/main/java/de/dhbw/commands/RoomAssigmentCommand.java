@@ -1,14 +1,12 @@
 package de.dhbw.commands;
 
-import de.dhbw.AssignmentStorage;
-import de.dhbw.PatientStorage;
+import de.dhbw.storage.AssignmentStorage;
+import de.dhbw.storage.PatientStorage;
 import de.dhbw.RoomAssignment;
-import de.dhbw.RoomStorage;
-import de.dhbw.commands.exceptions.InvalidKeyword;
+import de.dhbw.storage.RoomStorage;
 import de.dhbw.commands.exceptions.InvalidParameter;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 

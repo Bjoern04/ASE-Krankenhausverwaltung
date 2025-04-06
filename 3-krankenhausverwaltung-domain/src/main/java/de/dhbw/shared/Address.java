@@ -7,8 +7,8 @@ import java.util.Objects;
  */
 public final class Address {
     private final String street;
-    private final int houseNumber;
-    private final int zipCode;
+    private final String houseNumber;
+    private final String zipCode;
     private final String city;
 
     /**
@@ -20,18 +20,18 @@ public final class Address {
      * @param zipCode The postal/zip code
      * @throws IllegalArgumentException if any parameter is invalid
      */
-    public Address(final String street, final int houseNumber, final int zipCode, final String city) {
+    public Address(final String street, final String houseNumber, final String zipCode, final String city) {
         if (street == null || street.trim().isEmpty()) {
             throw new IllegalArgumentException("Street must not be null or empty");
         }
         if (city == null || city.trim().isEmpty()) {
             throw new IllegalArgumentException("City must not be null or empty");
         }
-        if (houseNumber <= 0) {
-            throw new IllegalArgumentException("House number must be positive");
+        if (houseNumber == null || !validateHouseNumber(houseNumber)) {
+            throw new IllegalArgumentException("Die Hausnummer muss eine Zahl sein und positiv.");
         }
-        if (zipCode <= 0) {
-            throw new IllegalArgumentException("ZIP code must be positive");
+        if (zipCode == null || !validateZipCode(zipCode)) {
+            throw new IllegalArgumentException("Die PLZ muss eine Zahl sein und positiv.");
         }
 
         this.street = street;
@@ -63,7 +63,7 @@ public final class Address {
      *
      * @return The house number
      */
-    public int getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
@@ -72,7 +72,7 @@ public final class Address {
      *
      * @return The ZIP code
      */
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
@@ -126,5 +126,23 @@ public final class Address {
      */
     public String getFormattedAddress() {
         return street + " " + houseNumber + ", " + zipCode + " " + city;
+    }
+
+    private boolean validateHouseNumber(String houseNumber) {
+        try {
+            int number = Integer.parseInt(houseNumber);
+            return number > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean validateZipCode(String zipCode) {
+        try {
+            int number = Integer.parseInt(zipCode);
+            return number > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

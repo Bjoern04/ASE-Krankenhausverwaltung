@@ -77,7 +77,7 @@ public class Patient {
         return dateOfBirth;
     }
 
-    public List<UUID> getExaminations() {
+    public List<UUID> getExaminationIds() {
         return examinationIds;
     }
 
@@ -85,7 +85,7 @@ public class Patient {
         return contact;
     }
 
-    public UUID getAssignment() {
+    public UUID getAssignmentId() {
         return assignmentId;
     }
 
