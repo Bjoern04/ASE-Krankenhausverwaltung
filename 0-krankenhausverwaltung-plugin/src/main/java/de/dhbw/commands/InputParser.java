@@ -2,14 +2,21 @@ package de.dhbw.commands;
 
 import de.dhbw.commands.exceptions.InvalidKeyword;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class InputParser {
 
+    public static final DateTimeFormatter LOCAL_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    public static final DateTimeFormatter LOCAL_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy'T'HH:mm");
+
     public static Command parseCommand(String input) throws RuntimeException {
-        String[] tokens = input.split(":");
+        String[] tokens = input.split("=>");
         if (tokens.length != 2) {
             throw new InvalidKeyword("Ungültiger Befehl. Bitte geben Sie einen gültigen Befehl ein.");
         }
@@ -26,6 +33,9 @@ public class InputParser {
 
             case "createdoctor":
                 return new CreateDoctorCommand(tokens[1]);
+
+            case "createexamination":
+                return new CreateExaminationCommand(tokens[1]);
 
             case "getpatientsofroom":
                 return new RoomAssigmentCommand(tokens[1]);
@@ -78,5 +88,21 @@ public class InputParser {
         }
 
         return uuidList;
+    }
+
+    public static LocalDate parseLocalDate(String input) throws IllegalArgumentException {
+        try {
+            return LocalDate.parse(input.trim(), LOCAL_DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid LocalDate format. Expected format: " + LOCAL_DATE_FORMATTER, e);
+        }
+    }
+
+    public static LocalDateTime parseLocalDateTime(String input) {
+        try {
+            return LocalDateTime.parse(input.trim(), LOCAL_DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid LocalDateTime format. Expected format: " + LOCAL_DATE_TIME_FORMATTER, e);
+        }
     }
 }

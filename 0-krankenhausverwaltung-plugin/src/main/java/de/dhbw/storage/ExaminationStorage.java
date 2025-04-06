@@ -8,6 +8,7 @@ import de.dhbw.patient.entity.Patient;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +29,8 @@ public class ExaminationStorage implements ExaminationRepository {
 
     @Override
     public boolean saveExamination(Examination examination) {
-        return false;
+        serializer.serialize(Collections.singletonList(examination), file.getAbsolutePath());
+        return true;
     }
 
     @Override

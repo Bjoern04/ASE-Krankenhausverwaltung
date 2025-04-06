@@ -15,7 +15,6 @@ public class CreateDoctorCommand implements Command {
 
     public CreateDoctorCommand(String argument) {
         this.argument = argument;
-        System.out.println("Argumente: " + argument);
     }
 
     @Override
@@ -34,7 +33,7 @@ public class CreateDoctorCommand implements Command {
         String hoseNumber = arguments.get(3).toString();
         String zipCode = arguments.get(4).toString();
         String city = arguments.get(5).toString();
-        LocalDate birthDate = LocalDate.parse(arguments.get(6).toString());
+        LocalDate birthDate = InputParser.parseLocalDate(arguments.get(6).toString());
         String phoneNumber = arguments.get(8).toString();
         String email = arguments.get(9).toString();
         List<UUID> examinationIds =  arguments.size() >10 ? InputParser.parseUuidList(arguments.get(10)) : null;

@@ -2,6 +2,7 @@ package de.dhbw.examination.entity;
 
 import de.dhbw.doctor.entity.Doctor;
 import de.dhbw.patient.entity.Patient;
+import de.dhbw.shared.ExaminationType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -9,13 +10,13 @@ import java.util.UUID;
 public class Examination {
     // Fields
     private final UUID id;
-    private String examinationType;
+    private ExaminationType examinationType;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private UUID patientId;
     private UUID doctorId;
 
-    public Examination(UUID id, String examinationType, LocalDateTime startTime, LocalDateTime endTime, UUID patientId, UUID doctorId) {
+    public Examination(UUID id, ExaminationType examinationType, LocalDateTime startTime, LocalDateTime endTime, UUID patientId, UUID doctorId) {
         if (id == null) {
             throw new NullPointerException("Untersuchungs-ID darf nicht null sein.");
         }
@@ -52,7 +53,7 @@ public class Examination {
         return id;
     }
 
-    public String getExaminationType() {
+    public ExaminationType getExaminationType() {
         return examinationType;
     }
 
@@ -73,7 +74,7 @@ public class Examination {
     }
 
 
-    public void updateExaminationType(String examinationType) {
+    public void updateExaminationType(ExaminationType examinationType) {
         if (examinationType == null) {
             throw new NullPointerException("Typ der Untersuchung darf nicht null sein.");
         }

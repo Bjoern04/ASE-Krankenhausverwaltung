@@ -1,5 +1,7 @@
 package de.dhbw.shared;
 
+import de.dhbw.shared.util.LocationNumberValidator;
+
 import java.util.Objects;
 
 /**
@@ -17,6 +19,10 @@ public final class Contact {
      * @throws IllegalArgumentException if email is null, empty, or invalid
      */
     public Contact(final String phoneNumber, final String email) {
+        if (phoneNumber == null || !LocationNumberValidator.isValidLocationNumber(phoneNumber)) {
+            throw new IllegalArgumentException("House number must be a positive number.");
+        }
+
         if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email must not be null or empty");
         }
@@ -58,7 +64,7 @@ public final class Contact {
         if (o == null || getClass() != o.getClass()) return false;
 
         Contact contact = (Contact) o;
-        return phoneNumber == contact.phoneNumber &&
+        return Objects.equals(phoneNumber, contact.phoneNumber) &&
                 Objects.equals(email, contact.email);
     }
 

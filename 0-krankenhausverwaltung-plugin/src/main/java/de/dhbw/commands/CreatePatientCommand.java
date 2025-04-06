@@ -27,7 +27,7 @@ public class CreatePatientCommand implements Command {
             String hoseNumber = arguments.size() > 3 ? arguments.get(3).toString(): null;
             String zipCode = arguments.size() > 4 ? arguments.get(4).toString(): null;
             String city = arguments.size() > 5 ? arguments.get(5).toString(): null;
-            LocalDate birthDate = arguments.size() > 6 ? LocalDate.parse(arguments.get(6).toString()): null;
+            LocalDate birthDate = arguments.size() > 6 ? InputParser.parseLocalDate(arguments.get(6).toString()): null;
             List<UUID> examinationIds =  arguments.size() > 7 ? InputParser.parseUuidList(arguments.get(7)) : null;
             String phoneNumber = arguments.size() > 8 ? arguments.get(8).toString(): null;
             String email = arguments.size() > 9 ? arguments.get(9).toString(): null;

@@ -1,14 +1,16 @@
 package de.dhbw.shared;
 
+import de.dhbw.shared.util.LocationNumberValidator;
+
 import java.util.Objects;
 
 /**
  * Value Object for Room Address according to DDD principles.
  */
 public final class RoomAddress {
-    private final int building;
-    private final int floor;
-    private final int roomNumber;
+    private final String building;
+    private final String floor;
+    private final String roomNumber;
 
     /**
      * Constructor for the RoomAddress Value Object.
@@ -18,15 +20,15 @@ public final class RoomAddress {
      * @param roomNumber The room number
      * @throws IllegalArgumentException if any parameter is invalid
      */
-    public RoomAddress(final int building, final int floor, final int roomNumber) {
-        if (building <= 0) {
-            throw new IllegalArgumentException("Building number must be positive");
+    public RoomAddress(final String building, final String floor, final String roomNumber) {
+        if (!LocationNumberValidator.isValidLocationNumber(building)) {
+            throw new IllegalArgumentException("Building number must be a positive number.");
         }
-        if (floor < 0) {
-            throw new IllegalArgumentException("Floor number cannot be negative");
+        if (!LocationNumberValidator.isValidLocationNumber(floor)) {
+            throw new IllegalArgumentException("Floor number must be a positive number or zero.");
         }
-        if (roomNumber <= 0) {
-            throw new IllegalArgumentException("Room number must be positive");
+        if (!LocationNumberValidator.isValidRoomNumber(roomNumber)) {
+            throw new IllegalArgumentException("Room number must be a positive number.");
         }
 
         this.building = building;
@@ -39,7 +41,7 @@ public final class RoomAddress {
      *
      * @return The building number
      */
-    public int getBuilding() {
+    public String getBuilding() {
         return building;
     }
 
@@ -48,7 +50,7 @@ public final class RoomAddress {
      *
      * @return The floor number
      */
-    public int getFloor() {
+    public String getFloor() {
         return floor;
     }
 
@@ -57,7 +59,7 @@ public final class RoomAddress {
      *
      * @return The room number
      */
-    public int getRoomNumber() {
+    public String getRoomNumber() {
         return roomNumber;
     }
 
@@ -73,9 +75,9 @@ public final class RoomAddress {
         if (o == null || getClass() != o.getClass()) return false;
 
         RoomAddress that = (RoomAddress) o;
-        return building == that.building &&
-                floor == that.floor &&
-                roomNumber == that.roomNumber;
+        return Objects.equals(building, that.building) &&
+                Objects.equals(floor, that.floor) &&
+                Objects.equals(roomNumber, that.roomNumber);
     }
 
     /**

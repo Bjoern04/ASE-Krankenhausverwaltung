@@ -1,5 +1,7 @@
 package de.dhbw.shared;
 
+import de.dhbw.shared.util.LocationNumberValidator;
+
 import java.util.Objects;
 
 /**
@@ -27,11 +29,11 @@ public final class Address {
         if (city == null || city.trim().isEmpty()) {
             throw new IllegalArgumentException("City must not be null or empty");
         }
-        if (houseNumber == null || !validateHouseNumber(houseNumber)) {
-            throw new IllegalArgumentException("Die Hausnummer muss eine Zahl sein und positiv.");
+        if (houseNumber == null || !LocationNumberValidator.isValidLocationNumber(houseNumber)) {
+            throw new IllegalArgumentException("House number must be a positive number.");
         }
-        if (zipCode == null || !validateZipCode(zipCode)) {
-            throw new IllegalArgumentException("Die PLZ muss eine Zahl sein und positiv.");
+        if (zipCode == null || !LocationNumberValidator.isValidLocationNumber(zipCode)) {
+            throw new IllegalArgumentException("ZIP code must be a positive number.");
         }
 
         this.street = street;
@@ -88,8 +90,8 @@ public final class Address {
         if (o == null || getClass() != o.getClass()) return false;
 
         Address address = (Address) o;
-        return houseNumber == address.houseNumber &&
-                zipCode == address.zipCode &&
+        return Objects.equals(houseNumber, address.houseNumber) &&
+                Objects.equals(zipCode, address.zipCode) &&
                 Objects.equals(street, address.street) &&
                 Objects.equals(city, address.city);
     }
@@ -126,23 +128,5 @@ public final class Address {
      */
     public String getFormattedAddress() {
         return street + " " + houseNumber + ", " + zipCode + " " + city;
-    }
-
-    private boolean validateHouseNumber(String houseNumber) {
-        try {
-            int number = Integer.parseInt(houseNumber);
-            return number > 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private boolean validateZipCode(String zipCode) {
-        try {
-            int number = Integer.parseInt(zipCode);
-            return number > 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }
