@@ -32,30 +32,22 @@ public class RoomAssignment {
 
         // Get Assignments and free space
         int freeSpace = room.getRoomSize() - room.getAssignmentIds().size();
-        List<UUID> assignments = assignmentRepository.findAssignmentsForRoom(room);
+        List<Assignment> assignments = assignmentRepository.findAssignmentsForRoom(room);
         if (assignments.isEmpty()) {
             return "Es ist kein Patient in diesem Zimmer. Es sind noch " + freeSpace + " Plätze frei.";
         }
 
-        // Get the patientIds of the patients that are in the room
-        List<UUID> patientIds = assignmentRepository.findPatientsForRoom(room);
-
         // Get the names of the patients
         List<Patient> patients = new ArrayList<>();
-        for (UUID patientId : patientIds) {
-            patients.add(patientRepository.findPatientById(patientId));
+        for (Assignment assignment : assignments) {
+            patients.add(patientRepository.findPatientById(assignment.getPatient()));
         }
 
-        if (patients.isEmpty()) {
-            return "Es ist kein Patient in diesem Zimmer. Es sind noch " + freeSpace + " Plätze frei.";
+        StringBuilder result = new StringBuilder();
+        for (Patient patient : patients) {
+            result.append(patient.getName().toString()).append("; ");
         }
-        else {
-            StringBuilder result = new StringBuilder();
-            for (Patient patient : patients) {
-                result.append(patient.getName().toString()).append("; ");
-            }
-            result.replace(result.length() - 2, result.length(), "");
-            return "Die Patienten in diesem Zimmer sind: " + result.toString() + ". Es sind noch " + freeSpace + " Plätze frei.";
-        }
+        result.replace(result.length() - 2, result.length(), "");
+        return "Die Patienten in diesem Zimmer sind: " + result.toString() + ". Es sind noch " + freeSpace + " Plätze frei.";
     }
 }

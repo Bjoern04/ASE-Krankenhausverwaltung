@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class RoomAssigmentCommand implements Command{
-    private String argument;
+    private final String argument;
 
     public RoomAssigmentCommand(String argument) {
         this.argument = argument;
@@ -30,10 +30,9 @@ public class RoomAssigmentCommand implements Command{
 
         try {
             UUID id  = UUID.fromString(arguments.getFirst().toString().trim());
-            roomAssignment.execute(id);
+            return roomAssignment.execute(id);
         } catch (IllegalArgumentException e) {
             throw new InvalidParameter("Ungültiger Parameter für eine UUID anhand der die Belegungen eines Zimmers gefunden werden sollen: " + e.getMessage());
         }
-        return "";
     }
 }

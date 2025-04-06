@@ -1,10 +1,31 @@
 package de.dhbw.commands;
 
+import de.dhbw.commands.exceptions.InvalidKeyword;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class InputParser {
+
+    public static Command parseCommand(String input) throws RuntimeException {
+        String[] tokens = input.split(":");
+        if (tokens.length != 2) {
+            throw new InvalidKeyword("Ungültiger Befehl. Bitte geben Sie einen gültigen Befehl ein.");
+        }
+        tokens[0] = tokens[0].trim();
+        tokens[0] = tokens[0].replace(" ", "");
+        tokens[0] = tokens[0].toLowerCase();
+
+        switch (tokens[0]) {
+            case "createroom":
+                return new CreateRoomCommand(tokens[1]);
+
+            case "getpatientsofroom":
+                return new RoomAssigmentCommand(tokens[1]);
+        }
+        return null;
+    }
 
     public static List<Object> parseArguments(String argument) {
         List<Object> result = new ArrayList<>();

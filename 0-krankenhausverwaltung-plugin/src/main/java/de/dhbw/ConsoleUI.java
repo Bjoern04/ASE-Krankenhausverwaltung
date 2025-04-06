@@ -2,6 +2,8 @@ package de.dhbw;
 
 import de.dhbw.commands.Command;
 import de.dhbw.commands.CreateRoomCommand;
+import de.dhbw.commands.InputParser;
+import de.dhbw.commands.RoomAssigmentCommand;
 import de.dhbw.commands.exceptions.InvalidKeyword;
 
 import java.io.IOException;
@@ -32,32 +34,14 @@ public class ConsoleUI {
                 continue;
             }
             try {
-                Command command = parseCommand(input);
+                Command command = InputParser.parseCommand(input);
                 if (command != null) {
                     String output = command.execute();
                     System.out.println(output);
                 }
             } catch (RuntimeException exception) {
                 System.out.println(ANSI_ORANGE +  exception.getClass().getSimpleName() +": " +  exception.getMessage() + ANSI_RESET);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
         }
-    }
-
-    private Command parseCommand(String input) throws RuntimeException {
-        String[] tokens = input.split(":");
-        if (tokens.length != 2) {
-            throw new InvalidKeyword("Ungültiger Befehl. Bitte geben Sie einen gültigen Befehl ein.");
-        }
-        tokens[0] = tokens[0].trim();
-        tokens[0] = tokens[0].replace(" ", "");
-        tokens[0] = tokens[0].toLowerCase();
-
-        switch (tokens[0]) {
-            case "createroom":
-                return new CreateRoomCommand(tokens[1]);
-        }
-        return null;
     }
 }

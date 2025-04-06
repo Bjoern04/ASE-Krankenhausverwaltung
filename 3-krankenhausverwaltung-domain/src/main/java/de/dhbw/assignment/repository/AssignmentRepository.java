@@ -19,7 +19,7 @@ public interface AssignmentRepository {
 
     Assignment findAssignmentByPatient(Patient patient);
 
-    List<UUID> findAssignmentsForRoom(Room room);
+    List<Assignment> findAssignmentsForRoom(Room room);
 
     boolean saveAssigment(Assignment assignment);
 

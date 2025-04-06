@@ -1,5 +1,6 @@
 package de.dhbw;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import de.dhbw.assignment.entity.Assignment;
 import de.dhbw.assignment.repository.AssignmentRepository;
 import de.dhbw.patient.entity.Patient;
@@ -41,7 +42,7 @@ public class AssignmentStorage implements AssignmentRepository {
     @Override
     public Assignment findAssignmentById(UUID id) {
         try {
-            List<Assignment> assignmentIds =loadAssignments();
+            List<Assignment> assignmentIds = loadAssignments();
             return assignmentIds.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,8 +56,14 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public List<UUID> findAssignmentsForRoom(Room room) {
-        return List.of();
+    public List<Assignment> findAssignmentsForRoom(Room room) {
+        try {
+            List<Assignment> assignmentIds = loadAssignments();
+            return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).collect(Collectors.toList());
+        }
+        catch  (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
