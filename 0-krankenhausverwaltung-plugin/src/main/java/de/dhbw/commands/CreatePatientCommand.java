@@ -1,8 +1,8 @@
 package de.dhbw.commands;
 
 import de.dhbw.CreatePatient;
+import de.dhbw.InputParser;
 import de.dhbw.commands.exceptions.InvalidParameter;
-import de.dhbw.storage.ExaminationStorage;
 import de.dhbw.storage.PatientStorage;
 
 import java.time.LocalDate;

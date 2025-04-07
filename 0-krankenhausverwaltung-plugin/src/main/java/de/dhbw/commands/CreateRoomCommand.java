@@ -1,6 +1,6 @@
 package de.dhbw.commands;
 
-import de.dhbw.storage.AssignmentStorage;
+import de.dhbw.InputParser;
 import de.dhbw.CreateRoom;
 import de.dhbw.storage.RoomStorage;
 import de.dhbw.commands.exceptions.InvalidParameter;

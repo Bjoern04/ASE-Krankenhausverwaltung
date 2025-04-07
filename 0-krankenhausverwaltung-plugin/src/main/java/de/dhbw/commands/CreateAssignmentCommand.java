@@ -1,11 +1,9 @@
 package de.dhbw.commands;
 
 import de.dhbw.CreateAssignment;
+import de.dhbw.InputParser;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
-import de.dhbw.patient.repository.PatientRepository;
-import de.dhbw.room.repository.RoomRepository;
 import de.dhbw.storage.AssignmentStorage;
-import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.PatientStorage;
 import de.dhbw.storage.RoomStorage;
 

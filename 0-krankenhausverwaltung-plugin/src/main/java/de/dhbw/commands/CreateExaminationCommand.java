@@ -1,7 +1,7 @@
 package de.dhbw.commands;
 
-import de.dhbw.CreateDoctor;
 import de.dhbw.CreateExamination;
+import de.dhbw.InputParser;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.shared.ExaminationType;
 import de.dhbw.storage.DoctorStorage;

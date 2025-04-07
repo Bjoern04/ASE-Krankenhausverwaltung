@@ -1,5 +1,6 @@
-package de.dhbw.commands;
+package de.dhbw;
 
+import de.dhbw.commands.*;
 import de.dhbw.commands.exceptions.InvalidKeyword;
 
 import java.time.LocalDate;
@@ -18,7 +19,14 @@ public class InputParser {
     public static Command parseCommand(String input) throws RuntimeException {
         String[] tokens = input.split("=>");
         if (tokens.length != 2) {
-            throw new InvalidKeyword("Ungültiger Befehl. Bitte geben Sie einen gültigen Befehl ein.");
+            if (tokens.length == 1) {
+                if (tokens[0].trim().equalsIgnoreCase("exit")) {
+                    return new ExitCommand();
+                } else if (tokens[0].trim().equalsIgnoreCase("help")) {
+                    return new HelpCommand();
+                }
+            }
+            throw new InvalidKeyword("Invalid command format. Please enter a valid command.");
         }
         tokens[0] = tokens[0].trim();
         tokens[0] = tokens[0].replace(" ", "");

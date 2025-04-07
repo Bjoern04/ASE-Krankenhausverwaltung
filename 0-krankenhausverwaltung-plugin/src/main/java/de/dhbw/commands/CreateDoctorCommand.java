@@ -1,10 +1,9 @@
 package de.dhbw.commands;
 
 import de.dhbw.CreateDoctor;
-import de.dhbw.commands.exceptions.InvalidParameter;
+import de.dhbw.InputParser;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.DoctorStorage;
-import de.dhbw.storage.ExaminationStorage;
 
 import java.time.LocalDate;
 import java.util.List;
