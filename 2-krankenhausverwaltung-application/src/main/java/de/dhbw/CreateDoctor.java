@@ -14,11 +14,9 @@ import java.util.UUID;
 
 public class CreateDoctor{
     private final DoctorRepository doctorRepository;
-    private final ExaminationRepository examinationRepository;
 
-    public CreateDoctor(DoctorRepository doctorRepository, ExaminationRepository examinationRepository) {
+    public CreateDoctor(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
-        this.examinationRepository = examinationRepository;
     }
 
     public UUID execute(String firstName, String lastName, String street, String houseNumber, String zipCode, String city, LocalDate dateOfBirth, String phoneNumber, String email) {

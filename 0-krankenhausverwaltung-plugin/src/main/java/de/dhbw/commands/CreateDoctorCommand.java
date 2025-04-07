@@ -19,7 +19,7 @@ public class CreateDoctorCommand implements Command {
 
     @Override
     public String execute() throws RuntimeException {
-        CreateDoctor createDoctor = new CreateDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"), new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"));
+        CreateDoctor createDoctor = new CreateDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 
         if (arguments.size() < 7 || arguments.size() > 9) {

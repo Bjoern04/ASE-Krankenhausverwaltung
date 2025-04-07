@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public abstract class AssignmentBuilderMixin {
-    public AssignmentBuilderMixin (@JsonProperty("id") UUID id, @JsonProperty("room") UUID room, @JsonProperty("patient") UUID patient, @JsonProperty("dateOfAdmission") LocalDate dateOfAdmission) {
+    public AssignmentBuilderMixin (@JsonProperty("id") UUID id, @JsonProperty("roomId") UUID room, @JsonProperty("patientId") UUID patient, @JsonProperty("dateOfAdmission") LocalDate dateOfAdmission) {
 
     }
 

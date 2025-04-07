@@ -30,7 +30,6 @@ import de.dhbw.shared.RoomAddress;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 public class JsonSerializer {
@@ -63,7 +62,7 @@ public class JsonSerializer {
         this.objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
     }
 
-    public <T> void serialize(List<T> objects, String filePath) {
+    public <T> void serializeUpdateFile(List<T> objects, String filePath) {
         try {
             // Versuche die existierende JSON-Datei zu laden
             List<T> existingObjects = deserialize(filePath, (Class<T>) objects.get(0).getClass());
@@ -82,6 +81,15 @@ public class JsonSerializer {
             }
         }
     }
+
+    public <T> void serializeOverwrite(List<T> objects, String filePath) {
+        try {
+            objectMapper.writeValue(new File(filePath), objects);
+        } catch (IOException e) {
+            throw new RuntimeException("Fehler beim Überschreiben der JSON-Datei: " + filePath, e);
+        }
+    }
+
 
     public <T> List<T> deserialize(String filePath, Class<T> clazz) {
         try {

@@ -51,11 +51,11 @@ public class Assignment {
         return id;
     }
 
-    public UUID getRoom() {
+    public UUID getRoomId() {
         return roomId;
     }
 
-    public UUID getPatient() {
+    public UUID getPatientId() {
         return patientId;
     }
 
@@ -67,18 +67,18 @@ public class Assignment {
         return dateOfDischarge;
     }
 
-    public void updateRoom(UUID room) {
-        if (room == null) {
+    public void updateRoomId(UUID roomId) {
+        if (roomId == null) {
             throw new NullPointerException("Raum der Belegung darf nicht null sein.");
         }
-        this.roomId = room;
+        this.roomId = roomId;
     }
 
-    public void updatePatient(UUID patient) {
-        if (patient == null) {
+    public void updatePatientID(UUID patientId) {
+        if (patientId == null) {
             throw new NullPointerException("Patient der Belegung darf nicht null sein.");
         }
-        this.patientId = patient;
+        this.patientId = patientId;
     }
 
     public void updateDateOfAdmission(LocalDate dateOfAdmission) {
@@ -106,10 +106,10 @@ public class Assignment {
 
         private LocalDate dateOfDischarge;
 
-        public AssignmentBuilder (UUID id, UUID room, UUID patient, LocalDate dateOfAdmission) {
+        public AssignmentBuilder (UUID id, UUID roomId, UUID patientId, LocalDate dateOfAdmission) {
             this.id = id;
-            this.roomId = room;
-            this.patientId = patient;
+            this.roomId = roomId;
+            this.patientId = patientId;
             this.dateOfAdmission = dateOfAdmission;
         }
 

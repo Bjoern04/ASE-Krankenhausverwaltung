@@ -8,15 +8,12 @@ import de.dhbw.room.entity.Room;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AssignmentStorage implements AssignmentRepository {
     private final File file;
     private final JsonSerializer serializer;
-    //private List<Assignment> assignmentIds;
 
     public AssignmentStorage(String filePath) {
         this.file = new File(filePath);
@@ -32,7 +29,7 @@ public class AssignmentStorage implements AssignmentRepository {
     public List<UUID> findPatientsForRoom(Room room) {
         try {
             List<Assignment> assignmentIds = loadAssignments();
-            return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).map(Assignment::getPatient).collect(Collectors.toList());
+            return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).map(Assignment::getPatientId).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -67,13 +64,24 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public boolean saveAssigment(Assignment assignment) {
-        return false;
+    public boolean saveAssignment(Assignment assignment) {
+        serializer.serializeUpdateFile(Collections.singletonList(assignment), file.getAbsolutePath());
+        return true;
     }
 
     @Override
-    public boolean deleteAssigment(Assignment assignment) {
-        return false;
+    public void deleteAssignment(UUID assignmentId) {
+        try {
+            List<Assignment> assignmentIds = loadAssignments();
+            Optional<Assignment> assignmentToDelete = assignmentIds.stream().filter(assignment -> assignment.getId().equals(assignmentId)).findFirst();
+
+            if (assignmentToDelete.isPresent()) {
+                assignmentIds.remove(assignmentToDelete.get());
+                serializer.serializeUpdateFile(assignmentIds, file.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

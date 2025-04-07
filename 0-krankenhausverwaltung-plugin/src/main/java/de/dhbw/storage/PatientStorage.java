@@ -7,10 +7,7 @@ import de.dhbw.shared.Name;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class PatientStorage implements PatientRepository {
     private final File file;
@@ -39,17 +36,40 @@ public class PatientStorage implements PatientRepository {
 
     @Override
     public boolean savePatient(Patient patient) {
-        serializer.serialize(Collections.singletonList(patient), file.getAbsolutePath());
+        serializer.serializeUpdateFile(Collections.singletonList(patient), file.getAbsolutePath());
         return true;
     }
 
     @Override
-    public boolean deletePatient(Patient patient) {
-        return false;
+    public void deletePatient(UUID patientId) {
+        try {
+            List<Patient> patientIds = loadPatients();
+            Optional<Patient> patientToDelete = patientIds.stream().filter(patient -> patient.getId().equals(patientId)).findFirst();
+
+            if (patientToDelete.isPresent()) {
+                patientIds.remove(patientToDelete.get());
+                serializer.serializeOverwrite(patientIds, file.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void updatePatient(Patient patient) {
+        try {
+            List<Patient> patients = loadPatients();
+            for (Patient patient1 : patients) {
+                if (patient1.getId().equals(patient.getId())) {
+                    patient1.updateAssignment(patient.getAssignmentId());
+                    serializer.serializeOverwrite(patients, file.getAbsolutePath());
+                    break;
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

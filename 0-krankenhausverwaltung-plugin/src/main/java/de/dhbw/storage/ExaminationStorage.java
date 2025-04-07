@@ -29,7 +29,7 @@ public class ExaminationStorage implements ExaminationRepository {
 
     @Override
     public boolean saveExamination(Examination examination) {
-        serializer.serialize(Collections.singletonList(examination), file.getAbsolutePath());
+        serializer.serializeUpdateFile(Collections.singletonList(examination), file.getAbsolutePath());
         return true;
     }
 

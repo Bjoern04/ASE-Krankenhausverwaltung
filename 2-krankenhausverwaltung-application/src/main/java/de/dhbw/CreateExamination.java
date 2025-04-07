@@ -23,13 +23,13 @@ public class CreateExamination{
     }
 
     public UUID execute(ExaminationType examinationType, LocalDateTime startDate, LocalDateTime endDate, UUID patientId, UUID doctorId) {
-        // check if patient exists
+        // Check if patient exists
         Patient patient = patientRepository.findPatientById(patientId);
         if (patient == null) {
             throw new IllegalArgumentException("Patient with ID " + patientId + " does not exist.");
         }
 
-        // check if doctor exists
+        // Check if doctor exists
         Doctor doctor = doctorRepository.findDoctorById(doctorId);
         if (doctor == null) {
             throw new IllegalArgumentException("Doctor with ID " + doctorId + " does not exist.");

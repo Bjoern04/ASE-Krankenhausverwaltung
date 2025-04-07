@@ -21,9 +21,9 @@ public interface AssignmentRepository {
 
     List<Assignment> findAssignmentsForRoom(Room room);
 
-    boolean saveAssigment(Assignment assignment);
+    boolean saveAssignment(Assignment assignment);
 
-    boolean deleteAssigment(Assignment assignment);
+    void deleteAssignment(UUID assignmentId);
 
     void updateAssigment (Assignment assignment);
 }

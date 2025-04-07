@@ -37,8 +37,8 @@ public class InputParser {
             case "createexamination":
                 return new CreateExaminationCommand(tokens[1]);
 
-            case "getpatientsofroom":
-                return new RoomAssigmentCommand(tokens[1]);
+            case "createassignment":
+                return new CreateAssignmentCommand(tokens[1]);
         }
         return null;
     }

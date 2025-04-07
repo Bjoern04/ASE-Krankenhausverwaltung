@@ -79,6 +79,13 @@ public class Room {
         }
     }
 
+    public void removeAssignment(UUID assignmentId) {
+        if (assignmentId == null) {
+            throw new NullPointerException("The ID assignmentId must not be null.");
+        }
+        this.assignmentIds.remove(assignmentId);
+    }
+
     public void updateAssignments(List<UUID> assignmentIds) {
         for (UUID assignmentId : assignmentIds) {
             if (!this.assignmentIds.contains(assignmentId)) {

@@ -40,7 +40,7 @@ public class RoomAssignment {
         // Get the names of the patients
         List<Patient> patients = new ArrayList<>();
         for (Assignment assignment : assignments) {
-            patients.add(patientRepository.findPatientById(assignment.getPatient()));
+            patients.add(patientRepository.findPatientById(assignment.getPatientId()));
         }
 
         StringBuilder result = new StringBuilder();

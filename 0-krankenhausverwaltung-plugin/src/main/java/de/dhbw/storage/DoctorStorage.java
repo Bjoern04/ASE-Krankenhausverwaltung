@@ -3,7 +3,6 @@ package de.dhbw.storage;
 import de.dhbw.JsonSerializer;
 import de.dhbw.doctor.entity.Doctor;
 import de.dhbw.doctor.repository.DoctorRepository;
-import de.dhbw.patient.entity.Patient;
 import de.dhbw.shared.Name;
 
 import java.io.File;
@@ -40,7 +39,7 @@ public class DoctorStorage implements DoctorRepository {
 
     @Override
     public boolean saveDoctor(Doctor doctor) {
-        serializer.serialize(Collections.singletonList(doctor), file.getAbsolutePath());
+        serializer.serializeUpdateFile(Collections.singletonList(doctor), file.getAbsolutePath());
         return true;
     }
 

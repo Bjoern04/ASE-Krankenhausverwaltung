@@ -1,12 +1,8 @@
 package de.dhbw;
 
 import de.dhbw.commands.Command;
-import de.dhbw.commands.CreateRoomCommand;
 import de.dhbw.commands.InputParser;
-import de.dhbw.commands.RoomAssigmentCommand;
-import de.dhbw.commands.exceptions.InvalidKeyword;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleUI {

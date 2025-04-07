@@ -50,7 +50,7 @@ public class RoomStorage implements RoomRepository {
 
     @Override
     public boolean saveRoom(Room room) {
-        serializer.serialize(Collections.singletonList(room), file.getAbsolutePath());
+        serializer.serializeUpdateFile(Collections.singletonList(room), file.getAbsolutePath());
         return true;
     }
 
@@ -61,14 +61,17 @@ public class RoomStorage implements RoomRepository {
 
     @Override
     public void updateRoom(Room room) {
-        try {
-            List<Room> rooms= loadRooms();
-            int index = rooms.indexOf(findRoomById(room.getId()));
-            if (index >= 0) {
-                rooms.set(index, room);
-                saveRooms(rooms);
+         try {
+            List<Room> rooms = loadRooms();
+            for (Room room1 : rooms) {
+                if (room1.getId().equals(room.getId())) {
+                    room1.updateAssignments(room.getAssignmentIds());
+                    serializer.serializeOverwrite(rooms, file.getAbsolutePath());
+                    break;
+                }
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -93,7 +96,7 @@ public class RoomStorage implements RoomRepository {
     }
 
     private void saveRooms(List<Room> rooms) throws IOException {
-        serializer.serialize(rooms, file.getAbsolutePath());
+        serializer.serializeUpdateFile(rooms, file.getAbsolutePath());
     }
 }
 

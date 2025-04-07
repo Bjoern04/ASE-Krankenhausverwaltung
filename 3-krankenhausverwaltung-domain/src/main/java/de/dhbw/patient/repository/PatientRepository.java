@@ -13,7 +13,7 @@ public interface PatientRepository {
 
     boolean savePatient(Patient patient);
 
-    boolean deletePatient(Patient patient);
+    void deletePatient(UUID patientId);
 
     void updatePatient (Patient patient);
 }
