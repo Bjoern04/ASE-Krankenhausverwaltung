@@ -3,10 +3,14 @@ package de.dhbw.storage;
 import de.dhbw.JsonSerializer;
 import de.dhbw.doctor.entity.Doctor;
 import de.dhbw.doctor.repository.DoctorRepository;
+import de.dhbw.patient.entity.Patient;
 import de.dhbw.shared.Name;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class DoctorStorage implements DoctorRepository {
@@ -20,7 +24,13 @@ public class DoctorStorage implements DoctorRepository {
 
     @Override
     public Doctor findDoctorById(UUID id) {
-        return null;
+        try {
+            List<Doctor> doctors = loadDoctors();
+            return doctors.stream().filter(doctor -> doctor.getId().equals(id)).findFirst().orElse(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -42,5 +52,18 @@ public class DoctorStorage implements DoctorRepository {
     @Override
     public boolean updateDoctor(Doctor doctor) {
         return false;
+    }
+
+    private List<Doctor> loadDoctors() throws IOException {
+        if (file.exists()) {
+            if (file.length() == 0) {
+                return new ArrayList<>();
+            }
+            else {
+                return serializer.deserialize(file.getAbsolutePath(), Doctor.class);
+            }
+        } else {
+            return new ArrayList<>();
+        }
     }
 }

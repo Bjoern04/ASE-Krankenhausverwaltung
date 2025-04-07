@@ -18,32 +18,36 @@ public class Examination {
 
     public Examination(UUID id, ExaminationType examinationType, LocalDateTime startTime, LocalDateTime endTime, UUID patientId, UUID doctorId) {
         if (id == null) {
-            throw new NullPointerException("Untersuchungs-ID darf nicht null sein.");
+            throw new NullPointerException("Examination ID must not be null.");
         }
         this.id = id;
 
         if (examinationType == null) {
-            throw new NullPointerException("Typ der Untersuchung darf nicht null sein.");
+            throw new NullPointerException("Examination type must not be null.");
         }
         this.examinationType = examinationType;
 
         if (startTime == null) {
-            throw new NullPointerException("Startzeit der Untersuchung darf nicht null sein.");
+            throw new NullPointerException("Start time of the examination must not be null.");
         }
-        this.startTime = startTime;
 
         if (endTime == null) {
-            throw new NullPointerException("Endzeitpunkt der Untersuchung darf nicht null sein.");
+            throw new NullPointerException("End time of the examination must not be null.");
         }
+
+        if (!examinationTimesAreValid(startTime, endTime)) {
+            throw new IllegalArgumentException("End time of the examination must be after the start time.");
+        }
+        this.startTime = startTime;
         this.endTime = endTime;
 
         if (patientId == null) {
-            throw new NullPointerException("Patient der an Untersuchung teilnimmt darf nicht null sein.");
+            throw new NullPointerException("Patient of the examination must not be null.");
         }
         this.patientId = patientId;
 
         if (doctorId == null) {
-            throw new NullPointerException("Arzt der Untersuchung durchführt darf nicht null sein.");
+            throw new NullPointerException("Doctor of the examination must not be null.");
         }
         this.doctorId = doctorId;
     }
@@ -76,36 +80,40 @@ public class Examination {
 
     public void updateExaminationType(ExaminationType examinationType) {
         if (examinationType == null) {
-            throw new NullPointerException("Typ der Untersuchung darf nicht null sein.");
+            throw new NullPointerException("Type of the examination must not be null.");
         }
         this.examinationType = examinationType;
     }
 
     public void updateStartTime(LocalDateTime startTime) {
         if (startTime == null) {
-            throw new NullPointerException("Startzeit der Untersuchung darf nicht null sein.");
+            throw new NullPointerException("Start time of the examination must not be null.");
         }
         this.startTime = startTime;
     }
 
     public void updateEndTime(LocalDateTime endTime) {
         if (endTime == null) {
-            throw new NullPointerException("Endzeitpunkt der Untersuchung darf nicht null sein.");
+            throw new NullPointerException("End time of the examination must not be null.");
         }
         this.endTime = endTime;
     }
 
     public void updatePatient(UUID patient) {
         if (patient == null) {
-            throw new NullPointerException("Patient der an Untersuchung teilnimmt darf nicht null sein.");
+            throw new NullPointerException("Patient of the examination must not be null.");
         }
         this.patientId = patient;
     }
 
     public void updateDoctor(UUID doctor) {
         if (doctor == null) {
-            throw new NullPointerException("Arzt der Untersuchung durchführt darf nicht null sein.");
+            throw new NullPointerException("Doctor of the examination must not be null.");
         }
         this.doctorId = doctor;
+    }
+
+    public boolean examinationTimesAreValid(LocalDateTime startTime, LocalDateTime endTime) {
+        return startTime.isBefore(endTime);
     }
 }

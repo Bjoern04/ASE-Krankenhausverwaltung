@@ -22,7 +22,6 @@ public class CreateDoctor{
     }
 
     public UUID execute(String firstName, String lastName, String street, String houseNumber, String zipCode, String city, LocalDate birthDate, String phoneNumber, String email, List<UUID> examinationIdsOfDoctor) {
-
         // Check examinations
         if (examinationIdsOfDoctor != null && !examinationIdsOfDoctor.isEmpty()) {
             List<UUID> allExaminationIds = examinationRepository.loadAllExaminations().stream().map(Examination::getId).toList();

@@ -8,7 +8,6 @@ import de.dhbw.patient.entity.Patient;
 import de.dhbw.patient.repository.PatientRepository;
 import de.dhbw.shared.ExaminationType;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

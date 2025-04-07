@@ -170,5 +170,4 @@ public class Doctor {
             return new Doctor(this);
         }
     }
-
 }

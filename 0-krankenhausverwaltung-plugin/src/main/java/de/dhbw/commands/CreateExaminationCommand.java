@@ -8,9 +8,7 @@ import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.ExaminationStorage;
 import de.dhbw.storage.PatientStorage;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,8 +25,8 @@ public class CreateExaminationCommand implements Command {
         List<Object> arguments = InputParser.parseArguments(argument);
 
         if (arguments.size() != 5) {
-            throw new WrongAmoutOfParameters("Falsche Anzahl an Parameter. Es wurden fünf erwartet, eingegeben wurden aber:" + arguments.size() + "\n" +
-                    "Die Parameter sind: Untersuchungsart, Startzeitpunkt, Endzeitpunkt, Patient-ID, Arzt-ID.");
+            throw new WrongAmoutOfParameters("The wrong amount of parameters. There have to be :" + arguments.size() + " parameters.\n" +
+                    "The parameters are: ExaminationType, StartTime, EndTime, Patient-ID, Doctor-ID.");
         }
 
         // Check examination type
