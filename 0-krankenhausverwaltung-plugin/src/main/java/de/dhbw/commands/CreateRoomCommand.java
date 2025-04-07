@@ -16,11 +16,11 @@ public class CreateRoomCommand implements Command {
     }
     @Override
     public String execute() throws RuntimeException {
-        CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"), new AssignmentStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\assignments.json"));
+        CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"));
 
         List<Object> arguments = InputParser.parseArguments(argument);
-        if (arguments.size() != 5) {
-            throw new WrongAmoutOfParameters("Falsche Anzahl an Parameter. Es wurden fünf erwartet, eingegeben wurden aber:" + arguments.size());
+        if (arguments.size() != 4) {
+            throw new WrongAmoutOfParameters("Falsche Anzahl an Parameter. Es wurden vier erwartet, eingegeben wurden aber:" + arguments.size());
         }
         String building = arguments.get(0).toString();
         String floor = arguments.get(1).toString();
@@ -28,9 +28,8 @@ public class CreateRoomCommand implements Command {
 
         try {
             int roomSize = Integer.parseInt(arguments.get(3).toString());
-            List<UUID> assignmentIds = InputParser.parseUuidList(arguments.get(4));
 
-            UUID roomUUID = createRoom.execute(building, floor, roomNumber, roomSize, assignmentIds);
+            UUID roomUUID = createRoom.execute(building, floor, roomNumber, roomSize);
             return "The room was created successfully. The ID of the created room is: " + roomUUID.toString();
 
         } catch (NumberFormatException e) {

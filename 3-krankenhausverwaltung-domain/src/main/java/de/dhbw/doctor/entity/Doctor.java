@@ -43,17 +43,13 @@ public class Doctor {
         }
         this.address = builder.address;
 
-        if (builder.dateOfBirth == null) {
-            throw new NullPointerException("Der Geburtstag des Arztes darf nicht null sein.");
-        }
-        this.dateOfBirth = builder.dateOfBirth;
-
         if (builder.contact == null) {
             throw new NullPointerException("Der Kontakt des Arztes darf nicht null sein.");
         }
         this.contact = builder.contact;
 
         // Optional fields
+        this.dateOfBirth = builder.dateOfBirth;
         this.examinationIds = builder.examinationIds != null
                 ? new ArrayList<>(builder.examinationIds)
                 : new ArrayList<>();
@@ -142,18 +138,22 @@ public class Doctor {
 
         private Address address;
 
-        private LocalDate dateOfBirth;
-
         private List<UUID> examinationIds;
+
+        private LocalDate dateOfBirth;
 
         private Contact contact;
 
-        public DoctorBuilder(UUID id, Name name, Address address, LocalDate dateOfBirth, Contact contact) {
+        public DoctorBuilder(UUID id, Name name, Address address,  Contact contact) {
             this.id = id;
             this.name = name;
             this.address = address;
-            this.dateOfBirth = dateOfBirth;
             this.contact = contact;
+        }
+
+        public DoctorBuilder withDateOfBirth(LocalDate dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
         }
 
         public DoctorBuilder withExaminations(List<UUID> examinations) {

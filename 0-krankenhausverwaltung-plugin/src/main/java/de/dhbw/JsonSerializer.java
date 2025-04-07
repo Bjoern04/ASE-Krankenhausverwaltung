@@ -1,5 +1,7 @@
 package de.dhbw;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import de.dhbw.assignment.entity.Assignment;
@@ -57,6 +59,8 @@ public class JsonSerializer {
         this.objectMapper.addMixIn(Address.class, AddressMixin.class);
         this.objectMapper.addMixIn(Contact.class, ContactMixin.class);
         this.objectMapper.addMixIn(RoomAddress.class, RoomAddressMixin.class);
+
+        this.objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
     }
 
     public <T> void serialize(List<T> objects, String filePath) {

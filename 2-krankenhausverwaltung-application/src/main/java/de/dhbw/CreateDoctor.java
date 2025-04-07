@@ -21,19 +21,10 @@ public class CreateDoctor{
         this.examinationRepository = examinationRepository;
     }
 
-    public UUID execute(String firstName, String lastName, String street, String houseNumber, String zipCode, String city, LocalDate birthDate, String phoneNumber, String email, List<UUID> examinationIdsOfDoctor) {
-        // Check examinations
-        if (examinationIdsOfDoctor != null && !examinationIdsOfDoctor.isEmpty()) {
-            List<UUID> allExaminationIds = examinationRepository.loadAllExaminations().stream().map(Examination::getId).toList();
-            for (UUID examinationId : examinationIdsOfDoctor) {
-                if (!allExaminationIds.contains(examinationId)) {
-                    throw new IllegalArgumentException("An examination with the ID " + examinationId + " does not exist.");
-                }
-            }
-        }
+    public UUID execute(String firstName, String lastName, String street, String houseNumber, String zipCode, String city, LocalDate dateOfBirth, String phoneNumber, String email) {
 
-        Doctor doctor = new Doctor.DoctorBuilder(UUID.randomUUID(), new Name(firstName, lastName), new Address(street, houseNumber, zipCode, city), birthDate, new Contact(phoneNumber, email))
-                .withExaminations(examinationIdsOfDoctor)
+        Doctor doctor = new Doctor.DoctorBuilder(UUID.randomUUID(), new Name(firstName, lastName), new Address(street, houseNumber, zipCode, city), new Contact(phoneNumber, email))
+                .withDateOfBirth(dateOfBirth)
                 .build();
         doctorRepository.saveDoctor(doctor);
         return doctor.getId();

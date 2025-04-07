@@ -17,7 +17,7 @@ public class CreatePatientCommand implements Command {
     }
     @Override
     public String execute() throws RuntimeException {
-        CreatePatient createPatient = new CreatePatient(new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"), new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"));
+        CreatePatient createPatient = new CreatePatient(new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 
         try {
@@ -28,16 +28,14 @@ public class CreatePatientCommand implements Command {
             String zipCode = arguments.size() > 4 ? arguments.get(4).toString(): null;
             String city = arguments.size() > 5 ? arguments.get(5).toString(): null;
             LocalDate birthDate = arguments.size() > 6 ? InputParser.parseLocalDate(arguments.get(6).toString()): null;
-            List<UUID> examinationIds =  arguments.size() > 7 ? InputParser.parseUuidList(arguments.get(7)) : null;
-            String phoneNumber = arguments.size() > 8 ? arguments.get(8).toString(): null;
-            String email = arguments.size() > 9 ? arguments.get(9).toString(): null;
-            UUID assigmentId = arguments.size() > 10 ? UUID.fromString(arguments.get(10).toString()) : null;
+            String phoneNumber = arguments.size() > 7 ? arguments.get(8).toString(): null;
+            String email = arguments.size() > 8 ? arguments.get(8).toString(): null;
 
-            UUID patientUUID = createPatient.execute(firstName, lastName, street, hoseNumber, zipCode, city, birthDate, examinationIds, phoneNumber, email, assigmentId);
-            return "Der Patient wurde erfolgreich erstellt. Die ID des Patienten ist: " + patientUUID.toString();
+            UUID patientUUID = createPatient.execute(firstName, lastName, street, hoseNumber, zipCode, city, birthDate, phoneNumber, email);
+            return "The patient was created successfully. The patient ID is: " + patientUUID.toString();
         }
         catch (NullPointerException exception) {
-            throw new InvalidParameter("Invalid parameter for creating the room: " + exception.getMessage());
+            throw new InvalidParameter("Invalid parameter for creating the patient: " + exception.getMessage());
         }
     }
 }

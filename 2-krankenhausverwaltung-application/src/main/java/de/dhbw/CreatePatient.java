@@ -14,14 +14,12 @@ import java.util.UUID;
 
 public class CreatePatient {
     private final PatientRepository patientRepository;
-    private final ExaminationRepository examinationRepository;
 
-    public CreatePatient(PatientRepository patientRepository, ExaminationRepository examinationRepository) {
+    public CreatePatient(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
-        this.examinationRepository = examinationRepository;
     }
 
-    public UUID execute(String firstName, String lastName, String street, String houseNumber, String zipCode, String city, LocalDate birthDate, List<UUID> examinationIdsOfPatient, String phoneNumber, String email, UUID assigmentId) {
+    public UUID execute(String firstName, String lastName, String street, String houseNumber, String zipCode, String city, LocalDate birthDate, String phoneNumber, String email) {
 
         // Create name if possible
         Name name = null;
@@ -49,18 +47,9 @@ public class CreatePatient {
         catch (IllegalArgumentException _) {
         }
 
-        // Check examinations
-        if (examinationIdsOfPatient != null && !examinationIdsOfPatient.isEmpty()) {
-            List<UUID> allExaminationIds = examinationRepository.loadAllExaminations().stream().map(Examination::getId).toList();
-            for (UUID examinationId : examinationIdsOfPatient) {
-                if (!allExaminationIds.contains(examinationId)) {
-                    throw new IllegalArgumentException("Eine Untersuchung mit der ID " + examinationId + " existiert nicht.");
-                }
-            }
-        }
 
         // Create a new patient.
-        Patient patient = new Patient.PatientBuilder(UUID.randomUUID()).withName(name).withAddress(address).withDateOfBirth(birthDate).withExamination(examinationIdsOfPatient).withContact(contact).withAssignment(assigmentId)
+        Patient patient = new Patient.PatientBuilder(UUID.randomUUID()).withName(name).withAddress(address).withDateOfBirth(birthDate).withContact(contact)
                 .build();
 
         // Save the new patient.

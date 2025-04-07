@@ -26,9 +26,6 @@ public abstract class PatientBuilderMixin {
     @JsonProperty("dateOfBirth")
     public abstract Patient.PatientBuilder withDateOfBirth(LocalDate dateOfBirth);
 
-    @JsonProperty("examinationIds")
-    public abstract Patient.PatientBuilder withExamination(List<UUID> examinationIds);
-
     @JsonProperty("contact")
     public abstract Patient.PatientBuilder withContact(Contact contact);
 

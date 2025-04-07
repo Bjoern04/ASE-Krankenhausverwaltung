@@ -22,9 +22,9 @@ public class CreateDoctorCommand implements Command {
         CreateDoctor createDoctor = new CreateDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"), new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 
-        if (arguments.size() < 8 || arguments.size() > 10) {
+        if (arguments.size() < 7 || arguments.size() > 9) {
             throw new WrongAmoutOfParameters("Falsche Anzahl an Parameter. Es wurden mindestens neun erwartet, eingegeben wurden aber:" + arguments.size() + "\n" +
-                    "Die Parameter sind: Vorname, Nachname, Straße, Hausnummer, PLZ, Stadt, Geburtsdatum, Telefonnummer, E-Mail und optional eine Liste von Untersuchungs-IDs.");
+                    "Die Parameter sind: Vorname, Nachname, Straße, Hausnummer, PLZ, Stadt, optional ein Geburtsdatum, Telefonnummer und E-Mail.");
         }
 
         String firstName = arguments.get(0).toString();
@@ -36,9 +36,8 @@ public class CreateDoctorCommand implements Command {
         LocalDate birthDate = InputParser.parseLocalDate(arguments.get(6).toString());
         String phoneNumber = arguments.get(7).toString();
         String email = arguments.get(8).toString();
-        List<UUID> examinationIds =  arguments.size() > 9 ? InputParser.parseUuidList(arguments.get(9)) : null;
 
-        UUID doctorUUID = createDoctor.execute(firstName, lastName, street, hoseNumber, zipCode, city, birthDate, phoneNumber, email, examinationIds);
+        UUID doctorUUID = createDoctor.execute(firstName, lastName, street, hoseNumber, zipCode, city, birthDate, phoneNumber, email);
         return "Der Arzt wurde erfolgreich erstellt. Die ID des Arztes ist: " + doctorUUID.toString();
     }
 }

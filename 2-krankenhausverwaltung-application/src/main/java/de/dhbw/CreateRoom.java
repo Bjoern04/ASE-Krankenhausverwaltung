@@ -11,31 +11,20 @@ import java.util.UUID;
 
 public class CreateRoom {
     private final RoomRepository roomRepository;
-    private final AssignmentRepository assignmentRepository;
 
-    public CreateRoom(RoomRepository roomRepository, AssignmentRepository assignmentRepository) {
+    public CreateRoom(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
-        this.assignmentRepository = assignmentRepository;
     }
 
-    public UUID execute(String building, String floor, String rooNumber, int roomSize, List<UUID> assignmentIds) {
-        // Check if the assignments exist.
-        for (UUID assignmentId : assignmentIds) {
-            Assignment assignment = assignmentRepository.findAssignmentById(assignmentId);
-            if (assignment == null) {
-                throw new IllegalArgumentException("Assignment mit der ID " + assignmentId + " existiert nicht.");
-            }
-        }
-
+    public UUID execute(String building, String floor, String rooNumber, int roomSize) {
         // Check if there is already a room with the same address.
         RoomAddress roomAddress = new RoomAddress(building, floor, rooNumber);
         Room roomWithSameAddress = roomRepository.findRoomByRoomAddress(roomAddress);
         if (roomWithSameAddress != null) {
-            throw new IllegalArgumentException("Ein Zimmer mit der Adresse " + roomAddress + " existiert bereits.");
+            throw new IllegalArgumentException("There is already a room with that address:" + roomAddress + " .");
         }
 
         Room room = new Room.RoomBuilder(UUID.randomUUID(), roomAddress, roomSize)
-                .withAssignments(assignmentIds)
                 .build();
 
         roomRepository.saveRoom(room);
