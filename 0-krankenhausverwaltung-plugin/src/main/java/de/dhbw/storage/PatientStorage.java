@@ -56,21 +56,17 @@ public class PatientStorage implements PatientRepository {
     }
 
     @Override
-    public void updatePatient(Patient patient) {
-        try {
-            List<Patient> patients = loadPatients();
-            for (Patient patient1 : patients) {
-                if (patient1.getId().equals(patient.getId())) {
-                    patient1.updateAssignment(patient.getAssignmentId());
-                    serializer.serializeOverwrite(patients, file.getAbsolutePath());
-                    break;
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void updatePatient(List<Patient> patients) {
+        serializer.serializeOverwrite(patients, file.getAbsolutePath());
+    }
 
+    @Override
+    public List<Patient> findAllPatients() {
+        try {
+            return loadPatients();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private List<Patient> loadPatients() throws IOException {

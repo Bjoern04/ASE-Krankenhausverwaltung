@@ -8,6 +8,7 @@ import de.dhbw.room.entity.Room;
 import de.dhbw.room.repository.RoomRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class CreateAssignment {
@@ -62,16 +63,12 @@ public class CreateAssignment {
 
             // Delete the old assignment
             assignmentRepository.deleteAssignment(oldAssignment.getId());
-
-            // Create an updated version of the patient
-            patient.updateAssignment(assignment.getId());
-            patientRepository.updatePatient(patient);
         }
-        else {
-            patient.updateAssignment(assignment.getId());
-            patientRepository.updatePatient(patient);
 
-        }
+        // Create an updated version of the patient
+        patient.updateAssignment(assignment.getId());
+        List<Patient> patients = Patient.updatePatientInPatientList(patient, patientRepository.findAllPatients());
+        patientRepository.updatePatient(patients);
 
         // Add the assignment to the room
         room.addAssignment(assignment.getId());

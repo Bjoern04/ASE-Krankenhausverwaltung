@@ -9,11 +9,13 @@ import java.util.UUID;
 public interface PatientRepository {
     Patient findPatientById(UUID id);
 
+    List<Patient> findAllPatients();
+
     Patient findPatientByName(Name name);
 
     boolean savePatient(Patient patient);
 
     void deletePatient(UUID patientId);
 
-    void updatePatient (Patient patient);
+    void updatePatient (List<Patient> patients);
 }
