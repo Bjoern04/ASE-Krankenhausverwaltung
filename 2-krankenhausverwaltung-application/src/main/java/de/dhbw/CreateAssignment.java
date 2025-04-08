@@ -4,6 +4,7 @@ import de.dhbw.aggregates.assignment.entity.Assignment;
 import de.dhbw.aggregates.assignment.repository.AssignmentRepository;
 import de.dhbw.aggregates.patient.entity.Patient;
 import de.dhbw.aggregates.patient.repository.PatientRepository;
+import de.dhbw.aggregates.patient.util.PatientUpdater;
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;
 
@@ -67,7 +68,7 @@ public class CreateAssignment {
 
         // Create an updated version of the patient
         patient.updateAssignment(assignment.getId());
-        List<Patient> patients = Patient.updatePatientInPatientList(patient, patientRepository.findAllPatients());
+        List<Patient> patients = PatientUpdater.updatePatientInPatientList(patient, patientRepository.findAllPatients());
         patientRepository.updatePatient(patients);
 
         // Add the assignment to the room
