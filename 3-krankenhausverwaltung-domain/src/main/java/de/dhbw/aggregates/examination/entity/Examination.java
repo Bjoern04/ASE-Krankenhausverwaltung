@@ -67,11 +67,11 @@ public class Examination {
         return endTime;
     }
 
-    public UUID getPatient() {
+    public UUID getPatientId() {
         return patientId;
     }
 
-    public UUID getDoctor() {
+    public UUID getDoctorId() {
         return doctorId;
     }
 

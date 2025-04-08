@@ -14,11 +14,9 @@ public interface ExaminationRepository {
 
     boolean deleteExamination (Examination examination);
 
-    boolean updateExamination (Examination examination);
+    void updateExamination (List<Examination> examinations);
 
     List<Examination> findExaminationForPatient (Patient patient);
-
-    List<Examination> findExaminationForDoctor (Doctor doctor);
 
     List<Examination> loadAllExaminations ();
 }

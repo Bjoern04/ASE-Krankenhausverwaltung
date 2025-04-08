@@ -39,17 +39,12 @@ public class ExaminationStorage implements ExaminationRepository {
     }
 
     @Override
-    public boolean updateExamination(Examination examination) {
-        return false;
+    public void updateExamination(List<Examination> examinations) {
+        serializer.serializeOverwrite(examinations, file.getAbsolutePath());
     }
 
     @Override
     public List<Examination> findExaminationForPatient(Patient patient) {
-        return List.of();
-    }
-
-    @Override
-    public List<Examination> findExaminationForDoctor(Doctor doctor) {
         return List.of();
     }
 

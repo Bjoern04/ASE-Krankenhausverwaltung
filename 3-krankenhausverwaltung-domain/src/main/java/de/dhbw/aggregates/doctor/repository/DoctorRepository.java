@@ -12,7 +12,7 @@ public interface DoctorRepository {
 
     boolean saveDoctor(Doctor doctor);
 
-    boolean deleteDoctor(Doctor doctor);
+    boolean deleteDoctor(UUID doctorId);
 
     boolean updateDoctor (Doctor doctor);
 }

@@ -47,6 +47,9 @@ public class InputParser {
 
             case "createassignment":
                 return new CreateAssignmentCommand(tokens[1]);
+
+            case "deletedoctor":
+                return new DeleteDoctorCommand(tokens[1]);
         }
         return null;
     }

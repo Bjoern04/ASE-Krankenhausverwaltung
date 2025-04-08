@@ -1,16 +1,14 @@
 package de.dhbw.storage;
 
 import de.dhbw.JsonSerializer;
+import de.dhbw.aggregates.assignment.entity.Assignment;
 import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.aggregates.doctor.repository.DoctorRepository;
 import de.dhbw.shared.value_objects.Name;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class DoctorStorage implements DoctorRepository {
     private final File file;
@@ -44,8 +42,22 @@ public class DoctorStorage implements DoctorRepository {
     }
 
     @Override
-    public boolean deleteDoctor(Doctor doctor) {
-        return false;
+    public boolean deleteDoctor(UUID doctorId) {
+        try {
+            List<Doctor> doctors = loadDoctors();
+            Optional<Doctor> doctorToDelete = doctors.stream().filter(doctor -> doctor.getId().equals(doctorId)).findFirst();
+
+            if (doctorToDelete.isPresent()) {
+                doctors.remove(doctorToDelete.get());
+                serializer.serializeOverwrite(doctors, file.getAbsolutePath());
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
