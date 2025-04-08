@@ -45,7 +45,9 @@ public class Examination {
         this.patientId = patientId;
 
         if (doctorId == null) {
-            throw new NullPointerException("Doctor of the examination must not be null.");
+            if (endTime.isAfter(LocalDateTime.now())) {
+                throw new NullPointerException("For an examination that is not completed yet the doctor must not be null. He only is allowed to be null for completed examinations that lie in the past.");
+            }
         }
         this.doctorId = doctorId;
     }
@@ -104,11 +106,13 @@ public class Examination {
         this.patientId = patient;
     }
 
-    public void updateDoctor(UUID doctor) {
-        if (doctor == null) {
-            throw new NullPointerException("Doctor of the examination must not be null.");
+    public void updateDoctor(UUID doctorId) {
+        if (doctorId == null) {
+            if (endTime.isAfter(LocalDateTime.now())) {
+                throw new NullPointerException("For an examination that is not completed yet the doctor must not be null. He only is allowed to be null for completed examinations that lie in the past.");
+            }
         }
-        this.doctorId = doctor;
+        this.doctorId = doctorId;
     }
 
     public boolean examinationTimesAreValid(LocalDateTime startTime, LocalDateTime endTime) {

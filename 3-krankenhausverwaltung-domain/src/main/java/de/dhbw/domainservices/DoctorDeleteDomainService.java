@@ -26,6 +26,7 @@ public class DoctorDeleteDomainService {
                     return null;
                 }
                 else {
+                    examination.updateDoctor(null);
                     examinations.add(examination);
                 }
             }

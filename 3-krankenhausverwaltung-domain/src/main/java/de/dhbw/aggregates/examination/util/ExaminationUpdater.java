@@ -14,6 +14,7 @@ public class ExaminationUpdater {
                     examination.updateEndTime(examinationToUpdate.getEndTime());
                     examination.updatePatient(examinationToUpdate.getPatientId());
                     examination.updateDoctor(examinationToUpdate.getDoctorId());
+                    System.out.println("Examination with ID " + examination.getId() + " was updated." + examination.getDoctorId());
                     break;
                 }
             }
