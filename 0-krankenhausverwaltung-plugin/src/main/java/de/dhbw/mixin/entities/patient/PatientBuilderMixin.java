@@ -2,13 +2,12 @@ package de.dhbw.mixin.entities.patient;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.dhbw.patient.entity.Patient;
-import de.dhbw.shared.Address;
-import de.dhbw.shared.Contact;
-import de.dhbw.shared.Name;
+import de.dhbw.aggregates.patient.entity.Patient;
+import de.dhbw.shared.value_objects.Address;
+import de.dhbw.shared.value_objects.Contact;
+import de.dhbw.shared.value_objects.Name;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 public abstract class PatientBuilderMixin {

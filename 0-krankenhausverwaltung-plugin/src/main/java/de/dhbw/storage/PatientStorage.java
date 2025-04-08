@@ -1,9 +1,9 @@
 package de.dhbw.storage;
 
 import de.dhbw.JsonSerializer;
-import de.dhbw.patient.entity.Patient;
-import de.dhbw.patient.repository.PatientRepository;
-import de.dhbw.shared.Name;
+import de.dhbw.aggregates.patient.entity.Patient;
+import de.dhbw.aggregates.patient.repository.PatientRepository;
+import de.dhbw.shared.value_objects.Name;
 
 import java.io.File;
 import java.io.IOException;

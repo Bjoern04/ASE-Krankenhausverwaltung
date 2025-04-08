@@ -1,10 +1,10 @@
 package de.dhbw.storage;
 
 import de.dhbw.JsonSerializer;
-import de.dhbw.doctor.entity.Doctor;
-import de.dhbw.examination.entity.Examination;
-import de.dhbw.examination.repository.ExaminationRepository;
-import de.dhbw.patient.entity.Patient;
+import de.dhbw.aggregates.doctor.entity.Doctor;
+import de.dhbw.aggregates.examination.entity.Examination;
+import de.dhbw.aggregates.examination.repository.ExaminationRepository;
+import de.dhbw.aggregates.patient.entity.Patient;
 
 import java.io.File;
 import java.util.ArrayList;

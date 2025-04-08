@@ -1,11 +1,11 @@
 package de.dhbw;
 
-import de.dhbw.assignment.entity.Assignment;
-import de.dhbw.assignment.repository.AssignmentRepository;
-import de.dhbw.patient.entity.Patient;
-import de.dhbw.patient.repository.PatientRepository;
-import de.dhbw.room.entity.Room;
-import de.dhbw.room.repository.RoomRepository;
+import de.dhbw.aggregates.assignment.entity.Assignment;
+import de.dhbw.aggregates.assignment.repository.AssignmentRepository;
+import de.dhbw.aggregates.patient.entity.Patient;
+import de.dhbw.aggregates.patient.repository.PatientRepository;
+import de.dhbw.aggregates.room.entity.Room;
+import de.dhbw.aggregates.room.repository.RoomRepository;
 
 import java.time.LocalDate;
 import java.util.List;

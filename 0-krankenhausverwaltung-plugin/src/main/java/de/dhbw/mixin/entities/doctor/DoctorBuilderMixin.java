@@ -2,10 +2,10 @@ package de.dhbw.mixin.entities.doctor;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.dhbw.doctor.entity.Doctor;
-import de.dhbw.shared.Address;
-import de.dhbw.shared.Contact;
-import de.dhbw.shared.Name;
+import de.dhbw.aggregates.doctor.entity.Doctor;
+import de.dhbw.shared.value_objects.Address;
+import de.dhbw.shared.value_objects.Contact;
+import de.dhbw.shared.value_objects.Name;
 
 import java.time.LocalDate;
 import java.util.List;

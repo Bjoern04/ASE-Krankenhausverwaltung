@@ -1,15 +1,12 @@
 package de.dhbw;
 
-import de.dhbw.doctor.entity.Doctor;
-import de.dhbw.doctor.repository.DoctorRepository;
-import de.dhbw.examination.entity.Examination;
-import de.dhbw.examination.repository.ExaminationRepository;
-import de.dhbw.shared.Address;
-import de.dhbw.shared.Contact;
-import de.dhbw.shared.Name;
+import de.dhbw.aggregates.doctor.entity.Doctor;
+import de.dhbw.aggregates.doctor.repository.DoctorRepository;
+import de.dhbw.shared.value_objects.Address;
+import de.dhbw.shared.value_objects.Contact;
+import de.dhbw.shared.value_objects.Name;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 public class CreateDoctor{

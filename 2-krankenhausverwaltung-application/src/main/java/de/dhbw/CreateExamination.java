@@ -1,12 +1,12 @@
 package de.dhbw;
 
-import de.dhbw.doctor.entity.Doctor;
-import de.dhbw.doctor.repository.DoctorRepository;
-import de.dhbw.examination.entity.Examination;
-import de.dhbw.examination.repository.ExaminationRepository;
-import de.dhbw.patient.entity.Patient;
-import de.dhbw.patient.repository.PatientRepository;
-import de.dhbw.shared.ExaminationType;
+import de.dhbw.aggregates.doctor.entity.Doctor;
+import de.dhbw.aggregates.doctor.repository.DoctorRepository;
+import de.dhbw.aggregates.examination.entity.Examination;
+import de.dhbw.aggregates.examination.repository.ExaminationRepository;
+import de.dhbw.aggregates.patient.entity.Patient;
+import de.dhbw.aggregates.patient.repository.PatientRepository;
+import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

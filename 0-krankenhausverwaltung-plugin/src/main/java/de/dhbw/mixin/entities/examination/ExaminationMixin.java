@@ -2,8 +2,7 @@ package de.dhbw.mixin.entities.examination;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import de.dhbw.shared.ExaminationType;
+import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

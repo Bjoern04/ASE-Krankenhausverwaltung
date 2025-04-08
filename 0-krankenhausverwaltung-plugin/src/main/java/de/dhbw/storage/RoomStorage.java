@@ -1,9 +1,9 @@
 package de.dhbw.storage;
 
 import de.dhbw.JsonSerializer;
-import de.dhbw.room.entity.Room;
-import de.dhbw.room.repository.RoomRepository;
-import de.dhbw.shared.RoomAddress;
+import de.dhbw.aggregates.room.entity.Room;
+import de.dhbw.aggregates.room.repository.RoomRepository;
+import de.dhbw.aggregates.room.value_objects.RoomAddress;
 
 import java.io.File;
 import java.io.IOException;

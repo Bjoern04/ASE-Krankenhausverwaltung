@@ -3,7 +3,7 @@ package de.dhbw.commands;
 import de.dhbw.CreateExamination;
 import de.dhbw.InputParser;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
-import de.dhbw.shared.ExaminationType;
+import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.ExaminationStorage;
 import de.dhbw.storage.PatientStorage;
