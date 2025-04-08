@@ -26,7 +26,7 @@ public class DeleteDoctor {
             return "Doctor with the ID " + doctorId + " has still examinations in the future and therefore cannot be deleted.";
         }
 
-        allExaminations = ExaminationUpdater.updateExaminations(allExaminations, examinationsToDeleteDoctorFrom);
+        ExaminationUpdater.updateExaminations(allExaminations, examinationsToDeleteDoctorFrom);
         examinationRepository.updateExamination(allExaminations);
 
         boolean doctorFound = doctorRepository.deleteDoctor(doctorId);

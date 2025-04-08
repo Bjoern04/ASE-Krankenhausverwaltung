@@ -2,10 +2,12 @@ package de.dhbw.commands;
 
 import de.dhbw.CreateDoctor;
 import de.dhbw.InputParser;
+import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.DoctorStorage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,9 +23,8 @@ public class CreateDoctorCommand implements Command {
         CreateDoctor createDoctor = new CreateDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 
-        if (arguments.size() < 7 || arguments.size() > 9) {
-            throw new WrongAmoutOfParameters("Falsche Anzahl an Parameter. Es wurden mindestens neun erwartet, eingegeben wurden aber:" + arguments.size() + "\n" +
-                    "Die Parameter sind: Vorname, Nachname, Straße, Hausnummer, PLZ, Stadt, optional ein Geburtsdatum, Telefonnummer und E-Mail.");
+        if (arguments.size() < 9 || arguments.size() > 10) {
+            throw new WrongAmoutOfParameters("Wrong amount of parameters. There should be nine or ten parameters, but:" + arguments.size() + " were entered.\n");
         }
 
         String firstName = arguments.get(0).toString();
@@ -35,8 +36,9 @@ public class CreateDoctorCommand implements Command {
         LocalDate birthDate = InputParser.parseLocalDate(arguments.get(6).toString());
         String phoneNumber = arguments.get(7).toString();
         String email = arguments.get(8).toString();
+        List<ExaminationType> examinationTypes = arguments.size() > 9 ? InputParser.parseExaminationTypeList(arguments.get(9)) : new ArrayList<>();
 
-        UUID doctorUUID = createDoctor.execute(firstName, lastName, street, hoseNumber, zipCode, city, birthDate, phoneNumber, email);
-        return "Der Arzt wurde erfolgreich erstellt. Die ID des Arztes ist: " + doctorUUID.toString();
+        UUID doctorUUID = createDoctor.execute(firstName, lastName, street, hoseNumber, zipCode, city, birthDate, phoneNumber, email, examinationTypes);
+        return "The doctor was created successfully. The ID of the doctor is: " + doctorUUID.toString();
     }
 }

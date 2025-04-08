@@ -13,12 +13,12 @@ import java.util.UUID;
 
 public abstract class DoctorBuilderMixin {
     @JsonCreator
-    public DoctorBuilderMixin(@JsonProperty("id") UUID id, @JsonProperty("name") Name name, @JsonProperty("address") Address address, @JsonProperty("contact") Contact contact) {
+    public DoctorBuilderMixin(@JsonProperty("id") UUID id, @JsonProperty("name") Name name, @JsonProperty("address") Address address, @JsonProperty("contact") Contact contact, @JsonProperty("dateOfBirth") LocalDate dateOfBirth) {
     }
 
     @JsonProperty("examinationIds")
     public abstract Doctor.DoctorBuilder withExaminationIds(List<UUID> examinationIds);
 
-    @JsonProperty("dateOfBirth")
-    public abstract Doctor.DoctorBuilder withDateOfBirth(LocalDate dateOfBirth);
+    @JsonProperty("examinationTypes")
+    public abstract Doctor.DoctorBuilder withExaminationTypes(List<String> examinationTypes);
 }

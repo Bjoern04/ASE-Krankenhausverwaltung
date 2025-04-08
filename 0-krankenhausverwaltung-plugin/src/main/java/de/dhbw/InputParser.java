@@ -1,5 +1,6 @@
 package de.dhbw;
 
+import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 import de.dhbw.commands.*;
 import de.dhbw.commands.exceptions.InvalidKeyword;
 
@@ -50,6 +51,9 @@ public class InputParser {
 
             case "deletedoctor":
                 return new DeleteDoctorCommand(tokens[1]);
+
+            case "examination reassignment":
+                return new ExaminationReassignmentCommand(tokens[1]);
         }
         return null;
     }
@@ -116,4 +120,25 @@ public class InputParser {
             throw new IllegalArgumentException("Invalid LocalDateTime format. Expected format: " + LOCAL_DATE_TIME_FORMATTER, e);
         }
     }
+
+    public static List<ExaminationType> parseExaminationTypeList(Object element) throws IllegalArgumentException {
+        if (!(element instanceof String[])) {
+            throw new IllegalArgumentException("Invalid element type. Expected String array.");
+        }
+
+        String[] typeStrings = (String[]) element;
+        List<ExaminationType> typeList = new ArrayList<>();
+
+        for (String typeStr : typeStrings) {
+            try {
+                ExaminationType type = ExaminationType.valueOf(typeStr.trim());
+                typeList.add(type);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid Examination Type format in array: '" + typeStr.trim() + "'", e);
+            }
+        }
+
+        return typeList;
+    }
+
 }

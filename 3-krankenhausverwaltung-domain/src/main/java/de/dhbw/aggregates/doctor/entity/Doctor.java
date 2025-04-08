@@ -1,5 +1,6 @@
 package de.dhbw.aggregates.doctor.entity;
 
+import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 import de.dhbw.shared.value_objects.Address;
 import de.dhbw.shared.value_objects.Contact;
 import de.dhbw.shared.value_objects.Name;
@@ -24,6 +25,8 @@ public class Doctor {
     private List<UUID> examinationIds;
 
     private Contact contact;
+
+    private ArrayList<ExaminationType> examinationTypes;
 
     private Doctor (DoctorBuilder builder) {
         if (builder.id == null) {
@@ -51,6 +54,10 @@ public class Doctor {
         this.examinationIds = builder.examinationIds != null
                 ? new ArrayList<>(builder.examinationIds)
                 : new ArrayList<>();
+
+        this.examinationTypes = builder.examinationTypes != null
+                ? new ArrayList<>(builder.examinationTypes)
+                : new ArrayList<>();
     }
 
     // Getters
@@ -70,12 +77,16 @@ public class Doctor {
         return dateOfBirth;
     }
 
-    public List<UUID> getExaminations() {
+    public List<UUID> getExaminationIds() {
         return examinationIds;
     }
 
     public Contact getContact() {
         return contact;
+    }
+
+    public List<ExaminationType> getExaminationTypes() {
+        return examinationTypes;
     }
 
 
@@ -125,6 +136,15 @@ public class Doctor {
         }
     }
 
+    public void addExaminationType(ExaminationType examinationType) {
+        if (examinationType == null) {
+            throw new NullPointerException("The examination type must not be null.");
+        }
+        if (!this.examinationTypes.contains(examinationType)) {
+            this.examinationTypes.add(examinationType);
+        }
+    }
+
 
     /**
      * Builder class for Doctor following the Builder design pattern.
@@ -142,15 +162,18 @@ public class Doctor {
 
         private Contact contact;
 
-        public DoctorBuilder(UUID id, Name name, Address address,  Contact contact) {
+        private List<ExaminationType> examinationTypes;
+
+        public DoctorBuilder(UUID id, Name name, Address address, LocalDate dateOfBirth, Contact contact) {
             this.id = id;
             this.name = name;
             this.address = address;
+            this.dateOfBirth = dateOfBirth;
             this.contact = contact;
         }
 
-        public DoctorBuilder withDateOfBirth(LocalDate dateOfBirth) {
-            this.dateOfBirth = dateOfBirth;
+        public DoctorBuilder withExaminationTypes(List<ExaminationType> examinationTypes) {
+            this.examinationTypes = examinationTypes;
             return this;
         }
 
