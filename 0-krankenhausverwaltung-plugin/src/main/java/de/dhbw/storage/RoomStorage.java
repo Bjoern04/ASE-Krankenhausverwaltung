@@ -25,27 +25,17 @@ public class RoomStorage implements RoomRepository {
 
     @Override
     public Room findRoomById(UUID id) {
-        try {
-            List<Room> rooms = loadRooms();
-            return rooms.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<Room> rooms = loadRooms();
+        return rooms.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
     public Room findRoomByRoomAddress(RoomAddress roomAddress) {
-        try {
-            List<Room> rooms = loadRooms();
-            return rooms.stream()
-                    .filter(room -> room.getRoomAddress().equals(roomAddress))
-                    .findFirst()
-                    .orElse(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<Room> rooms = loadRooms();
+        return rooms.stream()
+                .filter(room -> room.getRoomAddress().equals(roomAddress))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -61,18 +51,13 @@ public class RoomStorage implements RoomRepository {
 
     @Override
     public void updateRoom(Room room) {
-         try {
-            List<Room> rooms = loadRooms();
-            for (Room room1 : rooms) {
-                if (room1.getId().equals(room.getId())) {
-                    room1.updateAssignments(room.getAssignmentIds());
-                    serializer.serializeOverwrite(rooms, file.getAbsolutePath());
-                    break;
-                }
+        List<Room> rooms = loadRooms();
+        for (Room room1 : rooms) {
+            if (room1.getId().equals(room.getId())) {
+                room1.updateAssignments(room.getAssignmentIds());
+                serializer.serializeOverwrite(rooms, file.getAbsolutePath());
+                break;
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -82,7 +67,8 @@ public class RoomStorage implements RoomRepository {
 
     }
 
-    private List<Room> loadRooms() throws IOException {
+    @Override
+    public List<Room> loadRooms() {
         if (file.exists()) {
             if (file.length() == 0) {
                 return new ArrayList<>();

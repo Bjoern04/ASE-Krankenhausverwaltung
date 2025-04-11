@@ -60,6 +60,9 @@ public class InputParser {
 
             case "readdoctor":
                 return new ReadDoctorCommand(tokens[1]);
+
+            case "readroom":
+                return new ReadRoomCommand(tokens[1]);
         }
         return null;
     }

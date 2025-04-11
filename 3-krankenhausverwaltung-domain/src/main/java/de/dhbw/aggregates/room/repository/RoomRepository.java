@@ -3,6 +3,7 @@ package de.dhbw.aggregates.room.repository;
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.value_objects.RoomAddress;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface RoomRepository {
@@ -17,4 +18,6 @@ public interface RoomRepository {
     void updateRoom (Room room);
 
     void deleteAssigment(Room room, UUID assignmentId);
+
+    List<Room> loadRooms();
 }

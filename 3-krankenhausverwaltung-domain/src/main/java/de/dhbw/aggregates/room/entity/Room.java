@@ -5,6 +5,7 @@ import de.dhbw.aggregates.room.value_objects.RoomAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Room entity representing a room in the Krankenhausverwaltung.
@@ -94,12 +95,26 @@ public class Room {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Room{" +
+                "ID: " + id +
+                ", RoomAddress: " + roomAddress +
+                ", RoomSize: " + roomSize +
+                ", AssignmentIds: [" +
+                (assignmentIds != null ? assignmentIds.stream()
+                        .map(UUID::toString)
+                        .collect(Collectors.joining(", ")) : "null") +
+                "]" +
+                '}';
+    }
+
     public static class RoomBuilder {
         private final UUID id;
 
-        private RoomAddress roomAddress;
+        private final RoomAddress roomAddress;
 
-        private int roomSize;
+        private final int roomSize;
 
         private List<UUID> assignmentIds;
 
