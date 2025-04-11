@@ -57,6 +57,9 @@ public class InputParser {
 
             case "readpatient":
                 return new ReadPatientCommand(tokens[1]);
+
+            case "readdoctor":
+                return new ReadDoctorCommand(tokens[1]);
         }
         return null;
     }

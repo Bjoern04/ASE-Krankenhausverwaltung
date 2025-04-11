@@ -148,7 +148,8 @@ public class Patient {
             examinationIdsString.append("null");
         }
 
-        return "Name: " + (name != null ? name.toString() : "null") +
+        return "ID: " + id +
+                ", Name: " + (name != null ? name.toString() : "null") +
                 ", Address: " + (address != null ? address.toString() : "null") +
                 ", Date of Birth: " + (dateOfBirth != null ? dateOfBirth.toString() : "null") +
                 ", Examination IDs: [" + examinationIdsString.toString() + "]" +

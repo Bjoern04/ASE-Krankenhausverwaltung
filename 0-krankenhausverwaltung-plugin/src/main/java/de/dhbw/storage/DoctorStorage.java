@@ -6,7 +6,6 @@ import de.dhbw.aggregates.doctor.repository.DoctorRepository;
 import de.dhbw.shared.value_objects.Name;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class DoctorStorage implements DoctorRepository {
@@ -20,13 +19,8 @@ public class DoctorStorage implements DoctorRepository {
 
     @Override
     public Doctor findDoctorById(UUID id) {
-        try {
-            List<Doctor> doctors = loadDoctors();
-            return doctors.stream().filter(doctor -> doctor.getId().equals(id)).findFirst().orElse(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<Doctor> doctors = loadDoctors();
+        return doctors.stream().filter(doctor -> doctor.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
@@ -42,20 +36,16 @@ public class DoctorStorage implements DoctorRepository {
 
     @Override
     public boolean deleteDoctor(UUID doctorId) {
-        try {
-            List<Doctor> doctors = loadDoctors();
-            Optional<Doctor> doctorToDelete = doctors.stream().filter(doctor -> doctor.getId().equals(doctorId)).findFirst();
+        List<Doctor> doctors = loadDoctors();
+        Optional<Doctor> doctorToDelete = doctors.stream().filter(doctor -> doctor.getId().equals(doctorId)).findFirst();
 
-            if (doctorToDelete.isPresent()) {
-                doctors.remove(doctorToDelete.get());
-                serializer.serializeOverwrite(doctors, file.getAbsolutePath());
-                return true;
-            }
-            else {
-                return false;
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (doctorToDelete.isPresent()) {
+            doctors.remove(doctorToDelete.get());
+            serializer.serializeOverwrite(doctors, file.getAbsolutePath());
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -64,7 +54,8 @@ public class DoctorStorage implements DoctorRepository {
         return false;
     }
 
-    private List<Doctor> loadDoctors() throws IOException {
+    @Override
+    public List<Doctor> loadDoctors() {
         if (file.exists()) {
             if (file.length() == 0) {
                 return new ArrayList<>();

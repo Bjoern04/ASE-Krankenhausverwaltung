@@ -154,6 +154,50 @@ public class Doctor {
         this.examinationIds.remove(examinationId);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder examinationIdsString = new StringBuilder();
+        StringBuilder examinationTypesString = new StringBuilder();
+
+        if (examinationIds != null) {
+            for (UUID uuid : examinationIds) {
+                if (uuid != null) {
+                    examinationIdsString.append(uuid.toString()).append(", ");
+                } else {
+                    examinationIdsString.append("null, ");
+                }
+            }
+            if (examinationIdsString.length() > 2) {
+                examinationIdsString.setLength(examinationIdsString.length() - 2);
+            }
+        } else {
+            examinationIdsString.append("null");
+        }
+
+        if (examinationTypes != null) {
+            for (ExaminationType type : examinationTypes) {
+                if (type != null) {
+                    examinationTypesString.append(type.toString()).append(", ");
+                } else {
+                    examinationTypesString.append("null, ");
+                }
+            }
+            if (examinationTypesString.length() > 2) {
+                examinationTypesString.setLength(examinationTypesString.length() - 2);
+            }
+        } else {
+            examinationTypesString.append("null");
+        }
+
+        return "ID: " + id +
+                ", Name: " + (name != null ? name.toString() : "null") +
+                ", Address: " + (address != null ? address.toString() : "null") +
+                ", Date of Birth: " + (dateOfBirth != null ? dateOfBirth.toString() : "null") +
+                ", Contact: " + (contact != null ? contact.toString() : "null") +
+                ", Examination IDs: [" + examinationIdsString + "]" +
+                ", Examination Types: [" + examinationTypesString + "]";
+    }
+
 
     /**
      * Builder class for Doctor following the Builder design pattern.
