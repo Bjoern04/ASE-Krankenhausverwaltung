@@ -52,7 +52,7 @@ public class InputParser {
             case "deletedoctor":
                 return new DeleteDoctorCommand(tokens[1]);
 
-            case "examination reassignment":
+            case "examinationreassignment":
                 return new ExaminationReassignmentCommand(tokens[1]);
         }
         return null;

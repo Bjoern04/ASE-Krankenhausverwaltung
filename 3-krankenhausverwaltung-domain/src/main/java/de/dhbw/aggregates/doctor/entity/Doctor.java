@@ -1,5 +1,6 @@
 package de.dhbw.aggregates.doctor.entity;
 
+import de.dhbw.aggregates.examination.entity.Examination;
 import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 import de.dhbw.shared.value_objects.Address;
 import de.dhbw.shared.value_objects.Contact;
@@ -22,9 +23,9 @@ public class Doctor {
 
     private LocalDate dateOfBirth;
 
-    private List<UUID> examinationIds;
-
     private Contact contact;
+
+    private List<UUID> examinationIds;
 
     private ArrayList<ExaminationType> examinationTypes;
 
@@ -77,12 +78,13 @@ public class Doctor {
         return dateOfBirth;
     }
 
-    public List<UUID> getExaminationIds() {
-        return examinationIds;
-    }
 
     public Contact getContact() {
         return contact;
+    }
+
+    public List<UUID> getExaminationIds() {
+        return examinationIds;
     }
 
     public List<ExaminationType> getExaminationTypes() {
@@ -145,6 +147,13 @@ public class Doctor {
         }
     }
 
+    public void removeExamination(UUID examinationId) {
+        if (examinationId == null) {
+            throw new NullPointerException("The examination must not be null.");
+        }
+        this.examinationIds.remove(examinationId);
+    }
+
 
     /**
      * Builder class for Doctor following the Builder design pattern.
@@ -156,11 +165,11 @@ public class Doctor {
 
         private Address address;
 
-        private List<UUID> examinationIds;
-
         private LocalDate dateOfBirth;
 
-        private Contact contact;
+       private Contact contact;
+
+        private List<UUID> examinationIds;
 
         private List<ExaminationType> examinationTypes;
 

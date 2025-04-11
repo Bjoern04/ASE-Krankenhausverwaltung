@@ -1,7 +1,6 @@
 package de.dhbw.storage;
 
 import de.dhbw.JsonSerializer;
-import de.dhbw.aggregates.assignment.entity.Assignment;
 import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.aggregates.doctor.repository.DoctorRepository;
 import de.dhbw.shared.value_objects.Name;
