@@ -18,4 +18,6 @@ public interface PatientRepository {
     void deletePatient(UUID patientId);
 
     void updatePatient (List<Patient> patients);
+
+    List<Patient> loadPatients ();
 }

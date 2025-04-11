@@ -54,6 +54,9 @@ public class InputParser {
 
             case "examinationreassignment":
                 return new ExaminationReassignmentCommand(tokens[1]);
+
+            case "readpatient":
+                return new ReadPatientCommand(tokens[1]);
         }
         return null;
     }

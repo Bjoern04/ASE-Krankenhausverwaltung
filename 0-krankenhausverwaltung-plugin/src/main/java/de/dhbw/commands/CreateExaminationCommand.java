@@ -25,8 +25,7 @@ public class CreateExaminationCommand implements Command {
         List<Object> arguments = InputParser.parseArguments(argument);
 
         if (arguments.size() != 5) {
-            throw new WrongAmoutOfParameters("The wrong amount of parameters. There have to be :" + arguments.size() + " parameters.\n" +
-                    "The parameters are: ExaminationType, StartTime, EndTime, Patient-ID, Doctor-ID.");
+            throw new WrongAmoutOfParameters("The wrong amount of parameters. There have to be five parameters but " + arguments.size() + "were entered.");
         }
 
         // Check examination type

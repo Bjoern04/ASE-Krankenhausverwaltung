@@ -161,13 +161,13 @@ public class Doctor {
     public static class DoctorBuilder {
         private final UUID id;
 
-        private Name name;
+        private final Name name;
 
-        private Address address;
+        private final Address address;
 
-        private LocalDate dateOfBirth;
+        private final LocalDate dateOfBirth;
 
-       private Contact contact;
+        private final Contact contact;
 
         private List<UUID> examinationIds;
 

@@ -129,6 +129,33 @@ public class Patient {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder examinationIdsString = new StringBuilder();
+
+        if (examinationIds != null) {
+            for (Object id : examinationIds) {
+                if (id != null) {
+                    examinationIdsString.append(id).append(", ");
+                } else {
+                    examinationIdsString.append("null, ");
+                }
+            }
+            if (examinationIdsString.length() > 2) {
+                examinationIdsString.setLength(examinationIdsString.length() - 2);
+            }
+        } else {
+            examinationIdsString.append("null");
+        }
+
+        return "Name: " + (name != null ? name.toString() : "null") +
+                ", Address: " + (address != null ? address.toString() : "null") +
+                ", Date of Birth: " + (dateOfBirth != null ? dateOfBirth.toString() : "null") +
+                ", Examination IDs: [" + examinationIdsString.toString() + "]" +
+                ", Contact: " + (contact != null ? contact.toString() : "null") +
+                ", Assignment ID: " + assignmentId;
+    }
+
     /**
      * Builder class for Patient following the Builder design pattern.
      */

@@ -73,7 +73,6 @@ public class CreateAssignment {
 
         // Add the assignment to the room
         room.addAssignment(assignment.getId());
-        System.out.println("Assignment ID: " + room.getAssignmentIds().getLast().toString());
         roomRepository.updateRoom(room);
 
         // Save the assignment

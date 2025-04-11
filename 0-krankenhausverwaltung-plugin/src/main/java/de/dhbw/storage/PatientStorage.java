@@ -20,13 +20,8 @@ public class PatientStorage implements PatientRepository {
 
     @Override
     public Patient findPatientById(UUID id) {
-        try {
-            List<Patient> patients = loadPatients();
-            return patients.stream().filter(patient -> patient.getId().equals(id)).findFirst().orElse(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<Patient> patients = loadPatients();
+        return patients.stream().filter(patient -> patient.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
@@ -42,16 +37,12 @@ public class PatientStorage implements PatientRepository {
 
     @Override
     public void deletePatient(UUID patientId) {
-        try {
-            List<Patient> patientIds = loadPatients();
-            Optional<Patient> patientToDelete = patientIds.stream().filter(patient -> patient.getId().equals(patientId)).findFirst();
+        List<Patient> patientIds = loadPatients();
+        Optional<Patient> patientToDelete = patientIds.stream().filter(patient -> patient.getId().equals(patientId)).findFirst();
 
-            if (patientToDelete.isPresent()) {
-                patientIds.remove(patientToDelete.get());
-                serializer.serializeOverwrite(patientIds, file.getAbsolutePath());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (patientToDelete.isPresent()) {
+            patientIds.remove(patientToDelete.get());
+            serializer.serializeOverwrite(patientIds, file.getAbsolutePath());
         }
     }
 
@@ -62,14 +53,11 @@ public class PatientStorage implements PatientRepository {
 
     @Override
     public List<Patient> findAllPatients() {
-        try {
-            return loadPatients();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return loadPatients();
     }
 
-    private List<Patient> loadPatients() throws IOException {
+    @Override
+    public List<Patient> loadPatients()  {
         if (file.exists()) {
             if (file.length() == 0) {
                 return new ArrayList<>();
