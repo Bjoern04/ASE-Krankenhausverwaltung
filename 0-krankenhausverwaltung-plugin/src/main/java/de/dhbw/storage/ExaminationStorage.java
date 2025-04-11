@@ -1,14 +1,11 @@
 package de.dhbw.storage;
 
 import de.dhbw.JsonSerializer;
-import de.dhbw.aggregates.assignment.entity.Assignment;
-import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.aggregates.examination.entity.Examination;
 import de.dhbw.aggregates.examination.repository.ExaminationRepository;
 import de.dhbw.aggregates.patient.entity.Patient;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +23,7 @@ public class ExaminationStorage implements ExaminationRepository {
 
     @Override
     public Examination findExaminationById(UUID id) {
-        List<Examination> examinations = loadAllExaminations();
+        List<Examination> examinations = loadExaminations();
         return examinations.stream().filter(examination -> examination.getId().equals(id)).findFirst().orElse(null);
     }
 
@@ -52,7 +49,7 @@ public class ExaminationStorage implements ExaminationRepository {
     }
 
     @Override
-    public List<Examination> loadAllExaminations() {
+    public List<Examination> loadExaminations() {
         if (file.exists()) {
             if (file.length() == 0) {
                 return new ArrayList<>();

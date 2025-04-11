@@ -31,7 +31,7 @@ public class ExaminationReassignment {
             throw new IllegalArgumentException("Doctor with the ID " + doctorId + " could not be found");
         }
 
-        List<Examination> allExaminations = examinationRepository.loadAllExaminations();
+        List<Examination> allExaminations = examinationRepository.loadExaminations();
         if (allExaminations == null) {
             throw new IllegalArgumentException("There was an error while loading the examinations. Please check the file with the examinations.");
         }

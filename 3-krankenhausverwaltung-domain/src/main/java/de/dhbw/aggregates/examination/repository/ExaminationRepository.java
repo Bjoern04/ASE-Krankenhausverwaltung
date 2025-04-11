@@ -1,6 +1,5 @@
 package de.dhbw.aggregates.examination.repository;
 
-import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.aggregates.examination.entity.Examination;
 import de.dhbw.aggregates.patient.entity.Patient;
 
@@ -18,5 +17,5 @@ public interface ExaminationRepository {
 
     List<Examination> findExaminationForPatient (Patient patient);
 
-    List<Examination> loadAllExaminations ();
+    List<Examination> loadExaminations();
 }

@@ -118,4 +118,16 @@ public class Examination {
     public boolean examinationTimesAreValid(LocalDateTime startTime, LocalDateTime endTime) {
         return startTime.isBefore(endTime);
     }
+
+    @Override
+    public String toString() {
+        return "Examination{" +
+                "ID: " + id +
+                ", ExaminationType: " + examinationType +
+                ", StartTime: " + startTime +
+                ", EndTime: " + endTime +
+                ", PatientId: " + patientId +
+                ", DoctorId: " + doctorId +
+                '}';
+    }
 }

@@ -19,7 +19,7 @@ public class DeleteDoctor {
     }
 
     public String execute(UUID doctorId) {
-        List<Examination> allExaminations = examinationRepository.loadAllExaminations();
+        List<Examination> allExaminations = examinationRepository.loadExaminations();
         List<Examination> examinationsToDeleteDoctorFrom = DoctorDeleteDomainService.deleteDoctor(doctorId, allExaminations);
 
         if (examinationsToDeleteDoctorFrom == null) {

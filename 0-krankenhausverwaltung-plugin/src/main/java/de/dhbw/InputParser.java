@@ -63,6 +63,9 @@ public class InputParser {
 
             case "readroom":
                 return new ReadRoomCommand(tokens[1]);
+
+            case "readexamination":
+                return new ReadExaminationCommand(tokens[1]);
         }
         return null;
     }
