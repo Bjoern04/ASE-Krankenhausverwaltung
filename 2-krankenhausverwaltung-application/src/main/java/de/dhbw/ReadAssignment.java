@@ -21,7 +21,6 @@ public class ReadAssignment {
             if (allAssignments == null) {
                 throw new IllegalArgumentException("There was an error while loading the assignments. Please check the file with the assignments.");
             }
-            System.out.println("allAssignments: " + allAssignments.size());
             return allAssignments;
         }
         else {

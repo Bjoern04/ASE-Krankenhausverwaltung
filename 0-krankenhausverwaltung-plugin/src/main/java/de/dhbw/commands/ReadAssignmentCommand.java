@@ -49,6 +49,10 @@ public class ReadAssignmentCommand implements Command {
         for (Assignment assignment : assignments) {
             result.append(assignment.toString()).append("\n");
         }
+        // Remove the last newline character if it exists
+        if (!result.isEmpty() && result.charAt(result.length() - 1) == '\n') {
+            result.deleteCharAt(result.length() - 1);
+        }
 
         return result.toString();
     }
