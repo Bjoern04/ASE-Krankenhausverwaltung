@@ -3,35 +3,26 @@
 ## 1 Domain Driven Design 
 
 ### 1.1 Analyse der Ubiquitous Language
-Im Rahmen des Domain-Driven Designs (DDD) ist die Ubiquitous Language ein essenzielles Konzept,
-das sicherstellt, dass alle Beteiligten – Entwickler, Domänenexperten und andere Stakeholder
-– eine einheitliche und präzise Sprache verwenden. Diese Sprache spiegelt die Geschäftslogik wider
-und dient als Grundlage für die Modellierung der Software. Durch das definieren der verwendeten Begriffe und dem
-Hinterlegen von Beschreibung und Definitionen für diese, werden Missverständnisse vermieden und eine klare
-Kommunikation zwischen den Beteiligten ermöglicht. Diese könnten ansonsten, zum Beispiel durch Bezeichnungen mit
-unterschiedlichen Bedeutungsbereichen zu Problemen bei der Kommunikation und fehlerhaften Umsetzungen führen.
-Wichtig ist ebenfalls die bereits bestehenden Begriffe der Fachsprache zu nutzen und keine neuen zu erfinden. Dies trägt ebenfalls zu einer unter den Stakeholdern
-verständlichen Kommunikation und Sprache bei.<br>
+Im Rahmen des Domain-Driven Designs (DDD) ist die Ubiquitous Language ein essenzielles Konzept, das sicherstellt, dass alle Beteiligten – Entwickler, Domänenexperten und andere Stakeholder
+– eine einheitliche und präzise Sprache verwenden. Diese Sprache spiegelt die Geschäftslogik wider und dient als Grundlage für die Modellierung der Software. Durch das definieren der verwendeten Begriffe und dem Hinterlegen von Beschreibung und Definitionen für diese, werden Missverständnisse vermieden und eine klare
+Kommunikation zwischen den Beteiligten ermöglicht. Diese könnten ansonsten, zum Beispiel durch Bezeichnungen mit unterschiedlichen Bedeutungsbereichen zu Problemen bei der Kommunikation und fehlerhaften Umsetzungen führen. Wichtig ist ebenfalls die bereits bestehenden Begriffe der Fachsprache zu nutzen und keine neuen zu erfinden. Dies trägt ebenfalls zu einer unter den Stakeholdern verständlichen Kommunikation und Sprache bei.<br>
 All diese Kriterien wurden beim Verwenden der nachfolgenden Bezeichnungen beachtet. So wurden beispielsweise bereits bekannte Begriffe der Domäne wie "Patient" und
 "Arzt" verwendet und keine eigenen erstellt. Ebenfalls sind uneindeutige Begriffe der Domäne weiter erläutert. So ist zum Beispiel bei der "Untersuchungsart" erläutert, dass 
 sich diese auf die Untersuchung eines Patienten von einem Arzt bezieht. Sie stellt keine Untersuchungen des Krankenhauses durch Behörden oder Gesundheitsaufsichten dar.
 
 #### 1.1.1 Fachliche Begriffe und ihre Bedeutung
-Die Analyse der Ubiquitous Language basiert auf den zentralen Entitäten und Werten in der Problemstellung 
-eines Krankenhausmanagementsystems. Dabei werden in Klammern die im Quellcode verwendeten englischen Übersetzungen der Begriffe angegeben.<br>
-- **Patient (Patient)**: Eine Person, die in dem Krankenhaus medizinisch behandelt wird. Ein Patient besitzt Attribute wie **Name**, **Adresse**, **Geburtsdatum** und **Kontaktinformationen**. Ein Patient kann mehreren **Untersuchungen** unterzogen werden.
+Die Analyse der Ubiquitous Language basiert auf den zentralen Entitäten und Werten in der Problemstellung eines Krankenhausmanagementsystems. Dabei werden in Klammern die im Quellcode verwendeten englischen Übersetzungen der Begriffe angegeben.<br>
+- **Patient (Patient)**: Eine Person, die in dem Krankenhaus medizinisch behandelt wird. Ein Patient besitzt Attribute wie **Name**, **Adresse**, **Geburtsdatum** und *Kontaktinformationen**. Ein Patient kann mehreren **Untersuchungen** unterzogen werden.
 - **Arzt (Doctor)**: Ein medizinischer Fachmann, der Patienten in einer bestimmten Untersuchung behandelt. Ärzte haben Attribute wie **Name**, **Adresse**, **Geburtsdatum** und eine Liste von **Untersuchungen**, die sie durchführen.
-- **Untersuchung (Examination)**: Ein medizinisches Verfahren, das einem Patienten zugeordnet ist und von einem Arzt durchgeführt wird. Es umfasst eine **Untersuchungsart**, einen **Startzeitpunkt** und einen **Endzeitpunkt**.
-- **Zimmer (Room)**: Ein physischer Raum im Krankenhaus, in welchem Patient während ihres Aufenthalts untergebracht sind. Ein Zimmer enthält eine **Zimmernummer** und eine **Zimmeradresse**. Manche Zimmer bieten Platz für mehrere Patienten, weshalb ein Zimmer mehrere **Belegungen** haben kann.
+- **Untersuchung (Examination)**: Ein medizinisches Verfahren, das einem Patienten zugeordnet ist und von einem Arzt durchgeführt wird. Es umfasst die beteiligten Personen, eine **Untersuchungsart**, einen **Startzeitpunkt** und einen **Endzeitpunkt**.
+- **Zimmer (Room)**: Ein physischer Raum im Krankenhaus, in welchem Patient während ihres Aufenthalts untergebracht sind. Ein Zimmer enthält eine **Zimmergröße**, eine **Zimmeradresse** und Belegungen. Manche Zimmer bieten Platz für mehrere Patienten, weshalb ein Zimmer mehrere **Belegungen** haben kann.
 - **Belegung (Assignment)**: Die Zuweisung eines Patienten zu einem Zimmer für einen bestimmten Zeitraum. Eine Belegung enthält Daten wie **Aufnahmedatum** und **Entlassungsdatum**. Dort ist hinterlegt, welcher Patient in welchem Zimmer untergebracht ist.
-- **Zeitpunkt **: Eine Kombination aus **Datum** und **Uhrzeit**, um einen genauen Moment festzuhalten, an dem beispielweise eine Untersuchung beginnt.
+
 - **Adresse (Address)**: Ein Wertobjekt, das den Wohnort eines Patienten oder Arztes beschreibt, bestehend aus **Straße**, **Hausnummer**, **PLZ** und den **Ort**.
 - **Zimmeradresse (RoomAddress)**: Die Adressierung eines Zimmers des Krankenhauses innerhalb von diesem. Dabei ist die Anschrift des Krankenhauses nicht Teil davon. Die Adressierung des Zimmers erfolgt über das Gebäude des Krankenhauses, das Stockwerk innerhalb dieses Gebäudes und der Nummer die das Zimmer hat.
 - **Kontakt (Contact)**: Ein Wertobjekt, das Kommunikationsdaten einer Person speichert. Dazu gehören **Telefonnummer** und **E-Mail**.
-- **Datum (Date)**: Ein Wertobjekt, das einen bestimmten Tag eines Jahres festhält.
 - **Name (Name)**: Der offizielle Name einer Person bestehend aus ihrem Vornamen und Nachnamen.
-- **Uhrzeit (Time)**: 
-- **Untersuchungsart (ExaminationType)**: Die Untersuchungsart beschreibt die unterschiedlichen Typen von Untersuchungen, welche in einem Krankenhaus von einem Arzt an einem Patient durchgeführt werden.
+- **Untersuchungsart (ExaminationType)**: Die Untersuchungsart beschreibt die unterschiedlichen Typen von Untersuchungen, welche in einem Krankenhaus von einem Arzt an einem Patienten durchgeführt werden.
 
 #### 1.1.2 Domänenregeln und Verantwortlichkeiten
 1. Ein Patient kann sich in einem bestimmten Zeitraum nur in einem Zimmer befinden. 
@@ -40,8 +31,17 @@ eines Krankenhausmanagementsystems. Dabei werden in Klammern die im Quellcode ve
 4. Eine Untersuchung hat immer einen klar definierten Start- und Endzeitpunkt.
 5. Die Entlassung eines Patienten darf nicht vor seinem Aufnahmedatum liegen.
 6. Ein Patient kann mehrere Untersuchungen haben, welche jedoch nicht gleichzeitig stattfinden können.
-7. Ärzte müssen einen Namen haben, da nicht ausgewiesene Personen keine Untersuchungen an Patienten durchführen dürfen. Patienten wiederum müssen nicht zwingend einen Namen haben/ ihn angeben, da allen Personen eine Gesundheitsversorgung geboten wird.
+7. Ärzte müssen einen Namen, Geburtsdatum, Kontaktdaten und Adresse haben, da nicht ausgewiesene Personen keine Untersuchungen an Patienten durchführen dürfen. Patienten wiederum müssen nicht zwingend einen Namen haben/ ihn angeben, da allen Personen eine Gesundheitsversorgung geboten wird.
+8. Ein Arzt kann nur Untersuchungen durchführen, für die er qualifiziert ist. Dies wird durch die **Untersuchungsart** der Untersuchung bestimmt.
+9. Es kann keine zwei Zimmer mit der gleichen Adresse geben. Dies ist wichtig, um Verwirrung bei der Zuordnung von Patienten zu Zimmern zu vermeiden.
+10. Der Arzt der für eine spezielle Untersuchung verantwortlich ist, kann nur geändert werden, solange die Untersuchung noch nicht begonnen hat und nicht abgeschlossen ist. Der neue Arzt muss ebenfalls für die Untersuchung qualifiziert sein.
 
+## 1.2 Analyse und Begründung der verwendeten Muster
+**Adresse (Address)** ist als Value Object implementiert, weil es keine eigene Identität besitzt und vollständig durch seine Werte Straße, Hausnummer, PLZ und Ort beschrieben wird. Zwei Address-Objekte mit denselben Werten sind gleich und austauschbar. Wenn alle ihre Attribute gleich sind, so sind auch die beiden Objekte gleich. Sie geben die gleiche Adresse an. Zudem hat die Adresse keinen Lebenszyklus und wird sich nicht verändern. Sie ist unveränderlich (immutable) und wird nur zur Beschreibung der Entität Patient oder Arzt verwendet. Falls diese eine neue Adresse benötigen, wird ein neues Address-Objekt erstellt.
+<br><br>
+**Patient (Patient)** ist als Entity implementiert, weil jedes Patient-Objekt eine eigene Identität (UUID) besitzt, die es eindeutig unterscheidet, unabhängig von seinen Attributwerten wie Name oder Adresse. Zwei Patienten können die gleichen Namen haben (andere Attribute nullen), aber sie sind dennoch unterschiedliche Personen/ Entitäten, solange ihre UUIDs verschieden sind. Patienten haben zudem einen Lebenszyklus, da sich ihre Eigenschaften während ihres Aufenthaltes im Krankenhaus ändern können. Sie können in andere Zimmer verlegt werden oder neue Untersuchungen zugewiesen bekommen. Die Eigenschaften eines Patienten müssen sich ändern können. Es soll bei Änderungen kein neues Patienten-Objekt erstellt werden, sondern das bestehende aktualisiert werden.
+<br><br>
+**ExaminationReassignmentDomainService** ist eine Domain Service, weil es Geschäftslogik enthält, die mehrere Entitäten (Examination und Doctor) betrifft. Er definiert eine Regel der Problemdomäne, welche nicht einer bestimmten Entitle zugewiesen werden kann, da mehrere beteiligt sind. Der Domain Service überprüft, ob die vom Nutzer gewünschte Neuzuweisung eines Arztes zu einer bestehenden Untersuchung möglich ist. Dabei müssen unterschiedliche Bedingungen und Regeln der Examination und Doctor Entität überprüft werden, damit die Krankenhausverwaltung in einem korrekten Zustand bleibt. Der Domain Service stellt sicher, dass der neue Doktor die Untersuchungsart durchführen kann, die Untersuchung nicht in der Vergangenheit liegt und der Doktor zum Zeitpunkt der Untersuchung verfügbar ist.
 
 ## 2 Clean Architecture
 ### 2.1 Grundlagen Clean Architecture
