@@ -41,7 +41,7 @@ public class ReadDoctorCommand implements Command {
             throw new IllegalArgumentException("The input is invalid. Please use a valid UUID or 'all' to get all patients.");
         }
 
-        ReadDoctor readDoctor = new ReadDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"));
+        ReadDoctor readDoctor = new ReadDoctor(new DoctorStorage(System.getProperty("user.dir") + "/" + "doctors.json"));
         List<Doctor> doctors = readDoctor.execute(all, doctorId);
 
         StringBuilder result = new StringBuilder();

@@ -39,7 +39,7 @@ public class ReadExaminationCommand implements Command {
             throw new IllegalArgumentException("The input is invalid. Please use a valid UUID or 'all' to get all examinations.");
         }
 
-        ReadExamination readExamination = new ReadExamination(new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"));
+        ReadExamination readExamination = new ReadExamination(new ExaminationStorage(System.getProperty("user.dir") + "/" + "examinations.json"));
         List<Examination> examinations = readExamination.execute(all, examinationId);
 
         StringBuilder result = new StringBuilder();

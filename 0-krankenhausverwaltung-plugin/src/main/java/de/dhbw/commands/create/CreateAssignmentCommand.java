@@ -22,7 +22,7 @@ public class CreateAssignmentCommand implements Command {
 
     @Override
     public String execute() throws RuntimeException, FileNotFoundException {
-        CreateAssignment createAssignment = new CreateAssignment(new AssignmentStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\assignments.json"), new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"), new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"));
+        CreateAssignment createAssignment = new CreateAssignment(new AssignmentStorage(System.getProperty("user.dir") + "/" + "assignments.json"), new RoomStorage(System.getProperty("user.dir") + "/" + "rooms.json"), new PatientStorage(System.getProperty("user.dir") + "/" + "patients.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 
         if (arguments.size() < 3 || arguments.size() > 4) {

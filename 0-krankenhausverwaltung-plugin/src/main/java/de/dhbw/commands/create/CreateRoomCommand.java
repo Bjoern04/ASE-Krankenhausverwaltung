@@ -19,7 +19,7 @@ public class CreateRoomCommand implements Command {
     }
     @Override
     public String execute() throws RuntimeException, FileNotFoundException {
-        CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"));
+        CreateRoom createRoom = new CreateRoom(new RoomStorage(System.getProperty("user.dir") + "/" + "rooms.json"));
 
         List<Object> arguments = InputParser.parseArguments(argument);
         if (arguments.size() != 4) {

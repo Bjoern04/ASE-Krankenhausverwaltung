@@ -41,7 +41,7 @@ public class ReadAssignmentCommand implements Command {
             throw new IllegalArgumentException("The input is invalid. Please use a valid UUID or 'all' to get all assignments.");
         }
 
-        ReadAssignment readAssignment = new ReadAssignment(new AssignmentStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\assignments.json"));
+        ReadAssignment readAssignment = new ReadAssignment(new AssignmentStorage(System.getProperty("user.dir") + "/" + "assignments.json"));
         List<Assignment> assignments = readAssignment.execute(all, assignmentId);
 
         StringBuilder result = new StringBuilder();

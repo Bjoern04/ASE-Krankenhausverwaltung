@@ -18,7 +18,7 @@ public class DeleteDoctorCommand implements Command {
     public String execute() throws RuntimeException, FileNotFoundException {
         try {
             UUID doctorUUID = UUID.fromString(argument.trim());
-            DeleteDoctor deleteDoctor = new DeleteDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"), new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"));
+            DeleteDoctor deleteDoctor = new DeleteDoctor(new DoctorStorage(System.getProperty("user.dir") + "/" + "doctors.json"), new ExaminationStorage(System.getProperty("user.dir") + "/" + "examinations.json"));
             return deleteDoctor.execute(doctorUUID);
         }
         catch (IllegalArgumentException e) {

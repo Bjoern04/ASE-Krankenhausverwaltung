@@ -35,7 +35,7 @@ public class ExaminationReassignmentCommand implements Command {
             throw new IllegalArgumentException("Invalid parameter for the UUIDs: " + e.getMessage());
         }
 
-        ExaminationReassignment examinationReassignment = new ExaminationReassignment(new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"), new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"));
+        ExaminationReassignment examinationReassignment = new ExaminationReassignment(new ExaminationStorage(System.getProperty("user.dir") + "/" + "examinations.json"), new DoctorStorage(System.getProperty("user.dir") + "/" + "doctors.json"));
         return examinationReassignment.execute(examinationId, doctorId);
     }
 }

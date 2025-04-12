@@ -39,7 +39,7 @@ public class ReadRoomCommand implements Command {
             throw new IllegalArgumentException("The input is invalid. Please use a valid UUID or 'all' to get all rooms.");
         }
 
-        ReadRoom readRoom = new ReadRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"));
+        ReadRoom readRoom = new ReadRoom(new RoomStorage(System.getProperty("user.dir") + "/" + "rooms.json"));
         List<Room> rooms = readRoom.execute(all, roomId);
 
         StringBuilder result = new StringBuilder();
