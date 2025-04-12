@@ -2,7 +2,9 @@ package de.dhbw;
 
 import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 import de.dhbw.commands.*;
+import de.dhbw.commands.create.*;
 import de.dhbw.commands.exceptions.InvalidKeyword;
+import de.dhbw.commands.read.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

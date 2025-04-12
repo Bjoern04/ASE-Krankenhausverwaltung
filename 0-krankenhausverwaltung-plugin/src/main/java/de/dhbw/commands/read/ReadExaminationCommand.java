@@ -1,13 +1,11 @@
-package de.dhbw.commands;
+package de.dhbw.commands.read;
 
 import de.dhbw.InputParser;
-import de.dhbw.ReadExamination;
-import de.dhbw.ReadRoom;
+import de.dhbw.commands.Command;
+import de.dhbw.use_cases.read.ReadExamination;
 import de.dhbw.aggregates.examination.entity.Examination;
-import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.ExaminationStorage;
-import de.dhbw.storage.RoomStorage;
 
 import java.util.List;
 import java.util.UUID;

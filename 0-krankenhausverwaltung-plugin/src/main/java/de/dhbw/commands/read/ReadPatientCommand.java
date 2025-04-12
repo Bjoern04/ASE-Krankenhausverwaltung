@@ -1,21 +1,19 @@
-package de.dhbw.commands;
+package de.dhbw.commands.read;
 
 import de.dhbw.InputParser;
-import de.dhbw.ReadAssignment;
-import de.dhbw.ReadDoctor;
-import de.dhbw.aggregates.assignment.entity.Assignment;
-import de.dhbw.aggregates.doctor.entity.Doctor;
+import de.dhbw.commands.Command;
+import de.dhbw.use_cases.read.ReadPatient;
+import de.dhbw.aggregates.patient.entity.Patient;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
-import de.dhbw.storage.AssignmentStorage;
-import de.dhbw.storage.DoctorStorage;
+import de.dhbw.storage.PatientStorage;
 
 import java.util.List;
 import java.util.UUID;
 
-public class ReadAssignmentCommand implements Command {
+public class ReadPatientCommand implements Command {
     private final String argument;
 
-    public ReadAssignmentCommand(String argument) {
+    public ReadPatientCommand(String argument) {
         this.argument = argument;
     }
 
@@ -27,28 +25,29 @@ public class ReadAssignmentCommand implements Command {
         }
 
         boolean all;
-        UUID assignmentId = null;
+        UUID patientId = null;
         try {
             String input = (String) arguments.getFirst();
             if (input.equals("all")) {
                 all = true;
             }
             else {
-                assignmentId = UUID.fromString(input);
+                patientId = UUID.fromString(input);
                 all = false;
             }
         }
         catch (Exception e) {
-            throw new IllegalArgumentException("The input is invalid. Please use a valid UUID or 'all' to get all assignments.");
+            throw new IllegalArgumentException("The input is invalid. Please use a valid UUID or 'all' to get all patients.");
         }
 
-        ReadAssignment readAssignment = new ReadAssignment(new AssignmentStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\assignments.json"));
-        List<Assignment> assignments = readAssignment.execute(all, assignmentId);
+        ReadPatient readPatient = new ReadPatient(new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"));
+        List<Patient> patients = readPatient.execute(all, patientId);
 
         StringBuilder result = new StringBuilder();
-        for (Assignment assignment : assignments) {
-            result.append(assignment.toString()).append("\n");
+        for (Patient patient : patients) {
+            result.append(patient.toString()).append("\n");
         }
+
         // Remove the last newline character if it exists
         if (!result.isEmpty() && result.charAt(result.length() - 1) == '\n') {
             result.deleteCharAt(result.length() - 1);

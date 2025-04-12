@@ -1,4 +1,4 @@
-package de.dhbw;
+package de.dhbw.use_cases.create;
 
 import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.aggregates.doctor.repository.DoctorRepository;
@@ -8,7 +8,6 @@ import de.dhbw.shared.value_objects.Contact;
 import de.dhbw.shared.value_objects.Name;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

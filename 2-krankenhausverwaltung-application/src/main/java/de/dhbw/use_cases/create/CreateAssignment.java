@@ -1,4 +1,4 @@
-package de.dhbw;
+package de.dhbw.use_cases.create;
 
 import de.dhbw.aggregates.assignment.entity.Assignment;
 import de.dhbw.aggregates.assignment.repository.AssignmentRepository;

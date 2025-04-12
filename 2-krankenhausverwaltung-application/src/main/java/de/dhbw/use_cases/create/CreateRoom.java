@@ -1,4 +1,4 @@
-package de.dhbw;
+package de.dhbw.use_cases.create;
 
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;

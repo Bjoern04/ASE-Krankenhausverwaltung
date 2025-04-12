@@ -1,18 +1,19 @@
-package de.dhbw.commands;
+package de.dhbw.commands.read;
 
 import de.dhbw.InputParser;
-import de.dhbw.ReadPatient;
-import de.dhbw.aggregates.patient.entity.Patient;
+import de.dhbw.commands.Command;
+import de.dhbw.use_cases.read.ReadDoctor;
+import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
-import de.dhbw.storage.PatientStorage;
+import de.dhbw.storage.DoctorStorage;
 
 import java.util.List;
 import java.util.UUID;
 
-public class ReadPatientCommand implements Command {
+public class ReadDoctorCommand implements Command {
     private final String argument;
 
-    public ReadPatientCommand(String argument) {
+    public ReadDoctorCommand(String argument) {
         this.argument = argument;
     }
 
@@ -24,14 +25,14 @@ public class ReadPatientCommand implements Command {
         }
 
         boolean all;
-        UUID patientId = null;
+        UUID doctorId = null;
         try {
             String input = (String) arguments.getFirst();
             if (input.equals("all")) {
                 all = true;
             }
             else {
-                patientId = UUID.fromString(input);
+                doctorId = UUID.fromString(input);
                 all = false;
             }
         }
@@ -39,12 +40,12 @@ public class ReadPatientCommand implements Command {
             throw new IllegalArgumentException("The input is invalid. Please use a valid UUID or 'all' to get all patients.");
         }
 
-        ReadPatient readPatient = new ReadPatient(new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"));
-        List<Patient> patients = readPatient.execute(all, patientId);
+        ReadDoctor readDoctor = new ReadDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"));
+        List<Doctor> doctors = readDoctor.execute(all, doctorId);
 
         StringBuilder result = new StringBuilder();
-        for (Patient patient : patients) {
-            result.append(patient.toString()).append("\n");
+        for (Doctor doctor : doctors) {
+            result.append(doctor.toString()).append("\n");
         }
 
         // Remove the last newline character if it exists

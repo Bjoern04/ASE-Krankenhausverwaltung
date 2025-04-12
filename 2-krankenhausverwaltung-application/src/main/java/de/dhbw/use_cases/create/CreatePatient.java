@@ -1,4 +1,4 @@
-package de.dhbw;
+package de.dhbw.use_cases.create;
 
 import de.dhbw.aggregates.patient.entity.Patient;
 import de.dhbw.aggregates.patient.repository.PatientRepository;

@@ -1,6 +1,7 @@
-package de.dhbw.commands;
+package de.dhbw.commands.create;
 
-import de.dhbw.CreateDoctor;
+import de.dhbw.commands.Command;
+import de.dhbw.use_cases.create.CreateDoctor;
 import de.dhbw.InputParser;
 import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;

@@ -1,4 +1,4 @@
-package de.dhbw;
+package de.dhbw.use_cases.read;
 
 import de.dhbw.aggregates.examination.entity.Examination;
 import de.dhbw.aggregates.examination.repository.ExaminationRepository;

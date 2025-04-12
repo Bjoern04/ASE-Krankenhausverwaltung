@@ -1,9 +1,7 @@
-package de.dhbw;
+package de.dhbw.use_cases.read;
 
 import de.dhbw.aggregates.assignment.entity.Assignment;
 import de.dhbw.aggregates.assignment.repository.AssignmentRepository;
-import de.dhbw.aggregates.patient.entity.Patient;
-import de.dhbw.aggregates.patient.repository.PatientRepository;
 
 import java.util.List;
 import java.util.UUID;

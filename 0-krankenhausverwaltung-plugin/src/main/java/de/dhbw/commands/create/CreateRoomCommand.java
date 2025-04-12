@@ -1,7 +1,8 @@
-package de.dhbw.commands;
+package de.dhbw.commands.create;
 
 import de.dhbw.InputParser;
-import de.dhbw.CreateRoom;
+import de.dhbw.commands.Command;
+import de.dhbw.use_cases.create.CreateRoom;
 import de.dhbw.storage.RoomStorage;
 import de.dhbw.commands.exceptions.InvalidParameter;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;

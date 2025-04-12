@@ -1,6 +1,7 @@
-package de.dhbw.commands;
+package de.dhbw.commands.create;
 
-import de.dhbw.CreateAssignment;
+import de.dhbw.commands.Command;
+import de.dhbw.use_cases.create.CreateAssignment;
 import de.dhbw.InputParser;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.AssignmentStorage;

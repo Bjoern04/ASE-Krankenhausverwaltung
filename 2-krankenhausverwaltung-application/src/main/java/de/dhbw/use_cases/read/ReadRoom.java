@@ -1,6 +1,5 @@
-package de.dhbw;
+package de.dhbw.use_cases.read;
 
-import de.dhbw.aggregates.patient.entity.Patient;
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;
 
