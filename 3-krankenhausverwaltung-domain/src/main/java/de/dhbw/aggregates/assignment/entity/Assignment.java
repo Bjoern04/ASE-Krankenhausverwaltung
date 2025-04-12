@@ -1,6 +1,7 @@
 package de.dhbw.aggregates.assignment.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -86,17 +87,28 @@ public class Assignment {
         this.dateOfDischarge = dateOfDischarge;
     }
 
+    @Override
+    public String toString() {
+        return "Admission{" +
+                "Id: " + id +
+                ", RoomId: " + roomId +
+                ", PatientId: " + patientId +
+                ", DateOfAdmission: " + dateOfAdmission +
+                ", DateOfDischarge: " + dateOfDischarge +
+                '}';
+    }
+
     /**
      * Builder class for Assignment following the Builder design pattern.
      */
     public static class AssignmentBuilder {
         private final UUID id;
 
-        private UUID roomId;
+        private final UUID roomId;
 
-        private UUID patientId;
+        private final UUID patientId;
 
-        private LocalDate dateOfAdmission;
+        private final LocalDate dateOfAdmission;
 
         private LocalDate dateOfDischarge;
 

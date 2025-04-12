@@ -66,6 +66,9 @@ public class InputParser {
 
             case "readexamination":
                 return new ReadExaminationCommand(tokens[1]);
+
+            case "readassignment":
+                return new ReadAssignmentCommand(tokens[1]);
         }
         return null;
     }

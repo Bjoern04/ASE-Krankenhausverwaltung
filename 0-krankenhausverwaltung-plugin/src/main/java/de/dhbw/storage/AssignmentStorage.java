@@ -27,24 +27,15 @@ public class AssignmentStorage implements AssignmentRepository {
 
     @Override
     public List<UUID> findPatientsForRoom(Room room) {
-        try {
-            List<Assignment> assignmentIds = loadAssignments();
-            return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).map(Assignment::getPatientId).collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<Assignment> assignmentIds = loadAssignments();
+        return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).map(Assignment::getPatientId).collect(Collectors.toList());
     }
 
     @Override
     public Assignment findAssignmentById(UUID id) {
-        try {
-            List<Assignment> assignmentIds = loadAssignments();
-            return assignmentIds.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        List<Assignment> assignmentIds = loadAssignments();
+        System.out.println("assID" + assignmentIds.get(0).getId());
+        return assignmentIds.stream().filter(assignment -> assignment.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
@@ -53,14 +44,9 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public List<Assignment> findAssignmentsForRoom(Room room) {
-        try {
-            List<Assignment> assignmentIds = loadAssignments();
-            return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).collect(Collectors.toList());
-        }
-        catch  (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public List<Assignment> findAssignmentsForRoom(Room room){
+        List<Assignment> assignmentIds = loadAssignments();
+        return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).collect(Collectors.toList());
     }
 
     @Override
@@ -71,16 +57,12 @@ public class AssignmentStorage implements AssignmentRepository {
 
     @Override
     public void deleteAssignment(UUID assignmentId) {
-        try {
-            List<Assignment> assignmentIds = loadAssignments();
-            Optional<Assignment> assignmentToDelete = assignmentIds.stream().filter(assignment -> assignment.getId().equals(assignmentId)).findFirst();
+        List<Assignment> assignmentIds = loadAssignments();
+        Optional<Assignment> assignmentToDelete = assignmentIds.stream().filter(assignment -> assignment.getId().equals(assignmentId)).findFirst();
 
-            if (assignmentToDelete.isPresent()) {
-                assignmentIds.remove(assignmentToDelete.get());
-                serializer.serializeUpdateFile(assignmentIds, file.getAbsolutePath());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (assignmentToDelete.isPresent()) {
+            assignmentIds.remove(assignmentToDelete.get());
+            serializer.serializeUpdateFile(assignmentIds, file.getAbsolutePath());
         }
     }
 
@@ -89,7 +71,8 @@ public class AssignmentStorage implements AssignmentRepository {
 
     }
 
-    private List<Assignment> loadAssignments() throws IOException {
+    @Override
+    public List<Assignment> loadAssignments() {
         if (file.exists()) {
             if (file.length() == 0) {
                 return new ArrayList<>();
