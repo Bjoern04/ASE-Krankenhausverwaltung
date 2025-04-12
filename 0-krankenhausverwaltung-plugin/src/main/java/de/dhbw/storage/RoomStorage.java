@@ -4,8 +4,10 @@ import de.dhbw.JsonSerializer;
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;
 import de.dhbw.aggregates.room.value_objects.RoomAddress;
+import de.dhbw.commands.exceptions.EmptyFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,13 +26,13 @@ public class RoomStorage implements RoomRepository {
 
 
     @Override
-    public Room findRoomById(UUID id) {
+    public Room findRoomById(UUID id) throws FileNotFoundException {
         List<Room> rooms = loadRooms();
         return rooms.stream().filter(room -> room.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
-    public Room findRoomByRoomAddress(RoomAddress roomAddress) {
+    public Room findRoomByRoomAddress(RoomAddress roomAddress) throws FileNotFoundException {
         List<Room> rooms = loadRooms();
         return rooms.stream()
                 .filter(room -> room.getRoomAddress().equals(roomAddress))
@@ -50,7 +52,7 @@ public class RoomStorage implements RoomRepository {
     }
 
     @Override
-    public void updateRoom(Room room) {
+    public void updateRoom(Room room) throws FileNotFoundException {
         List<Room> rooms = loadRooms();
         for (Room room1 : rooms) {
             if (room1.getId().equals(room.getId())) {
@@ -68,16 +70,17 @@ public class RoomStorage implements RoomRepository {
     }
 
     @Override
-    public List<Room> loadRooms() {
+    public List<Room> loadRooms() throws FileNotFoundException {
         if (file.exists()) {
             if (file.length() == 0) {
-                return new ArrayList<>();
+                throw new EmptyFile("The file " + file.getAbsolutePath() + " is empty.");
             }
             else {
                 return serializer.deserialize(file.getAbsolutePath(), Room.class);
             }
-        } else {
-            return new ArrayList<>();
+        }
+        else {
+            throw new FileNotFoundException("The file " + file.getAbsolutePath() + " does not exist.");
         }
     }
 

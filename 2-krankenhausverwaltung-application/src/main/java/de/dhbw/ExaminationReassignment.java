@@ -7,6 +7,7 @@ import de.dhbw.aggregates.examination.repository.ExaminationRepository;
 import de.dhbw.aggregates.examination.util.ExaminationUpdater;
 import de.dhbw.domainservices.ExaminationReassignmentDomainService;
 
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +21,7 @@ public class ExaminationReassignment {
         this.doctorRepository = doctorRepository;
     }
 
-    public String execute(UUID examinationId, UUID doctorId) {
+    public String execute(UUID examinationId, UUID doctorId) throws FileNotFoundException {
         Examination examination = examinationRepository.findExaminationById(examinationId);
         if (examination == null) {
             throw new IllegalArgumentException("Examination with the ID " + examinationId + " could not not be found");

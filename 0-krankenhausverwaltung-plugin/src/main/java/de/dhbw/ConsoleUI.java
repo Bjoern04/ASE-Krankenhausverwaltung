@@ -4,6 +4,7 @@ import de.dhbw.commands.Command;
 import de.dhbw.commands.ExitCommand;
 import de.dhbw.commands.HelpCommand;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ConsoleUI {
@@ -37,7 +38,8 @@ public class ConsoleUI {
                         System.out.println(output);
                     }
                 }
-            } catch (RuntimeException exception) {
+            }
+            catch (RuntimeException | FileNotFoundException exception) {
                 System.out.println(ANSI_ORANGE +  exception.getClass().getSimpleName() +": " +  exception.getMessage() + ANSI_RESET);
             }
         }

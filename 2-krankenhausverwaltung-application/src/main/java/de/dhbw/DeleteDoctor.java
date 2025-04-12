@@ -6,6 +6,7 @@ import de.dhbw.aggregates.examination.repository.ExaminationRepository;
 import de.dhbw.aggregates.examination.util.ExaminationUpdater;
 import de.dhbw.domainservices.DoctorDeleteDomainService;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class DeleteDoctor {
         this.examinationRepository = examinationRepository;
     }
 
-    public String execute(UUID doctorId) {
+    public String execute(UUID doctorId) throws FileNotFoundException {
         List<Examination> allExaminations = examinationRepository.loadExaminations();
         List<Examination> examinationsToDeleteDoctorFrom = DoctorDeleteDomainService.deleteDoctor(doctorId, allExaminations);
 

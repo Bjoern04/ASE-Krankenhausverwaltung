@@ -6,6 +6,7 @@ import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.ExaminationStorage;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class ExaminationReassignmentCommand implements Command {
     }
 
     @Override
-    public String execute() throws RuntimeException {
+    public String execute() throws RuntimeException, FileNotFoundException {
         List<Object> arguments = InputParser.parseArguments(argument);
         if (arguments.size() != 2) {
             throw new WrongAmoutOfParameters("Wrong amount of parameters. There must be two parameters but " + arguments.size() + " were given.");

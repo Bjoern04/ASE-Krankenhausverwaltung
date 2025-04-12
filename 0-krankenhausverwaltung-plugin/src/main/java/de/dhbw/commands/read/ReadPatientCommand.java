@@ -7,6 +7,7 @@ import de.dhbw.aggregates.patient.entity.Patient;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.PatientStorage;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class ReadPatientCommand implements Command {
     }
 
     @Override
-    public String execute() throws RuntimeException {
+    public String execute() throws RuntimeException, FileNotFoundException {
         List<Object> arguments = InputParser.parseArguments(argument);
         if (arguments.size() != 1){
             throw new WrongAmoutOfParameters("The wrong amount of parameters. There has to be one parameter but there were " + arguments.size() + " entered.");

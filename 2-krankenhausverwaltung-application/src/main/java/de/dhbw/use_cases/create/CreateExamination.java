@@ -8,6 +8,7 @@ import de.dhbw.aggregates.patient.entity.Patient;
 import de.dhbw.aggregates.patient.repository.PatientRepository;
 import de.dhbw.aggregates.examination.value_objects.ExaminationType;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class CreateExamination{
         this.doctorRepository = doctorRepository;
     }
 
-    public UUID execute(ExaminationType examinationType, LocalDateTime startDate, LocalDateTime endDate, UUID patientId, UUID doctorId) {
+    public UUID execute(ExaminationType examinationType, LocalDateTime startDate, LocalDateTime endDate, UUID patientId, UUID doctorId) throws FileNotFoundException {
         // Check if patient exists
         Patient patient = patientRepository.findPatientById(patientId);
         if (patient == null) {

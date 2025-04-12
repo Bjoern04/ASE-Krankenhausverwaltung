@@ -6,6 +6,8 @@ import de.dhbw.use_cases.create.CreateRoom;
 import de.dhbw.storage.RoomStorage;
 import de.dhbw.commands.exceptions.InvalidParameter;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
+
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,7 +18,7 @@ public class CreateRoomCommand implements Command {
         this.argument = argument;
     }
     @Override
-    public String execute() throws RuntimeException {
+    public String execute() throws RuntimeException, FileNotFoundException {
         CreateRoom createRoom = new CreateRoom(new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"));
 
         List<Object> arguments = InputParser.parseArguments(argument);

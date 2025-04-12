@@ -30,6 +30,9 @@ import de.dhbw.aggregates.room.value_objects.RoomAddress;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
 public class JsonSerializer {
@@ -92,11 +95,23 @@ public class JsonSerializer {
 
 
     public <T> List<T> deserialize(String filePath, Class<T> clazz) {
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            try {
+                Files.createDirectories(Paths.get(file.getParent()));
+                objectMapper.writeValue(file, Collections.emptyList());
+            }
+            catch (IOException e) {
+                throw new RuntimeException("Error while creating the JSON file: " + filePath, e);
+            }
+        }
+
         try {
             return objectMapper.readValue(new File(filePath), objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
-        } catch (IOException e) {
-            System.out.println("message" + e.getMessage());
-            throw new RuntimeException("Fehler beim Laden der JSON-Datei: " + filePath, e);
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Error while loading the JSON file: " + filePath, e);
         }
     }
 }

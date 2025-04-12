@@ -5,8 +5,10 @@ import de.dhbw.aggregates.assignment.entity.Assignment;
 import de.dhbw.aggregates.assignment.repository.AssignmentRepository;
 import de.dhbw.aggregates.patient.entity.Patient;
 import de.dhbw.aggregates.room.entity.Room;
+import de.dhbw.commands.exceptions.EmptyFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -26,15 +28,14 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public List<UUID> findPatientsForRoom(Room room) {
+    public List<UUID> findPatientsForRoom(Room room) throws FileNotFoundException {
         List<Assignment> assignmentIds = loadAssignments();
         return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).map(Assignment::getPatientId).collect(Collectors.toList());
     }
 
     @Override
-    public Assignment findAssignmentById(UUID id) {
+    public Assignment findAssignmentById(UUID id) throws FileNotFoundException {
         List<Assignment> assignmentIds = loadAssignments();
-        System.out.println("assID" + assignmentIds.get(0).getId());
         return assignmentIds.stream().filter(assignment -> assignment.getId().equals(id)).findFirst().orElse(null);
     }
 
@@ -44,7 +45,7 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public List<Assignment> findAssignmentsForRoom(Room room){
+    public List<Assignment> findAssignmentsForRoom(Room room) throws FileNotFoundException {
         List<Assignment> assignmentIds = loadAssignments();
         return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).collect(Collectors.toList());
     }
@@ -56,7 +57,7 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public void deleteAssignment(UUID assignmentId) {
+    public void deleteAssignment(UUID assignmentId) throws FileNotFoundException {
         List<Assignment> assignmentIds = loadAssignments();
         Optional<Assignment> assignmentToDelete = assignmentIds.stream().filter(assignment -> assignment.getId().equals(assignmentId)).findFirst();
 
@@ -72,16 +73,17 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public List<Assignment> loadAssignments() {
+    public List<Assignment> loadAssignments() throws FileNotFoundException {
         if (file.exists()) {
             if (file.length() == 0) {
-                return new ArrayList<>();
+               throw new EmptyFile("The file " + file.getAbsolutePath() + " is empty.");
             }
             else {
                 return serializer.deserialize(file.getAbsolutePath(), Assignment.class);
             }
-        } else {
-            return new ArrayList<>();
+        }
+        else {
+            throw new FileNotFoundException("The file " + file.getAbsolutePath() + " does not exist.");
         }
     }
 }

@@ -3,6 +3,7 @@ package de.dhbw.use_cases.read;
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class ReadRoom {
         this.roomRepository = roomRepository;
     }
 
-    public List<Room> execute(boolean all, UUID roomId) {
+    public List<Room> execute(boolean all, UUID roomId) throws FileNotFoundException {
         if (all) {
             List<Room> allRooms = roomRepository.loadRooms();
             if (allRooms == null) {

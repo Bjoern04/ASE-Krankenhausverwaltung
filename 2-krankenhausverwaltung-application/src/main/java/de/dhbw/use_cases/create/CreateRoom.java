@@ -4,6 +4,7 @@ import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;
 import de.dhbw.aggregates.room.value_objects.RoomAddress;
 
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class CreateRoom {
@@ -13,7 +14,7 @@ public class CreateRoom {
         this.roomRepository = roomRepository;
     }
 
-    public UUID execute(String building, String floor, String rooNumber, int roomSize) {
+    public UUID execute(String building, String floor, String rooNumber, int roomSize) throws FileNotFoundException {
         // Check if there is already a room with the same address.
         RoomAddress roomAddress = new RoomAddress(building, floor, rooNumber);
         Room roomWithSameAddress = roomRepository.findRoomByRoomAddress(roomAddress);

@@ -3,9 +3,11 @@ package de.dhbw.storage;
 import de.dhbw.JsonSerializer;
 import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.aggregates.doctor.repository.DoctorRepository;
+import de.dhbw.commands.exceptions.EmptyFile;
 import de.dhbw.shared.value_objects.Name;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class DoctorStorage implements DoctorRepository {
@@ -18,7 +20,7 @@ public class DoctorStorage implements DoctorRepository {
     }
 
     @Override
-    public Doctor findDoctorById(UUID id) {
+    public Doctor findDoctorById(UUID id) throws FileNotFoundException {
         List<Doctor> doctors = loadDoctors();
         return doctors.stream().filter(doctor -> doctor.getId().equals(id)).findFirst().orElse(null);
     }
@@ -35,7 +37,7 @@ public class DoctorStorage implements DoctorRepository {
     }
 
     @Override
-    public boolean deleteDoctor(UUID doctorId) {
+    public boolean deleteDoctor(UUID doctorId) throws FileNotFoundException {
         List<Doctor> doctors = loadDoctors();
         Optional<Doctor> doctorToDelete = doctors.stream().filter(doctor -> doctor.getId().equals(doctorId)).findFirst();
 
@@ -55,16 +57,17 @@ public class DoctorStorage implements DoctorRepository {
     }
 
     @Override
-    public List<Doctor> loadDoctors() {
+    public List<Doctor> loadDoctors() throws FileNotFoundException {
         if (file.exists()) {
             if (file.length() == 0) {
-                return new ArrayList<>();
+                throw new EmptyFile("The file " + file.getAbsolutePath() + " is empty.");
             }
             else {
                 return serializer.deserialize(file.getAbsolutePath(), Doctor.class);
             }
-        } else {
-            return new ArrayList<>();
+        }
+        else {
+            throw new FileNotFoundException("The file " + file.getAbsolutePath() + " does not exist.");
         }
     }
 }

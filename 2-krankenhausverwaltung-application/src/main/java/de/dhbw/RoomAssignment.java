@@ -7,6 +7,7 @@ import de.dhbw.aggregates.patient.repository.PatientRepository;
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +23,7 @@ public class RoomAssignment {
         this.patientRepository = patientRepository;
     }
 
-    public String execute(UUID roomId) {
+    public String execute(UUID roomId) throws FileNotFoundException {
         // Find Room by ID
         Room room = roomRepository.findRoomById(roomId);
         if (room == null) {

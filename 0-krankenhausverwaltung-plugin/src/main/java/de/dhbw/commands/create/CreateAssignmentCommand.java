@@ -8,6 +8,7 @@ import de.dhbw.storage.AssignmentStorage;
 import de.dhbw.storage.PatientStorage;
 import de.dhbw.storage.RoomStorage;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +21,7 @@ public class CreateAssignmentCommand implements Command {
     }
 
     @Override
-    public String execute() throws RuntimeException {
+    public String execute() throws RuntimeException, FileNotFoundException {
         CreateAssignment createAssignment = new CreateAssignment(new AssignmentStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\assignments.json"), new RoomStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\rooms.json"), new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 

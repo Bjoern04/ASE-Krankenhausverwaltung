@@ -4,8 +4,10 @@ import de.dhbw.JsonSerializer;
 import de.dhbw.aggregates.examination.entity.Examination;
 import de.dhbw.aggregates.examination.repository.ExaminationRepository;
 import de.dhbw.aggregates.patient.entity.Patient;
+import de.dhbw.commands.exceptions.EmptyFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +24,7 @@ public class ExaminationStorage implements ExaminationRepository {
 
 
     @Override
-    public Examination findExaminationById(UUID id) {
+    public Examination findExaminationById(UUID id) throws FileNotFoundException {
         List<Examination> examinations = loadExaminations();
         return examinations.stream().filter(examination -> examination.getId().equals(id)).findFirst().orElse(null);
     }
@@ -49,16 +51,17 @@ public class ExaminationStorage implements ExaminationRepository {
     }
 
     @Override
-    public List<Examination> loadExaminations() {
+    public List<Examination> loadExaminations() throws FileNotFoundException {
         if (file.exists()) {
             if (file.length() == 0) {
-                return new ArrayList<>();
+                throw new EmptyFile("The file " + file.getAbsolutePath() + " is empty.");
             }
             else {
                 return serializer.deserialize(file.getAbsolutePath(), Examination.class);
             }
-        } else {
-            return new ArrayList<>();
+        }
+        else {
+            throw new FileNotFoundException("The file " + file.getAbsolutePath() + " does not exist.");
         }
     }
 }

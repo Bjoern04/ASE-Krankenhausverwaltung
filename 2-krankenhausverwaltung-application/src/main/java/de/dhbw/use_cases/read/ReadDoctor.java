@@ -3,6 +3,7 @@ package de.dhbw.use_cases.read;
 import de.dhbw.aggregates.doctor.entity.Doctor;
 import de.dhbw.aggregates.doctor.repository.DoctorRepository;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class ReadDoctor {
         this.doctorRepository = doctorRepository;
     }
 
-    public List<Doctor> execute(boolean all, UUID doctorId) {
+    public List<Doctor> execute(boolean all, UUID doctorId) throws FileNotFoundException {
         if (all) {
             List<Doctor> allDoctors = doctorRepository.loadDoctors();
             if (allDoctors == null) {

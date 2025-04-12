@@ -4,6 +4,7 @@ import de.dhbw.DeleteDoctor;
 import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.ExaminationStorage;
 
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class DeleteDoctorCommand implements Command {
@@ -14,7 +15,7 @@ public class DeleteDoctorCommand implements Command {
     }
 
     @Override
-    public String execute() throws RuntimeException {
+    public String execute() throws RuntimeException, FileNotFoundException {
         try {
             UUID doctorUUID = UUID.fromString(argument.trim());
             DeleteDoctor deleteDoctor = new DeleteDoctor(new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"), new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"));

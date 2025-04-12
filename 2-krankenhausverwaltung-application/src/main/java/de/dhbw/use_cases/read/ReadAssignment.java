@@ -3,6 +3,7 @@ package de.dhbw.use_cases.read;
 import de.dhbw.aggregates.assignment.entity.Assignment;
 import de.dhbw.aggregates.assignment.repository.AssignmentRepository;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class ReadAssignment {
         this.assignmentRepository = assignmentRepository;
     }
 
-    public List<Assignment> execute(boolean all, UUID assignmentId) {
+    public List<Assignment> execute(boolean all, UUID assignmentId) throws FileNotFoundException {
         if (all) {
             List<Assignment> allAssignments = assignmentRepository.loadAssignments();
             if (allAssignments == null) {

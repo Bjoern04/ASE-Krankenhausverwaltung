@@ -8,6 +8,7 @@ import de.dhbw.aggregates.patient.util.PatientUpdater;
 import de.dhbw.aggregates.room.entity.Room;
 import de.dhbw.aggregates.room.repository.RoomRepository;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class CreateAssignment {
         this.patientRepository = patientRepository;
     }
 
-    public UUID execute(UUID roomId, UUID patientId, LocalDate dateOfAdmission, LocalDate dateOfDischarge) {
+    public UUID execute(UUID roomId, UUID patientId, LocalDate dateOfAdmission, LocalDate dateOfDischarge) throws FileNotFoundException {
         // Find Room by ID
         Room room = roomRepository.findRoomById(roomId);
         if (room == null) {

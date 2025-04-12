@@ -9,6 +9,7 @@ import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.ExaminationStorage;
 import de.dhbw.storage.PatientStorage;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +22,7 @@ public class CreateExaminationCommand implements Command {
     }
 
     @Override
-    public String execute() throws RuntimeException {
+    public String execute() throws RuntimeException, FileNotFoundException {
         CreateExamination createExamination = new CreateExamination(new ExaminationStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\examinations.json"), new PatientStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\patients.json"), new DoctorStorage("F:\\Bjoern\\Studium\\AdvancedSoftwareEngineering\\JsonTests\\doctors.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 
