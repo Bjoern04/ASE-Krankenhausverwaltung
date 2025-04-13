@@ -162,13 +162,12 @@ sollen die Vor- und Nachteile dieses Patterns am Beispiel der Patient Entität e
 #### Warum das Muster an dieser Stelle eingesetzt wurde
 Die Klasse Patient besitzt mehrere Attribute, von denen einige optional sind. Ein konventioneller Konstruktor mit vielen Parametern wäre unübersichtlich und 
 fehleranfällig. Das Builder-Pattern erlaubt es, nur die benötigten Parameter zu setzen und so eine lesbare, flexible und intuitive Objektinitialisierung zu 
-ermöglichen.
+ermöglichen. Dadurch können die unten genannten Vorteile erreicht werden, welche den Entwicklungsprozess erleichtern und die Lesbarkeit des Codes erhöhen.
+
 
 #### Verbesserung des Codes durch das Builder-Pattern
 Lesbarkeit & Wartbarkeit: Durch die Verwendung von Methoden mit sprechenden Namen (withName(), withAddress(), etc.) wird der Code lesbarer und intuitiver.
-Flexibilität: Das Muster erlaubt es, optionale Parameter zu setzen, ohne überladene Konstruktoren zu benötigen.
-Unveränderlichkeit: Das fertige Patient-Objekt kann als immutable behandelt werden, da alle Attribute final gesetzt werden.
-Vermeidung von inkonsistenten Zuständen: Die notwendigen Validierungen können zentral im build()-Methodenaufruf erfolgen.
+Flexibilität: Das Muster erlaubt es, optionale Parameter zu setzen, ohne überladene Konstruktoren zu benötigen. Somit muss sich kein Gedanke über die Reihenfolge der Parameter gemacht werden. 
 
 #### Vor- und Nachteile des Builder-Patterns
 
@@ -176,21 +175,30 @@ Vorteile:
 - Verbesserte Lesbarkeit und Verständlichkeit des Codes
 - Flexibilität bei der Objekterstellung
 - Vermeidung von zu vielen Konstruktoren mit unterschiedlichen Parameterkombinationen
-- Förderung von Immutability (wenn gewünscht)
+- Erleichterte Wartbarkeit und Erweiterbarkeit des Codes
+- Ermöglicht die Verwendung von optionalen Parametern ohne Überladung von Konstruktoren
+- Ermöglicht eine klare Trennung zwischen der Objekterstellung und der Objektverwendung
 
 Nachteile:
 - Zusätzlicher Implementierungsaufwand durch eine separate Builder-Klasse
-- Erhöhter Speicherbedarf, da ein zusätzliches Objekt (PatientBuilder) benötigt wird
-- Vor- und Nachteile ohne das Builder-Pattern
+- Erhöhter Speicherbedarf, da ein zusätzliches Objekt (PatientBuilder) benötigt wird 
+- Möglicherweise längere Initialisierungszeit, da ein zusätzliches Objekt erstellt werden muss
+- Komplexität durch zusätzliche Klasse, die verwaltet werden muss
 
-#### Vorteile ohne Builder-Pattern:
+
+#### Vor- und Nachteile ohne das Builder-Pattern
+
+Vorteile:
 - Weniger Code durch direkte Nutzung von Konstruktoren
 - Geringerer Speicherverbrauch, da keine zusätzliche Builder-Klasse notwendig ist
+- Einfachere Implementierung, da keine separate Builder-Klasse erstellt werden muss
 
-#### Nachteile ohne Builder-Pattern:
+Nachteile:
 - Lange, schwer verständliche Konstruktoraufrufe
 - Höhere Fehleranfälligkeit durch falsche Parameterreihenfolge
 - Geringere Erweiterbarkeit des Codes
+- Möglicherweise schwerer verständliche Tests zu schreiben, da alle Parameter in den Konstruktoren angegeben werden müssen
+- Eingeschränkte Flexibilität bei der Objekterstellung, da alle Parameter im Konstruktor angegeben werden müssen
 
 #### Fazit
 Das Builder-Pattern verbessert die Struktur und Lesbarkeit des Codes erheblich, insbesondere bei komplexen Objekten mit vielen optionalen Attributen. 
