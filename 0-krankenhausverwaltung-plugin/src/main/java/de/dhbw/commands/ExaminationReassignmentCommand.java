@@ -1,6 +1,6 @@
 package de.dhbw.commands;
 
-import de.dhbw.ExaminationReassignment;
+import de.dhbw.use_cases.ExaminationReassignment;
 import de.dhbw.InputParser;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.DoctorStorage;
