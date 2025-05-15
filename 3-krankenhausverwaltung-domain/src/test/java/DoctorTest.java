@@ -6,7 +6,6 @@ import de.dhbw.shared.value_objects.Address;
 import de.dhbw.shared.value_objects.Contact;
 import de.dhbw.shared.value_objects.Name;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.List;

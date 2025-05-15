@@ -54,7 +54,7 @@ public class ShowDoctorExaminationPlanCommand implements Command {
             result.append("Examination plan for Doctor: ").append(assignmentId).append("\n");
             for (ExaminationWithPatientName examination : examinationsOfDoctor) {
 
-                result.append(examination.getPatientName()).append(" - ").append(examination.getExamination()).append("\n");
+                result.append(examination.toString());
             }
 
             return result.toString();
