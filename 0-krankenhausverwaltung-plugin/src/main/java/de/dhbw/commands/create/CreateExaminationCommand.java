@@ -23,7 +23,7 @@ public class CreateExaminationCommand implements Command {
 
     @Override
     public String execute() throws RuntimeException, FileNotFoundException {
-        CreateExamination createExamination = new CreateExamination(new ExaminationStorage(System.getProperty("user.dir") + "/" + "examination.json"), new PatientStorage(System.getProperty("user.dir") + "/" + "patients.json"), new DoctorStorage(System.getProperty("user.dir") + "/" + "doctors.json"));
+        CreateExamination createExamination = new CreateExamination(new ExaminationStorage(System.getProperty("user.dir") + "/" + "examinations.json"), new PatientStorage(System.getProperty("user.dir") + "/" + "patients.json"), new DoctorStorage(System.getProperty("user.dir") + "/" + "doctors.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
 
         if (arguments.size() != 5) {

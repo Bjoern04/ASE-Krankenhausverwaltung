@@ -1,0 +1,22 @@
+[
+    {
+        "id": "74bda31b-5b25-44ad-afab-e0f3dab084ef",
+        "examinationType": "GeneralExamination",
+        "startTime": [
+            2025,
+            6,
+            16,
+            16,
+            17
+        ],
+        "endTime": [
+            2025,
+            6,
+            16,
+            16,
+            20
+        ],
+        "patientId": "1a6e45dd-70e0-4261-8648-f8edef2380e8",
+        "doctorId": "48957526-e484-44f3-9e53-7898e69d3ac9"
+    }
+]

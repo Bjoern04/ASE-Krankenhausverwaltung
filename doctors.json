@@ -1,0 +1,26 @@
+[
+    {
+        "id": "48957526-e484-44f3-9e53-7898e69d3ac9",
+        "name": {
+            "firstName": "großer",
+            "lastName": "timmi"
+        },
+        "address": {
+            "street": "teststraße",
+            "houseNumber": "11",
+            "zipCode": "76187",
+            "city": "Karlsruhe"
+        },
+        "dateOfBirth": [
+            2000,
+            1,
+            9
+        ],
+        "contact": {
+            "phoneNumber": "12345",
+            "email": "doctor@gmail.com"
+        },
+        "examinationIds": [],
+        "examinationTypes": []
+    }
+]

@@ -17,7 +17,7 @@ public class ConsoleUI {
     }
 
     public void start(){
-        System.out.println("Willkommen in der Krankenhausverwaltung!");
+        System.out.println("Welcome to the hospital management system.");
         while (true) {
             System.out.print("> ");
             String input = scanner.nextLine().trim();

@@ -71,6 +71,9 @@ public class InputParser {
 
             case "readassignment":
                 return new ReadAssignmentCommand(tokens[1]);
+
+            case "showdoctorexaminationplan":
+                return new ShowDoctorExaminationPlanCommand(tokens[1]);
         }
         return null;
     }
@@ -104,7 +107,7 @@ public class InputParser {
 
     public static List<UUID> parseUuidList(Object element) throws IllegalArgumentException {
         if (!(element instanceof String[])) {
-            throw new IllegalArgumentException("Das Element ist kein String-Array und kann nicht als Liste von UUIDs geparst werden.");
+            throw new IllegalArgumentException("The element is not a string array and cannot be parsed as a list of UUIDs.");
         }
 
         String[] uuidStrings = (String[]) element;
@@ -115,7 +118,7 @@ public class InputParser {
                 UUID uuid = UUID.fromString(uuidStr.trim());
                 uuidList.add(uuid);
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Ungültiges UUID-Format im Array: '" + uuidStr.trim() + "'", e);
+                throw new IllegalArgumentException("Invalid UUID-format in Array: '" + uuidStr.trim() + "'", e);
             }
         }
 
