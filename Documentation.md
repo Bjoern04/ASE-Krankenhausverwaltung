@@ -151,6 +151,22 @@ Das Low Coupling-Prinzip ist in der Anwendung durch die Verwendung von Interface
 
 
 ## 4 Refactoring
+### 4.1 Code Smells
+Code Smells sind die Bezeichnung für eine verdächtige und potentiell verbesserungswürdige Codestelle.
+
+#### Long Method im Input Parser
+Die Methode parseInput() im Input Parser ist eine lange Methode, die mehrere Aufgaben gleichzeitig ausführt. Sie ist dafür verantwortlich, die Benutzereingaben zu verarbeiten und diese in die entsprechenden Befehle zu parsen. Dies führt zu einer hohen Komplexität und macht den Code schwer verständlich und wartbar. Dazu trägt zudem das überaus lange switch statement bei, welches bei Erweiterung des Programms mit jenem neuen Command wächst. Jede case-Anweisung innerhalb des switch-Blocks ist für die Instanziierung eines spezifischen Command-Objekts zuständig<br>
+ - Geringe Lesbarkeit: Durch die genannten Gründe kann es zu einer geringeren Lesbarkeit kommen, da die Methode schwer zu überblicken und zu verstehen ist. Ein Entwickler muss den gesamten Codeblock durchgehen, um die Logik für einen einzelnen Befehl zu erfassen.
+ - Erhöhte Komplexität: Die Vermischung der Logik zur Befehlserkennung und der Instanziierung verschiedener Command-Typen erhöht die kognitive Last und die Komplexität der Methode.
+ - Verletzung des Single Responsibility Principle (SRP): Die parseCommand-Methode hat mehrere Verantwortlichkeiten: das Parsen des Eingabestrings, die Identifizierung des Befehlsschlüsselworts und die Erstellung des entsprechenden Command-Objekts. Dies widerspricht dem SRP, welches besagt, dass eine Klasse oder Methode nur einen Grund zur Änderung haben sollte.
+
+#### Switch Statement im Input Parser
+Aufbauen auf dem vorherigen Code Smell kann auch detailliert auf das switch statement eingegangen werden. Dieses ist für die Instanziierung der einzelnen Command-Objekte zuständig. Es ist jedoch sehr lang und unübersichtlich, da es für jeden Befehl einen eigenen case-Block enthält. Dies führt zu einer hohen Komplexität und macht den Code schwer verständlich und wartbar. Dieses switch statement ist ein eigener Code Smell an sich und trägt dabei gleichzeitig zu dem vorherigen der Long Method bei.
+
+#### Dead Code im Input Parser
+Im Input Parser gibt es die Methode parseUuidList(). Diese Methode wird im gesamten Projekt nicht aufgerufen. Sie ist daher ein Code Smell vom Typ Dead Code. Dead Code ist Code, der nicht verwendet wird und daher entfernt werden kann. Diese Methode wurde nur am Anfang des Projektes verwendet und wird mittlerweile nicht mehr benötigt. Sie kann daher entfernt werden, um den Code sauberer und wartbarer zu gestalten. Dead Code kann auch zu Verwirrung führen, da andere Entwickler möglicherweise denken, dass der Code noch benötigt wird. Dadurch wird auch die Länge des Quellcodes reduziert.
+
+####
 ## 6 Entwurfsmuster
 ### 6.1 Builder Pattern
 #### Begründung für den Einsatz des Builder-Patterns

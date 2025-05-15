@@ -53,7 +53,8 @@ public class ShowDoctorExaminationPlanCommand implements Command {
             StringBuilder result = new StringBuilder();
             result.append("Examination plan for Doctor: ").append(assignmentId).append("\n");
             for (ExaminationWithPatientName examination : examinationsOfDoctor) {
-                result.append(examination.toString());
+
+                result.append(examination.getPatientName()).append(" - ").append(examination.getExamination()).append("\n");
             }
 
             return result.toString();
