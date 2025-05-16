@@ -37,26 +37,6 @@ public class DoctorStorage implements DoctorRepository {
     }
 
     @Override
-    public boolean deleteDoctor(UUID doctorId) throws FileNotFoundException {
-        List<Doctor> doctors = loadDoctors();
-        Optional<Doctor> doctorToDelete = doctors.stream().filter(doctor -> doctor.getId().equals(doctorId)).findFirst();
-
-        if (doctorToDelete.isPresent()) {
-            doctors.remove(doctorToDelete.get());
-            serializer.serializeOverwrite(doctors, file.getAbsolutePath());
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean updateDoctor(Doctor doctor) {
-        return false;
-    }
-
-    @Override
     public List<Doctor> loadDoctors() throws FileNotFoundException {
         if (file.exists()) {
             if (file.length() == 0) {

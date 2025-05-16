@@ -11,21 +11,14 @@ import java.util.UUID;
 
 
 public interface AssignmentRepository {
-    Room findRoomForPatient(Patient patient);
-
-    List<UUID> findPatientsForRoom (Room room) throws FileNotFoundException;
 
     Assignment findAssignmentById(UUID id) throws FileNotFoundException;
 
-    Assignment findAssignmentByPatient(Patient patient);
-
-    List<Assignment> findAssignmentsForRoom(Room room) throws FileNotFoundException;
 
     boolean saveAssignment(Assignment assignment);
 
     void deleteAssignment(UUID assignmentId) throws FileNotFoundException;
 
-    void updateAssigment (Assignment assignment);
 
     List<Assignment> loadAssignments() throws FileNotFoundException;
 }

@@ -22,31 +22,9 @@ public class AssignmentStorage implements AssignmentRepository {
     }
 
     @Override
-    public Room findRoomForPatient(Patient patient) {
-        return null;
-    }
-
-    @Override
-    public List<UUID> findPatientsForRoom(Room room) throws FileNotFoundException {
-        List<Assignment> assignmentIds = loadAssignments();
-        return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).map(Assignment::getPatientId).collect(Collectors.toList());
-    }
-
-    @Override
     public Assignment findAssignmentById(UUID id) throws FileNotFoundException {
         List<Assignment> assignmentIds = loadAssignments();
         return assignmentIds.stream().filter(assignment -> assignment.getId().equals(id)).findFirst().orElse(null);
-    }
-
-    @Override
-    public Assignment findAssignmentByPatient(Patient patient) {
-        return null;
-    }
-
-    @Override
-    public List<Assignment> findAssignmentsForRoom(Room room) throws FileNotFoundException {
-        List<Assignment> assignmentIds = loadAssignments();
-        return assignmentIds.stream().filter(assigment -> assigment.getId().equals(room.getId())).collect(Collectors.toList());
     }
 
     @Override
@@ -64,11 +42,6 @@ public class AssignmentStorage implements AssignmentRepository {
             assignmentIds.remove(assignmentToDelete.get());
             serializer.serializeUpdateFile(assignmentIds, file.getAbsolutePath());
         }
-    }
-
-    @Override
-    public void updateAssigment(Assignment assignment) {
-
     }
 
     @Override

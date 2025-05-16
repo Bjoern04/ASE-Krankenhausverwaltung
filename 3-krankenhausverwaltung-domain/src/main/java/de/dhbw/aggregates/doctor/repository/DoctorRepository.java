@@ -14,9 +14,5 @@ public interface DoctorRepository {
 
     boolean saveDoctor(Doctor doctor);
 
-    boolean deleteDoctor(UUID doctorId) throws FileNotFoundException;
-
-    boolean updateDoctor (Doctor doctor);
-
     List<Doctor> loadDoctors() throws FileNotFoundException;
 }

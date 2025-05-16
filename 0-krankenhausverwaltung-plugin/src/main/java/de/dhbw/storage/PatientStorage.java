@@ -38,17 +38,6 @@ public class PatientStorage implements PatientRepository {
     }
 
     @Override
-    public void deletePatient(UUID patientId) throws FileNotFoundException {
-        List<Patient> patientIds = loadPatients();
-        Optional<Patient> patientToDelete = patientIds.stream().filter(patient -> patient.getId().equals(patientId)).findFirst();
-
-        if (patientToDelete.isPresent()) {
-            patientIds.remove(patientToDelete.get());
-            serializer.serializeOverwrite(patientIds, file.getAbsolutePath());
-        }
-    }
-
-    @Override
     public void updatePatient(List<Patient> patients) {
         serializer.serializeOverwrite(patients, file.getAbsolutePath());
     }

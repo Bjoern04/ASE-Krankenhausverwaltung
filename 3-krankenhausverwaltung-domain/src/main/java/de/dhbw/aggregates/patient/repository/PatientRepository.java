@@ -16,7 +16,6 @@ public interface PatientRepository {
 
     boolean savePatient(Patient patient);
 
-    void deletePatient(UUID patientId) throws FileNotFoundException;
 
     void updatePatient (List<Patient> patients);
 

@@ -12,11 +12,6 @@ public interface ExaminationRepository {
 
     boolean saveExamination (Examination examination);
 
-    boolean deleteExamination (Examination examination);
-
-    void updateExamination (List<Examination> examinations);
-
-    List<Examination> findExaminationForPatient (Patient patient);
 
     List<Examination> loadExaminations() throws FileNotFoundException;
 }

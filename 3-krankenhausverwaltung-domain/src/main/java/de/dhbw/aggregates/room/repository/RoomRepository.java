@@ -14,11 +14,7 @@ public interface RoomRepository {
 
     boolean saveRoom (Room room);
 
-    boolean deleteRoom (Room room);
-
     void updateRoom (Room room) throws FileNotFoundException;
-
-    void deleteAssigment(Room room, UUID assignmentId);
 
     List<Room> loadRooms() throws FileNotFoundException;
 }

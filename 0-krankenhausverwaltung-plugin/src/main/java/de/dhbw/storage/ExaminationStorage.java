@@ -36,21 +36,6 @@ public class ExaminationStorage implements ExaminationRepository {
     }
 
     @Override
-    public boolean deleteExamination(Examination examination) {
-        return false;
-    }
-
-    @Override
-    public void updateExamination(List<Examination> examinations) {
-        serializer.serializeOverwrite(examinations, file.getAbsolutePath());
-    }
-
-    @Override
-    public List<Examination> findExaminationForPatient(Patient patient) {
-        return List.of();
-    }
-
-    @Override
     public List<Examination> loadExaminations() throws FileNotFoundException {
         if (file.exists()) {
             if (file.length() == 0) {

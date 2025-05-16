@@ -1,7 +1,7 @@
 # Schriftliche Dokumentation 
 
 ## 0 Musterbefehle
-Dieses Kapitel dient zur Darstellung der Befehlsstruktur. Es werden Beispiele für die möglichen Befehle gegeben. Anhand dieser kann das Programm auch ausprobiert werden. Zudem waren sie die Grundlage für das manuelle Testen der Anwendung. Die bestehenden JSOn Dateien mitherunterladen und weder verschieben noch löschen.<br>
+Dieses Kapitel dient zur Darstellung der Befehlsstruktur. Es werden Beispiele für die möglichen Befehle gegeben. Anhand dieser kann das Programm auch ausprobiert werden. Zudem waren sie die Grundlage für das manuelle Testen der Anwendung. Die bestehenden JSON Dateien mitherunterladen und weder verschieben noch löschen.<br>
 Die Befehle können zum Testen in dieser Reihenfolge ausgeführt werden.
 
 ### 0.1 Create Doctor
@@ -86,7 +86,7 @@ Beispiel:
 
 ### 1.1 Analyse der Ubiquitous Language
 Im Rahmen des Domain-Driven Designs (DDD) ist die Ubiquitous Language ein essenzielles Konzept, das sicherstellt, dass alle Beteiligten – Entwickler, Domänenexperten und andere Stakeholder
-– eine einheitliche und präzise Sprache verwenden. Diese Sprache spiegelt die Geschäftslogik wider und dient als Grundlage für die Modellierung der Software. Durch das definieren der verwendeten Begriffe und dem Hinterlegen von Beschreibung und Definitionen für diese, werden Missverständnisse vermieden und eine klare
+– eine einheitliche und präzise Sprache verwenden. Diese Sprache spiegelt die Geschäftslogik wider und dient als Grundlage für die Modellierung der Software. Durch das Definieren der verwendeten Begriffe und dem Hinterlegen von Beschreibungen und Definitionen für diese, werden Missverständnisse vermieden und eine klare
 Kommunikation zwischen den Beteiligten ermöglicht. Diese könnten ansonsten, zum Beispiel durch Bezeichnungen mit unterschiedlichen Bedeutungsbereichen zu Problemen bei der Kommunikation und fehlerhaften Umsetzungen führen. Wichtig ist ebenfalls die bereits bestehenden Begriffe der Fachsprache zu nutzen und keine neuen zu erfinden. Dies trägt ebenfalls zu einer unter den Stakeholdern verständlichen Kommunikation und Sprache bei.<br>
 All diese Kriterien wurden beim Verwenden der nachfolgenden Bezeichnungen beachtet. So wurden beispielsweise bereits bekannte Begriffe der Domäne wie "Patient" und
 "Arzt" verwendet und keine eigen erstellten. Ebenfalls sind uneindeutige Begriffe der Domäne weiter erläutert. So ist zum Beispiel bei der "Untersuchungsart" erläutert, dass 
@@ -195,7 +195,7 @@ Das Single Responsibility Principle ist Teil der SOLID-Prinzipien und besagt, da
 
  Das Prinzip wird zum Beispiel in der Klasse CreateDoctor berücksichtigt, weil sie ausschließlich für die Erstellung und das Speichern eines neuen Arztes im Repository zuständig ist. Alle anderen Aufgaben, wie die Validierung der Eingaben oder die Verwaltung der Arzt-Entität, sind in anderen Klassen gekapselt. Somit werden die einzelnen Aufgaben klar auf die unterschiedlichen Klassen aufgeteilt. Dadurch bleibt die Klasse übersichtlich und leicht wartbar. Auch wird sie durch Änderungen an den anderen Klassen weniger beeinflusst.<br>
 
-Das Prinzip ist ebenfalls bei den einzelnen Commands angewandt. Diese sind nur für einen bestimmten Anwendungsfall zuständig und übernehmen keine weiteren Aufgaben. So ist zum Beispiel der CreatePatientCommand nur dafür zuständig, Patienten zu erstellen und zu bearbeiten. Er ist nicht für die Verwaltung von Ärzten oder Zimmern verantwortlich. Das ermöglicht es neue Commands schnell hinzuzufügen, da sie nicht von bestehenden abhängig sind. Zudem können die bestehenden Commands unabhängig voneinander getestet und erweitert werden, sodass die Arbeit des Entwicklers er erleichtert und beschleunigt wird. <br>
+Das Prinzip ist ebenfalls bei den einzelnen Commands angewandt. Diese sind nur für einen bestimmten Anwendungsfall zuständig und übernehmen keine weiteren Aufgaben. So ist zum Beispiel der CreatePatientCommand nur dafür zuständig, Patienten zu erstellen und zu bearbeiten. Er ist nicht für die Verwaltung von Ärzten oder Zimmern verantwortlich. Das ermöglicht es neue Commands schnell hinzuzufügen, da sie nicht von bestehenden abhängig sind. Zudem können die bestehenden Commands unabhängig voneinander getestet und erweitert werden, sodass die Arbeit des Entwicklers erleichtert und beschleunigt wird. <br>
 
 ### 3.2 Open/Closed Principle (OCP)
 Das Open/Closed Principle ist ein weiteres Prinzip der SOLID-Prinzipien und besagt, dass Software-Entitäten (Klassen, Module, Funktionen, etc.) offen für Erweiterungen, aber geschlossen für Änderungen sein sollten. Dies bedeutet, dass bestehender Code nicht verändert werden sollte, um neue Funktionalitäten hinzuzufügen. Stattdessen sollten neue Funktionalitäten durch Erweiterungen des bestehenden Codes erreicht werden.<br>

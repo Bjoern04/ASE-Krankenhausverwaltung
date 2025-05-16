@@ -46,10 +46,6 @@ public class RoomStorage implements RoomRepository {
         return true;
     }
 
-    @Override
-    public boolean deleteRoom(Room room) {
-        return false;
-    }
 
     @Override
     public void updateRoom(Room room) throws FileNotFoundException {
@@ -63,11 +59,6 @@ public class RoomStorage implements RoomRepository {
         }
     }
 
-
-    @Override
-    public void deleteAssigment(Room room, UUID assignmentId) {
-
-    }
 
     @Override
     public List<Room> loadRooms() throws FileNotFoundException {
