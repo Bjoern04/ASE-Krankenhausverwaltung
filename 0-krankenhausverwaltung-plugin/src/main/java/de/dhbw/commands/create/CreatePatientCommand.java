@@ -21,6 +21,7 @@ public class CreatePatientCommand implements Command {
     public String execute() throws RuntimeException {
         CreatePatient createPatient = new CreatePatient(new PatientStorage(System.getProperty("user.dir") + "/" + "patients.json"));
         List<Object> arguments = InputParser.parseArguments(argument);
+        System.out.println("Arguments: " + arguments.size());
 
         try {
             String firstName = arguments.size() > 0 ? arguments.get(0).toString() : null;
@@ -30,8 +31,11 @@ public class CreatePatientCommand implements Command {
             String zipCode = arguments.size() > 4 ? arguments.get(4).toString(): null;
             String city = arguments.size() > 5 ? arguments.get(5).toString(): null;
             LocalDate birthDate = arguments.size() > 6 ? InputParser.parseLocalDate(arguments.get(6).toString()): null;
-            String phoneNumber = arguments.size() > 7 ? arguments.get(8).toString(): null;
+            String phoneNumber = arguments.size() > 7 ? arguments.get(7).toString(): null;
             String email = arguments.size() > 8 ? arguments.get(8).toString(): null;
+
+            System.out.println("phoneNumber: " + phoneNumber);
+            System.out.println("Email: " + email);
 
             UUID patientUUID = createPatient.execute(firstName, lastName, street, hoseNumber, zipCode, city, birthDate, phoneNumber, email);
             return "The patient was created successfully. The patient ID is: " + patientUUID.toString();

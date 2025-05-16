@@ -1,5 +1,87 @@
 # Schriftliche Dokumentation 
 
+## 0 Musterbefehle
+Dieses Kapitel dient zur Darstellung der Befehlsstruktur. Es werden Beispiele für die möglichen Befehle gegeben. Anhand dieser kann das Programm auch ausprobiert werden. Zudem waren sie die Grundlage für das manuelle Testen der Anwendung. Die bestehenden JSOn Dateien mitherunterladen und weder verschieben noch löschen.<br>
+Die Befehle können zum Testen in dieser Reihenfolge ausgeführt werden.
+
+### 0.1 Create Doctor
+
+Syntax:
+- create doctor => \<vorname>, \<nachname>, \<straße>, \<hausnummer>, \<plz>, \<ort>, \<geburtsdatum>, \<telefonnummer>, \<email>, \[\<untersuchungsart>, \<untersuchungsart>]
+
+Beispiel:
+- create doctor => Max, Musterdoktor, Teststraße, 1, 12345, Musterstadt, 09.01.1999, 98457474, doctor@gmail.com, \[GeneralExamination, Biopsy]
+
+### 0.2 Create Patient
+Syntax:
+- create patient => \<vorname>, \<nachname>, \<straße>, \<hausnummer>, \<plz>, \<ort>, \<geburtsdatum>, \<telefonnummer>, \<email>
+
+Beispiel:
+- create patient => Max, Musterpatient, Teststraße, 1, 12345, Musterstadt, 09.01.1999, 98457474, patient@gmail.com 
+
+### 0.3 Create Room
+Syntax:
+- create room => \<gebäude>, \<stockwerk>, \<zimmernummer>, \<größe>
+
+Beispiel:
+- create room => 1, 1, 101, 2
+
+### 0.4 Create Examination
+Syntax:
+- create examination => \<untersuchungsart>, \<startzeitpunkt>, \<endzeitpunkt>, \<patientId>, \<arztId>
+
+Beispiel:
+- create examination => Biopsy, 08.09.2026T16:17, 08.09.2026T16:20, e70f12d9-617a-4161-8fb2-b2a47d33dd66, c197a445-eab2-4662-847f-5cdb2191c151 
+
+### 0.5 Create Assignment
+Syntax:
+- create assignment => \<zimmerId>, \<patientId>, \<aufnahmedatum>, \<entlassungsdatum>
+
+Beispiel:
+- create assignment => 6f36ca8c-d248-41d2-a550-542114307de0, e70f12d9-617a-4161-8fb2-b2a47d33dd66, 08.09.2026, 08.10.2026
+
+### 0.6 Read Doctor
+Syntax:
+- read doctor => \<doctorId>
+
+Beispiel:
+- read doctor => c197a445-eab2-4662-847f-5cdb2191c151
+
+### 0.7 Read Patient
+Syntax:
+- read patient => \<patientId>
+
+Beispiel:
+- read patient => e70f12d9-617a-4161-8fb2-b2a47d33dd66
+
+### 0.8 Read Room
+Syntax:
+- read room => \<roomId>
+
+Beispiel:
+- read room => 6f36ca8c-d248-41d2-a550-542114307de0
+
+### 0.9 Read Examination
+Syntax:
+- read examination => \<examinationId>
+
+Beispiel:
+- read examination => f831fc85-5dde-4a88-92e7-fa819a2309fd
+
+### 0.10 Read Assignment
+Syntax:
+- read assignment => \<assignmentId>
+
+
+### 0.11 Read DoctorExaminationPlan
+Syntax:
+- read doctorexaminationplan => \<doctorId>, \<sortByDate>
+
+Beispiel:
+- read doctorexaminationplan => c197a445-eab2-4662-847f-5cdb2191c151, false
+
+
+
 ## 1 Domain Driven Design 
 
 ### 1.1 Analyse der Ubiquitous Language

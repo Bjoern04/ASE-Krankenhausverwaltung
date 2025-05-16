@@ -1,22 +1,22 @@
 [
-    {
-        "id": "74bda31b-5b25-44ad-afab-e0f3dab084ef",
-        "examinationType": "GeneralExamination",
-        "startTime": [
-            2025,
-            6,
-            16,
-            16,
-            17
-        ],
-        "endTime": [
-            2025,
-            6,
-            16,
-            16,
-            20
-        ],
-        "patientId": "1a6e45dd-70e0-4261-8648-f8edef2380e8",
-        "doctorId": "48957526-e484-44f3-9e53-7898e69d3ac9"
-    }
+  {
+    "id": "f831fc85-5dde-4a88-92e7-fa819a2309fd",
+    "examinationType": "GeneralExamination",
+    "startTime": [
+      2026,
+      4,
+      6,
+      16,
+      17
+    ],
+    "endTime": [
+      2026,
+      4,
+      6,
+      16,
+      20
+    ],
+    "patientId": "e70f12d9-617a-4161-8fb2-b2a47d33dd66",
+    "doctorId": "c197a445-eab2-4662-847f-5cdb2191c151"
+  }
 ]
