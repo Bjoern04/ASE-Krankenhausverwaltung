@@ -7,7 +7,7 @@ import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.ExaminationStorage;
 import de.dhbw.storage.PatientStorage;
-import de.dhbw.use_cases.ReadDoctorExaminationPlan;
+import de.dhbw.use_cases.read.ReadDoctorExaminationPlan;
 
 import java.io.FileNotFoundException;
 import java.util.List;

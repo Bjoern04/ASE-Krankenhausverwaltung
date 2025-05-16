@@ -2,7 +2,7 @@ import de.dhbw.aggregates.doctor.repository.DoctorRepository;
 import de.dhbw.aggregates.examination.repository.ExaminationRepository;
 import de.dhbw.aggregates.patient.repository.PatientRepository;
 import de.dhbw.aggregates.examination.util.ExaminationWithPatientName;
-import de.dhbw.use_cases.ReadDoctorExaminationPlan;
+import de.dhbw.use_cases.read.ReadDoctorExaminationPlan;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

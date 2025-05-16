@@ -51,12 +51,6 @@ public class InputParser {
             case "createassignment":
                 return new CreateAssignmentCommand(tokens[1]);
 
-            case "deletedoctor":
-                return new DeleteDoctorCommand(tokens[1]);
-
-            case "examinationreassignment":
-                return new ExaminationReassignmentCommand(tokens[1]);
-
             case "readpatient":
                 return new ReadPatientCommand(tokens[1]);
 

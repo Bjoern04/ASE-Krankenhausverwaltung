@@ -1,4 +1,4 @@
-package de.dhbw.use_cases;
+package de.dhbw.use_cases.read;
 
 import de.dhbw.aggregates.doctor.repository.DoctorRepository;
 import de.dhbw.aggregates.examination.repository.ExaminationRepository;
