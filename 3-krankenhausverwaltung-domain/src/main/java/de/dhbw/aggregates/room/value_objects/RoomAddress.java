@@ -1,6 +1,6 @@
 package de.dhbw.aggregates.room.value_objects;
 
-import de.dhbw.shared.util.LocationNumberValidator;
+import de.dhbw.shared.util.NumberValidator;
 
 import java.util.Objects;
 
@@ -21,13 +21,13 @@ public final class RoomAddress {
      * @throws IllegalArgumentException if any parameter is invalid
      */
     public RoomAddress(final String building, final String floor, final String roomNumber) {
-        if (!LocationNumberValidator.isValidLocationNumber(building)) {
+        if (!NumberValidator.isValidNumberBiggerZero(building)) {
             throw new IllegalArgumentException("Building number must be a positive number.");
         }
-        if (!LocationNumberValidator.isValidLocationNumber(floor)) {
+        if (!NumberValidator.isValidNumberBiggerZero(floor)) {
             throw new IllegalArgumentException("Floor number must be a positive number or zero.");
         }
-        if (!LocationNumberValidator.isValidRoomNumber(roomNumber)) {
+        if (!NumberValidator.isValidNumberBiggerOrEqualZero(roomNumber)) {
             throw new IllegalArgumentException("Room number must be a positive number.");
         }
 

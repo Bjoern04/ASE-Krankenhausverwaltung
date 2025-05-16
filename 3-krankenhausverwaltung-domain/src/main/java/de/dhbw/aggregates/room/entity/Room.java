@@ -21,17 +21,17 @@ public class Room {
 
     private Room (RoomBuilder builder) {
         if (builder.id == null) {
-            throw new NullPointerException("Die ID des Raumes darf nicht null sein.");
+            throw new NullPointerException("The ID of the room must not be null.");
         }
         this.id = builder.id;
 
         if (builder.roomAddress == null) {
-            throw new NullPointerException("Die Adresse des Raumes darf nicht null sein.");
+            throw new NullPointerException("The address of the room must not be null.");
         }
         this.roomAddress = builder.roomAddress;
 
         if (builder.roomSize <= 0) {
-            throw new IllegalArgumentException("Die Raumgröße muss größer als null sein.");
+            throw new IllegalArgumentException("The room size must be greater than zero.");
         }
         this.roomSize = builder.roomSize;
 
@@ -59,21 +59,21 @@ public class Room {
 
     public void updateRoomAddress(RoomAddress roomAddress) {
         if (roomAddress == null) {
-            throw new NullPointerException("Die Adresse des Raumes darf nicht null sein.");
+            throw new NullPointerException("The address of the room must not be null.");
         }
         this.roomAddress = roomAddress;
     }
 
     public void updateRoomSize(int roomSize) {
         if (roomSize <= 0) {
-            throw new IllegalArgumentException("Die Raumgröße muss größer als null sein.");
+            throw new IllegalArgumentException("The room size must be greater than zero.");
         }
         this.roomSize = roomSize;
     }
 
     public void addAssignment (UUID assignmentId) {
         if (assignmentId == null) {
-            throw new NullPointerException("Die Belegung darf nicht null sein.");
+            throw new NullPointerException("The ID assignmentId must not be null.");
         }
         if (!this.assignmentIds.contains(assignmentId)) {
             this.assignmentIds.add(assignmentId);

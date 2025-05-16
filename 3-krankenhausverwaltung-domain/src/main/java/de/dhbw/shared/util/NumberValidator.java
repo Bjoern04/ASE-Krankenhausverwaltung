@@ -1,10 +1,10 @@
 package de.dhbw.shared.util;
 
-public final class LocationNumberValidator {
-    private LocationNumberValidator() {
+public final class NumberValidator {
+    private NumberValidator() {
     }
 
-    public static boolean isValidLocationNumber(String numberString) {
+    public static boolean isValidNumberBiggerZero(String numberString) {
         try {
             int number = Integer.parseInt(numberString);
             return number > 0;
@@ -13,7 +13,7 @@ public final class LocationNumberValidator {
         }
     }
 
-    public static boolean isValidRoomNumber(String numberString) {
+    public static boolean isValidNumberBiggerOrEqualZero(String numberString) {
         try {
             int number = Integer.parseInt(numberString);
             return number >= 0;

@@ -20,22 +20,22 @@ public class Assignment {
 
     private Assignment (AssignmentBuilder builder) {
         if (builder.id == null) {
-            throw new NullPointerException("Belegungs-ID darf nicht null sein.");
+            throw new NullPointerException("The ID of the assignment must not be null.");
         }
         this.id = builder.id;
 
         if (builder.roomId == null) {
-            throw new NullPointerException("Raum der Belegung darf nicht null sein.");
+            throw new NullPointerException("Room of the assignment must not be null.");
         }
         this.roomId = builder.roomId;
 
         if (builder.patientId == null) {
-            throw new NullPointerException("Patient der Belegung darf nicht null sein.");
+            throw new NullPointerException("Patient of the assignment must not be null.");
         }
         this.patientId = builder.patientId;
 
         if (builder.dateOfAdmission == null) {
-            throw new NullPointerException("Einlieferungsdatum darf nicht null sein.");
+            throw new NullPointerException("Date of admission must not be null.");
         }
         this.dateOfAdmission = builder.dateOfAdmission;
 
@@ -64,21 +64,21 @@ public class Assignment {
 
     public void updateRoomId(UUID roomId) {
         if (roomId == null) {
-            throw new NullPointerException("Raum der Belegung darf nicht null sein.");
+            throw new NullPointerException("The room of the assignment must not be null.");
         }
         this.roomId = roomId;
     }
 
     public void updatePatientID(UUID patientId) {
         if (patientId == null) {
-            throw new NullPointerException("Patient der Belegung darf nicht null sein.");
+            throw new NullPointerException("The patient of the assignment must not be null.");
         }
         this.patientId = patientId;
     }
 
     public void updateDateOfAdmission(LocalDate dateOfAdmission) {
         if (dateOfAdmission == null) {
-            throw new NullPointerException("Einlieferungsdatum darf nicht null sein.");
+            throw new NullPointerException("The date of admission must not be null.");
         }
         this.dateOfAdmission = dateOfAdmission;
     }

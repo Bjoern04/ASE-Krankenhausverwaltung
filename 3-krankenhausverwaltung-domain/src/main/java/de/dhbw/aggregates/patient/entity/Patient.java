@@ -38,7 +38,7 @@ public class Patient {
     // Private constructor to enforce builder usage
     private Patient(PatientBuilder builder) {
         if (builder.id == null) {
-            throw new NullPointerException("Patient-ID darf nicht null sein.");
+            throw new NullPointerException("The ID of the patient must not be null.");
         }
         this.id = builder.id;
 
@@ -104,7 +104,7 @@ public class Patient {
 
     public void addExamination (UUID examinationId) {
         if (examinationId == null) {
-            throw new NullPointerException("Die Untersuchung darf nicht null sein.");
+            throw new NullPointerException("The examination ID must not be null.");
         }
         if (!this.examinationIds.contains(examinationId)) {
             this.examinationIds.add(examinationId);

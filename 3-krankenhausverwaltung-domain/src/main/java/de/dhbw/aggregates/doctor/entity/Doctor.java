@@ -31,22 +31,22 @@ public class Doctor {
 
     private Doctor (DoctorBuilder builder) {
         if (builder.id == null) {
-            throw new NullPointerException("Arzt-ID darf nicht null sein.");
+            throw new NullPointerException("The ID of the doctor must not be null.");
         }
         this.id = builder.id;
 
         if (builder.name == null) {
-            throw new NullPointerException("Der Name des Arztes darf nicht null sein.");
+            throw new NullPointerException("The name of the doctor must not be null.");
         }
         this.name = builder.name;
 
         if (builder.address == null) {
-            throw new NullPointerException("Die Adresse des Arztes darf nicht null sein.");
+            throw new NullPointerException("The address of the doctor must not be null.");
         }
         this.address = builder.address;
 
         if (builder.contact == null) {
-            throw new NullPointerException("Der Kontakt des Arztes darf nicht null sein.");
+            throw new NullPointerException("The contact of the doctor must not be null.");
         }
         this.contact = builder.contact;
 
@@ -95,21 +95,21 @@ public class Doctor {
 
     public void updateName(Name name) {
         if (name == null) {
-            throw new NullPointerException("Der Name des Arztes darf nicht null sein.");
+            throw new NullPointerException("The name of the doctor must not be null.");
         }
         this.name = name;
     }
 
     public void updateAddress(Address address) {
         if (address == null) {
-            throw new NullPointerException("Die Adresse des Arztes darf nicht null sein.");
+            throw new NullPointerException("The address of the doctor must not be null.");
         }
         this.address = address;
     }
 
     public void updateDateOfBirth(LocalDate dateOfBirth) {
         if (dateOfBirth == null) {
-            throw new NullPointerException("Der Geburtstag des Arztes darf nicht null sein.");
+            throw new NullPointerException("The date of birth of the doctor must not be null.");
         }
         this.dateOfBirth = dateOfBirth;
     }
@@ -124,14 +124,14 @@ public class Doctor {
 
     public void updateContact(Contact contact) {
         if (contact == null) {
-            throw new NullPointerException("Der Kontakt des Arztes darf nicht null sein.");
+            throw new NullPointerException("The contact of the doctor must not be null.");
         }
         this.contact = contact;
     }
 
     public void addExamination(UUID examination) {
         if (examination == null) {
-            throw new NullPointerException("Die Untersuchung darf nicht null sein.");
+            throw new NullPointerException("The examination must not be null.");
         }
         if (!this.examinationIds.contains(examination)) {
             this.examinationIds.add(examination);

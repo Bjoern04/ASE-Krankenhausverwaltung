@@ -1,6 +1,6 @@
 package de.dhbw.shared.value_objects;
 
-import de.dhbw.shared.util.LocationNumberValidator;
+import de.dhbw.shared.util.NumberValidator;
 
 import java.util.Objects;
 
@@ -19,7 +19,7 @@ public final class Contact {
      * @throws IllegalArgumentException if email is null, empty, or invalid
      */
     public Contact(final String phoneNumber, final String email) {
-        if (phoneNumber == null || !LocationNumberValidator.isValidLocationNumber(phoneNumber)) {
+        if (phoneNumber == null || !NumberValidator.isValidNumberBiggerZero(phoneNumber)) {
             throw new IllegalArgumentException("Phone number must be a positive number.");
         }
 

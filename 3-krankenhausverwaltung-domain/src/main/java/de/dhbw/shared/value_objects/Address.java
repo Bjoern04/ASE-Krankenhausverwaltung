@@ -1,6 +1,6 @@
 package de.dhbw.shared.value_objects;
 
-import de.dhbw.shared.util.LocationNumberValidator;
+import de.dhbw.shared.util.NumberValidator;
 
 import java.util.Objects;
 
@@ -29,10 +29,10 @@ public final class Address {
         if (city == null || city.trim().isEmpty()) {
             throw new IllegalArgumentException("City must not be null or empty");
         }
-        if (houseNumber == null || !LocationNumberValidator.isValidLocationNumber(houseNumber)) {
+        if (houseNumber == null || !NumberValidator.isValidNumberBiggerZero(houseNumber)) {
             throw new IllegalArgumentException("House number must be a positive number.");
         }
-        if (zipCode == null || !LocationNumberValidator.isValidLocationNumber(zipCode)) {
+        if (zipCode == null || !NumberValidator.isValidNumberBiggerZero(zipCode)) {
             throw new IllegalArgumentException("ZIP code must be a positive number.");
         }
 
