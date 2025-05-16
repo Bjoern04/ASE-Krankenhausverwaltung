@@ -25,7 +25,7 @@ public class ReadExamination {
         else {
             Examination examination = examinationRepository.findExaminationById(examinationId);
             if (examination == null) {
-                throw new IllegalArgumentException("The doctor with the ID " + examinationId + " could not found.");
+                throw new IllegalArgumentException("The doctor with the ID " + examinationId + " could not be found.");
             }
             return List.of(examination);
         }
