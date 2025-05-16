@@ -72,8 +72,8 @@ public class InputParser {
             case "readassignment":
                 return new ReadAssignmentCommand(tokens[1]);
 
-            case "showdoctorexaminationplan":
-                return new ShowDoctorExaminationPlanCommand(tokens[1]);
+            case "readdoctorexaminationplan":
+                return new ReadDoctorExaminationPlanCommand(tokens[1]);
         }
         return null;
     }

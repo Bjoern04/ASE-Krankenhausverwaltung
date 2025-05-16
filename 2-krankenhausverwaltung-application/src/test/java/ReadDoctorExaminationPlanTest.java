@@ -2,7 +2,7 @@ import de.dhbw.aggregates.doctor.repository.DoctorRepository;
 import de.dhbw.aggregates.examination.repository.ExaminationRepository;
 import de.dhbw.aggregates.patient.repository.PatientRepository;
 import de.dhbw.aggregates.examination.util.ExaminationWithPatientName;
-import de.dhbw.use_cases.ShowDoctorExaminationPlan;
+import de.dhbw.use_cases.ReadDoctorExaminationPlan;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ShowDoctorExaminationPlanTest {
+class ReadDoctorExaminationPlanTest {
 
     @Test
     void testExecute_callsRepositoriesAndReturnsResult() throws FileNotFoundException {
@@ -28,7 +28,7 @@ class ShowDoctorExaminationPlanTest {
         when(doctorRepository.findDoctorById(doctorId)).thenReturn(Mockito.mock(de.dhbw.aggregates.doctor.entity.Doctor.class));
         when(examinationRepository.loadExaminations()).thenReturn(Collections.emptyList());
 
-        ShowDoctorExaminationPlan useCase = new ShowDoctorExaminationPlan(doctorRepository, examinationRepository, patientRepository);
+        ReadDoctorExaminationPlan useCase = new ReadDoctorExaminationPlan(doctorRepository, examinationRepository, patientRepository);
 
         // Act
         List<ExaminationWithPatientName> result = useCase.execute(doctorId, false);

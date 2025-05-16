@@ -16,6 +16,7 @@ public class CreatePatientCommand implements Command {
     public CreatePatientCommand(String argument) {
         this.argument = argument;
     }
+
     @Override
     public String execute() throws RuntimeException {
         CreatePatient createPatient = new CreatePatient(new PatientStorage(System.getProperty("user.dir") + "/" + "patients.json"));

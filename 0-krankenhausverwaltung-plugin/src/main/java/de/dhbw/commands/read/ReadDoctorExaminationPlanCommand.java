@@ -1,25 +1,26 @@
-package de.dhbw.commands;
+package de.dhbw.commands.read;
 
 import de.dhbw.InputParser;
 import de.dhbw.aggregates.examination.util.ExaminationWithPatientName;
+import de.dhbw.commands.Command;
 import de.dhbw.commands.exceptions.WrongAmoutOfParameters;
 import de.dhbw.storage.DoctorStorage;
 import de.dhbw.storage.ExaminationStorage;
 import de.dhbw.storage.PatientStorage;
-import de.dhbw.use_cases.ShowDoctorExaminationPlan;
+import de.dhbw.use_cases.ReadDoctorExaminationPlan;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
-public class ShowDoctorExaminationPlanCommand implements Command {
+public class ReadDoctorExaminationPlanCommand implements Command {
         private final String argument;
 
-        public ShowDoctorExaminationPlanCommand(String argument) {
+        public ReadDoctorExaminationPlanCommand(String argument) {
             this.argument = argument;
         }
 
-        @Override
+    @Override
         public String execute() throws RuntimeException, FileNotFoundException {
             List<Object> arguments = InputParser.parseArguments(argument);
             if (arguments.size() != 2) {
@@ -44,7 +45,7 @@ public class ShowDoctorExaminationPlanCommand implements Command {
 
 
 
-            ShowDoctorExaminationPlan showDoctorExaminationPlan = new ShowDoctorExaminationPlan(new DoctorStorage(System.getProperty("user.dir") + "/" + "doctors.json"),
+            ReadDoctorExaminationPlan showDoctorExaminationPlan = new ReadDoctorExaminationPlan(new DoctorStorage(System.getProperty("user.dir") + "/" + "doctors.json"),
                     new ExaminationStorage(System.getProperty("user.dir") + "/" + "examinations.json"),
                     new PatientStorage(System.getProperty("user.dir") + "/" + "patients.json"));
 
