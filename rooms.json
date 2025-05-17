@@ -1,1 +1,14 @@
-[{"id":"6f36ca8c-d248-41d2-a550-542114307de0","roomAddress":{"building":"1","floor":"1","roomNumber":"101"},"roomSize":2,"assignmentIds":["3e3e89de-eeec-4554-9d30-85600ac2539c"]}]
+[
+  {
+    "id": "6f36ca8c-d248-41d2-a550-542114307de0",
+    "roomAddress": {
+      "building": "1",
+      "floor": "1",
+      "roomNumber": "101"
+    },
+    "roomSize": 2,
+    "assignmentIds": [
+      "3e3e89de-eeec-4554-9d30-85600ac2539c"
+    ]
+  }
+]

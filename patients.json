@@ -1,1 +1,26 @@
-[{"id":"e70f12d9-617a-4161-8fb2-b2a47d33dd66","name":{"firstName":"Testpatient","lastName":"TestNachname"},"address":{"street":"Teststraße","houseNumber":"1","zipCode":"12345","city":"Musterstadt"},"dateOfBirth":[1999,1,9],"examinationIds":[],"contact":{"phoneNumber":"98457474","email":"testPatient@gmail.com"},"assignmentId":"3e3e89de-eeec-4554-9d30-85600ac2539c"}]
+[
+  {
+    "id": "e70f12d9-617a-4161-8fb2-b2a47d33dd66",
+    "name": {
+      "firstName": "Testpatient",
+      "lastName": "TestNachname"
+    },
+    "address": {
+      "street": "Teststraße",
+      "houseNumber": "1",
+      "zipCode": "12345",
+      "city": "Musterstadt"
+    },
+    "dateOfBirth": [
+      1999,
+      1,
+      9
+    ],
+    "examinationIds": [],
+    "contact": {
+      "phoneNumber": "98457474",
+      "email": "testPatient@gmail.com"
+    },
+    "assignmentId": null
+  }
+]
