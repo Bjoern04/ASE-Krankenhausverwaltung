@@ -1,7 +1,7 @@
 # Schriftliche Dokumentation 
 ## Inhaltsverzeichnis
-### 0 [Musterbefehle](#0 Musterbefehle)
-#### 0.1 [Create Doctor](#0.1 Create Doctor)
+### 0 [Musterbefehle](#Musterbefehle)
+#### 0.1 [Create Doctor](#create-doctor)
 #### 0.2 [Create Patient](#0.2 Create Patient)
 #### 0.3 [Create Room](#0.3 Create Room)
 #### 0.4 [Create Examination](#0.4 Create Examination)
