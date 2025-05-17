@@ -1,4 +1,46 @@
 # Schriftliche Dokumentation 
+## Inhaltsverzeichnis
+### 0 Musterbefehle
+#### 0.1 Create Doctor
+#### 0.2 Create Patient
+#### 0.3 Create Room
+#### 0.4 Create Examination
+#### 0.5 Create Assignment
+#### 0.6 Read Doctor
+#### 0.7 Read Patient
+#### 0.8 Read Room
+#### 0.9 Read Examination
+#### 0.10 Read Assignment
+#### 0.11 Read DoctorExaminationPlan
+
+### 1 Domain Driven Design
+#### 1.1 Analyse der Ubiquitous Language
+#### 1.1.1 Fachliche Begriffe und ihre Bedeutung
+#### 1.1.2 Domänenregeln und Verantwortlichkeiten
+#### 1.2 Analyse und Begründung der verwendeten Muster
+
+### 2 Clean Architecture
+#### 2.1 Grundlagen Clean Architecture
+#### 2.2 Schichten der Anwendung
+#### 2.2.1 Domain-Schicht
+#### 2.2.2 Application-Schicht
+#### 2.2.3 Plugin-Schicht
+
+### 3 Programming Principles
+#### 3.1 Single Responsibility Principle (SRP)
+#### 3.2 Open/Closed Principle (OCP)
+#### 3.3 Dependency Inversion Principle (DIP)
+#### 3.4 DRY (Don't Repeat Yourself)
+#### 3.5 GRASP - Low Coupling
+
+### 4 Refactoring
+#### 4.1 Code Smells
+#### 4.2 Refactoring
+
+### 5 Entwurfsmuster
+#### 5.1 Builder Pattern
+
+<br><br><br>
 
 ## 0 Musterbefehle
 Dieses Kapitel dient zur Darstellung der Befehlsstruktur. Es werden Beispiele für die möglichen Befehle gegeben. Anhand dieser kann das Programm auch ausprobiert werden. Zudem waren sie die Grundlage für das manuelle Testen der Anwendung. Die bestehenden JSON Dateien mitherunterladen und weder verschieben noch löschen.<br>
@@ -259,8 +301,8 @@ Das Refactoring, um den "Duplicated Code" zu beseitigen, besteht darin, die best
 - Erhöhte Lesbarkeit und Verständlichkeit: Der Code in der ShowDoctorExaminationPlanCommand Klasse wird durch die einfachere Schleife lesbarer und verständlicher. Der Fokus liegt nun auf der Iteration durch die Liste der Untersuchungstermine, ohne sich um die Details der String-Formatierung kümmern zu müssen.
 - Stärkere Kohäsion: Die ExaminationWithPatientName Klasse übernimmt die Verantwortung für ihre eigene String-Repräsentation. Dies erhöht die Kohäsion der Klasse, da sie nun sowohl die Daten als auch die Art und Weise, wie diese Daten als String dargestellt werden, kapselt.
 
-## 6 Entwurfsmuster
-### 6.1 Builder Pattern
+## 5 Entwurfsmuster
+### 5.1 Builder Pattern
 #### Begründung für den Einsatz des Builder-Patterns
 Das Builder-Pattern wird eingesetzt, um die Instanziierung von Objekten mit vielen optionalen Attributen zu erleichtern und Konstruktoren mit gleichen Signaturen 
 zu ermöglichen. Insbesondere für eine komplexe Domänenklasse, die viele Felder besitzt und sich mit der Zeit erweitern kann, bietet dieses Muster 
