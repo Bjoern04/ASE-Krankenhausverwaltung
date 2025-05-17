@@ -1,44 +1,45 @@
 # Schriftliche Dokumentation 
 ## Inhaltsverzeichnis
-### 0 [Musterbefehle](#Musterbefehle)
-#### 0.1 [Create Doctor](#create-doctor)
-#### 0.2 [Create Patient](#0.2 Create Patient)
-#### 0.3 [Create Room](#0.3 Create Room)
-#### 0.4 [Create Examination](#0.4 Create Examination)
-#### 0.5 [Create Assignment](#0.5 Create Assignment)
-#### 0.6 [Read Doctor](#0.6 Read Doctor)
-#### 0.7 [Read Patient](#0.7 Read Patient)
-#### 0.8 [Read Room](#0.8 Read Room)
-#### 0.9 [Read Examination](#0.9 Read Examination)
-#### 0.10 [Read Assignment](#0.10 Read Assignment)
-#### 0.11 [Read DoctorExaminationPlan](#0.11 Read DoctorExaminationPlan)
 
-### 1 [Domain Driven Design](#1 Domain Driven Design)
-#### 1.1 [Analyse der Ubiquitous Language](#1.1 Analyse der Ubiquitous Language)
-#### 1.1.1 [Fachliche Begriffe und ihre Bedeutung](#1.1.1 Fachliche Begriffe und ihre Bedeutung)
-#### 1.1.2 [Domänenregeln und Verantwortlichkeiten](#1.1.2 Domänenregeln und Verantwortlichkeiten)
-#### 1.2 [Analyse und Begründung der verwendeten Muster](#1.2 Analyse und Begründung der verwendeten Muster)
+### 0. Musterbefehle
+- [0.1 Create Doctor](#01-create-doctor)
+- [0.2 Create Patient](#02-create-patient)
+- [0.3 Create Room](#03-create-room)
+- [0.4 Create Examination](#04-create-examination)
+- [0.5 Create Assignment](#05-create-assignment)
+- [0.6 Read Doctor](#06-read-doctor)
+- [0.7 Read Patient](#07-read-patient)
+- [0.8 Read Room](#08-read-room)
+- [0.9 Read Examination](#09-read-examination)
+- [0.10 Read Assignment](#010-read-assignment)
+- [0.11 Read DoctorExaminationPlan](#011-read-doctorexaminationplan)
 
-### 2 [Clean Architecture](#2 Clean Architecture)
-#### 2.1 [Grundlagen Clean Architecture](#2.1 Grundlagen Clean Architecture)
-#### 2.2 [Schichten der Anwendung](#2.2 Schichten der Anwendung)
-#### 2.2.1 [Domain-Schicht](#2.2.1 Domain-Schicht)
-#### 2.2.2 [Application-Schicht](#2.2.2 Application-Schicht)
-#### 2.2.3 [Plugin-Schicht](#2.2.3 Plugin-Schicht)
+### 1. Domain Driven Design
+- [1.1 Analyse der Ubiquitous Language](#11-analyse-der-ubiquitous-language)
+    - [1.1.1 Fachliche Begriffe und ihre Bedeutung](#111-fachliche-begriffe-und-ihre-bedeutung)
+    - [1.1.2 Dom채nenregeln und Verantwortlichkeiten](#112-dom채nenregeln-und-verantwortlichkeiten)
+- [1.2 Analyse und Begr체ndung der verwendeten Muster](#12-analyse-und-begr체ndung-der-verwendeten-muster)
 
-### 3 [Programming Principles](#3 Programming Principles)
-#### 3.1 [Single Responsibility Principle (SRP)](#3.1 Single Responsibility Principle (SRP))
-#### 3.2 [Open/Closed Principle (OCP)](#3.2 Open/Closed Principle (OCP))
-#### 3.3 [Dependency Inversion Principle (DIP)](#3.3 Dependency Inversion Principle (DIP))
-#### 3.4 [DRY (Don't Repeat Yourself)](#3.4 DRY (Don't Repeat Yourself))
-#### 3.5 [GRASP-Low Coupling](#3.5 GRASP-Low Coupling)
+### 2. Clean Architecture
+- [2.1 Grundlagen Clean Architecture](#21-grundlagen-clean-architecture)
+- [2.2 Schichten der Anwendung](#22-schichten-der-anwendung)
+    - [2.2.1 Domain-Schicht](#221-domain-schicht)
+    - [2.2.2 Application-Schicht](#222-application-schicht)
+    - [2.2.3 Plugin-Schicht](#223-plugin-schicht)
 
-### 4 [Refactoring](#4 Refactoring)
-#### 4.1 [Code Smells](#4.1 Code Smells)
-#### 4.2 [Refactoring](#4.2 Refactoring)
+### 3. Programming Principles
+- [3.1 Single Responsibility Principle (SRP)](#31-single-responsibility-principle-srp)
+- [3.2 Open/Closed Principle (OCP)](#32-openclosed-principle-ocp)
+- [3.3 Dependency Inversion Principle (DIP)](#33-dependency-inversion-principle-dip)
+- [3.4 DRY (Don't Repeat Yourself)](#34-dry-dont-repeat-yourself)
+- [3.5 GRASP - Low Coupling](#35-grasp---low-coupling)
 
-### 5 [Entwurfsmuster](#5 Entwurfsmuster)
-#### 5.1 [Builder Pattern](#5.1 Builder Pattern)
+### 4. Refactoring
+- [4.1 Code Smells](#41-code-smells)
+- [4.2 Refactoring](#42-refactoring)
+
+### 5. Entwurfsmuster
+- [5.1 Builder Pattern](#51-builder-pattern)
 
 <br><br><br>
 
