@@ -18,6 +18,7 @@ public class ConsoleUI {
 
     public void start(){
         System.out.println("Welcome to the hospital management system.");
+        System.out.println("Type 'help' to see a list of available commands.");
         while (true) {
             System.out.print("> ");
             String input = scanner.nextLine().trim();
