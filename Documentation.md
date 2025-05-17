@@ -1,44 +1,44 @@
 # Schriftliche Dokumentation 
 ## Inhaltsverzeichnis
-### 0 Musterbefehle
-#### 0.1 Create Doctor
-#### 0.2 Create Patient
-#### 0.3 Create Room
-#### 0.4 Create Examination
-#### 0.5 Create Assignment
-#### 0.6 Read Doctor
-#### 0.7 Read Patient
-#### 0.8 Read Room
-#### 0.9 Read Examination
-#### 0.10 Read Assignment
-#### 0.11 Read DoctorExaminationPlan
+### 0 [Musterbefehle](#0 Musterbefehle)
+#### 0.1 [Create Doctor](#0.1 Create Doctor)
+#### 0.2 [Create Patient](#0.2 Create Patient)
+#### 0.3 [Create Room](#0.3 Create Room)
+#### 0.4 [Create Examination](#0.4 Create Examination)
+#### 0.5 [Create Assignment](#0.5 Create Assignment)
+#### 0.6 [Read Doctor](#0.6 Read Doctor)
+#### 0.7 [Read Patient](#0.7 Read Patient)
+#### 0.8 [Read Room](#0.8 Read Room)
+#### 0.9 [Read Examination](#0.9 Read Examination)
+#### 0.10 [Read Assignment](#0.10 Read Assignment)
+#### 0.11 [Read DoctorExaminationPlan](#0.11 Read DoctorExaminationPlan)
 
-### 1 Domain Driven Design
-#### 1.1 Analyse der Ubiquitous Language
-#### 1.1.1 Fachliche Begriffe und ihre Bedeutung
-#### 1.1.2 Domänenregeln und Verantwortlichkeiten
-#### 1.2 Analyse und Begründung der verwendeten Muster
+### 1 [Domain Driven Design](#1 Domain Driven Design)
+#### 1.1 [Analyse der Ubiquitous Language](#1.1 Analyse der Ubiquitous Language)
+#### 1.1.1 [Fachliche Begriffe und ihre Bedeutung](#1.1.1 Fachliche Begriffe und ihre Bedeutung)
+#### 1.1.2 [Domänenregeln und Verantwortlichkeiten](#1.1.2 Domänenregeln und Verantwortlichkeiten)
+#### 1.2 [Analyse und Begründung der verwendeten Muster](#1.2 Analyse und Begründung der verwendeten Muster)
 
-### 2 Clean Architecture
-#### 2.1 Grundlagen Clean Architecture
-#### 2.2 Schichten der Anwendung
-#### 2.2.1 Domain-Schicht
-#### 2.2.2 Application-Schicht
-#### 2.2.3 Plugin-Schicht
+### 2 [Clean Architecture](#2 Clean Architecture)
+#### 2.1 [Grundlagen Clean Architecture](#2.1 Grundlagen Clean Architecture)
+#### 2.2 [Schichten der Anwendung](#2.2 Schichten der Anwendung)
+#### 2.2.1 [Domain-Schicht](#2.2.1 Domain-Schicht)
+#### 2.2.2 [Application-Schicht](#2.2.2 Application-Schicht)
+#### 2.2.3 [Plugin-Schicht](#2.2.3 Plugin-Schicht)
 
-### 3 Programming Principles
-#### 3.1 Single Responsibility Principle (SRP)
-#### 3.2 Open/Closed Principle (OCP)
-#### 3.3 Dependency Inversion Principle (DIP)
-#### 3.4 DRY (Don't Repeat Yourself)
-#### 3.5 GRASP - Low Coupling
+### 3 [Programming Principles](#3 Programming Principles)
+#### 3.1 [Single Responsibility Principle (SRP)](#3.1 Single Responsibility Principle (SRP))
+#### 3.2 [Open/Closed Principle (OCP)](#3.2 Open/Closed Principle (OCP))
+#### 3.3 [Dependency Inversion Principle (DIP)](#3.3 Dependency Inversion Principle (DIP))
+#### 3.4 [DRY (Don't Repeat Yourself)](#3.4 DRY (Don't Repeat Yourself))
+#### 3.5 [GRASP-Low Coupling](#3.5 GRASP-Low Coupling)
 
-### 4 Refactoring
-#### 4.1 Code Smells
-#### 4.2 Refactoring
+### 4 [Refactoring](#4 Refactoring)
+#### 4.1 [Code Smells](#4.1 Code Smells)
+#### 4.2 [Refactoring](#4.2 Refactoring)
 
-### 5 Entwurfsmuster
-#### 5.1 Builder Pattern
+### 5 [Entwurfsmuster](#5 Entwurfsmuster)
+#### 5.1 [Builder Pattern](#5.1 Builder Pattern)
 
 <br><br><br>
 
